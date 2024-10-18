@@ -1,0 +1,168 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"); */
+/* @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"); */
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto&display=swap'); */
+/* @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css); */
+/* @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css"); */
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/fonts/PretendardVariable.woff2') format('woff2'),
+       url('/fonts/PretendardVariable.woff') format('woff');
+  font-weight: 45 920;
+  font-display: swap;
+}
+/* *{
+	font-family: "Pretendard"
+} */
+/* * { 
+	font-family: "Pretendard "
+}
+body{
+	font-family: "Pretendard "
+
+}
+.font-mont {
+    font-family: 'Montserrat';
+}
+.fontawesome{
+	font-family: 'font-awesome';
+} */
+/* :root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+} */
+
+/* reset CSS */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box; /* Apply globally */
+}
+
+button {
+  box-sizing: border-box; /* Ensure specifically for buttons */
+}
+
+
+
+/* Swiper의 기본 네비게이션 및 페이지네이션 클래스 덮어쓰기 */
+.custom-swiper .swiper-button-next,
+.custom-swiper .swiper-button-prev {
+  color: #fff; /* 화살표 색상 */
+  font-size: 10px;
+  background-color: rgba(0, 0, 0, 0.5); /* 배경색 */
+  width: 30px;
+  height: 30px;
+  border-radius: 50%; /* 동그랗게 만들기 */
+}
+.custom-swiper {
+  --swiper-navigation-size: 14px;
+}
+
+/* hover 효과 */
+.custom-swiper .swiper-button-next:hover,
+.custom-swiper .swiper-button-prev:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* 페이지네이션 스타일 */
+.custom-swiper .swiper-pagination-bullet {
+  background-color: #ddd; /* 기본 색상 */
+  width:8px;
+  height: 8px;
+  opacity: 1;
+}
+
+.custom-swiper .swiper-pagination-bullet-active {
+  background-color: #007BFF; /* 활성화된 페이지네이션 색상 */
+}
+
+/* raido button */
+input[type='radio'] { 
+  /* display: none;  */
+  appearance: none;
+  /* height: 1.5rem; */
+}
+
+label:has(input[type='radio']) {
+  padding: 0.5rem 1.25rem;
+  font-size: 14px;
+  margin-right: 1rem;
+  cursor: pointer;
+  border: 1px solid #222;
+  border-radius: 99px;
+}
+
+label:has(input[type='radio']:checked) {
+  background-color: #222;
+  color: white;
+}
