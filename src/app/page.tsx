@@ -1,10 +1,17 @@
+import SerachBar from "@/components/elements/SearchBar";
 export default function Home() {
+  if (typeof window !== "undefined") {
+    const isDarkMode =
+      window.matchMedia &&
+      window.matchMedia("(prefer-color-scheme: dark)").matches;
+    console.log(isDarkMode);
+  }
 
   return (
-    <main className="mx-auto max-w-5xl my-4 space-y-20">
-      <div className="flex space-x-4 h-80">
-
-      </div>
+    <main className="mx-auto max-w-5xl min-h-screen bg-stone-800 text-stone-100 px-4 py-8">
+      <SerachBar />
+      {/* <div className="flex space-x-4 h-80">
+      </div> */}
     </main>
   );
 }

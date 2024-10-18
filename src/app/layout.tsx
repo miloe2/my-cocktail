@@ -10,7 +10,6 @@ const pretendard = localFont({
   weight: '45 920',
   variable: '--font-pretendard',
 });
-// const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -27,7 +26,7 @@ export default function RootLayout({
       <head></head>
       {/* <body> */}
       <body className={`${pretendard.variable} font-pretendard`}>
-        <Header initialDarkMode={true} />
+        {/* <Header initialDarkMode={true} /> */}
         {children}
       </body>
     </html>
