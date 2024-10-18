@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
+import React from "react";
 import "./globals.css";
-import localFont from 'next/font/local';
-import Header from '@/components/elements/Header';
-
+import localFont from "next/font/local";
+// import Header from "@/components/elements/Header";
 
 const pretendard = localFont({
-  src: '../../public/fonts/PretendardVariable.woff2',
-  display: 'swap',
-  weight: '45 920',
-  variable: '--font-pretendard',
+  src: "../../public/fonts/PretendardVariable.woff2",
+  display: "swap",
+  weight: "45 920",
+  variable: "--font-pretendard",
 });
 
 export const metadata: Metadata = {

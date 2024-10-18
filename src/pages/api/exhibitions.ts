@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import connection from "@/lib/mysql";
-
+const num = 2;
 const handler = async  (req : NextApiRequest, res: NextApiResponse) => {
     try {
         const [rows] = await connection.query('SELECT * FROM t_exhibitions');

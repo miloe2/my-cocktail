@@ -1,4 +1,6 @@
 import SerachBar from "@/components/elements/SearchBar";
+import SearchHints from "@/components/pages/main/SearchHints";
+
 export default function Home() {
   if (typeof window !== "undefined") {
     const isDarkMode =
@@ -9,7 +11,9 @@ export default function Home() {
 
   return (
     <main className="mx-auto max-w-5xl min-h-screen bg-stone-800 text-stone-100 px-4 py-8">
-      <SerachBar />
+      <SerachBar className="mt-20" />
+      <SearchHints />
+
       {/* <div className="flex space-x-4 h-80">
       </div> */}
     </main>
