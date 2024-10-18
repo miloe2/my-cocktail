@@ -1,4 +1,4 @@
-import SerachBar from "@/components/elements/SearchBar";
+import SearchBar from "@/components/elements/SearchBar";
 import SearchHints from "@/components/pages/main/SearchHints";
 
 export default function Home() {
@@ -10,12 +10,12 @@ export default function Home() {
   }
 
   return (
-    <main className="mx-auto max-w-5xl min-h-screen bg-stone-800 text-stone-100 px-4 py-8">
-      <SerachBar className="mt-20" />
-      <SearchHints />
-
-      {/* <div className="flex space-x-4 h-80">
-      </div> */}
+    <main className="mx-auto max-w-5xl px-4 py-8">
+      <SearchBar className="mt-20" />
+      <div className="-mr-4 mt-4">
+        <SearchHints />
+      </div>
     </main>
   );
+  
 }

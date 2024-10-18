@@ -21,7 +21,7 @@ const SearchBar = ({ className }: SearchBarProps) => {
       <input
         onChange={handleInputChange}
         type="text"
-        className="text-sm font-medium rounded-md w-full h-8 focus:ring-blue-900 focus:ring-2 outline-none text-stone-800 px-3"
+        className="touch-manipulation text-base font-medium rounded-md w-full h-8 focus:ring-blue-900 focus:ring-2 outline-none text-stone-800 px-3"
       />
       <button className="absolute top-2 right-2" onClick={handleSearch}>
         <svg
