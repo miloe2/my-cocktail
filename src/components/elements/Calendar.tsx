@@ -1,15 +1,9 @@
 interface CalendarProps {
-  className : string;
+  className: string;
 }
 
-const Calendar = ({
-  className 
-} : CalendarProps) => {
-  return (
-    <div className={`${className}`}>
-      calendar
-    </div>
-  );
+const Calendar = ({ className }: CalendarProps) => {
+  return <div className={`${className}`}>calendar</div>;
 };
 
 export default Calendar;

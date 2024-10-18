@@ -2,48 +2,48 @@
 import { useState } from "react";
 
 export interface HeaderProps {
-  initialDarkMode  : boolean;
+  initialDarkMode: boolean;
 }
-const commonClass = 'h-12'
+const commonClass = "h-12";
 const headerClass = {
-  dark : 'bg-black text-white',
-  light : 'bg-zinc-200 text-[#222]',
+  dark: "bg-black text-white",
+  light: "bg-zinc-200 text-[#222]",
   // light : 'bg-white text-[#222]'
-}
+};
 
-export const Header = ({ 
-  initialDarkMode  
-}: HeaderProps) => {
-  const [ isDark, setIsDark ] = useState(initialDarkMode)
+export const Header = ({ initialDarkMode }: HeaderProps) => {
+  const [isDark, setIsDark] = useState(initialDarkMode);
   const handleUiMode = () => {
-    console.log('click');
-    setIsDark(!isDark)
-  }
+    console.log("click");
+    setIsDark(!isDark);
+  };
 
   return (
     <header>
-        <div className={`${commonClass} ${isDark ? headerClass['dark'] : headerClass['light']}`}>
-          <div className='flex max-w-5xl justify-between items-center mx-auto h-full  text-sm'>
-            <dl>hi</dl>     
-            <dl className='flex space-x-5'>
-              <dt>
-                <button>home</button>
-              </dt>
-              <dt>
-                <button>cocktail</button>
-              </dt>
-              <dt>
-                <button onClick={handleUiMode}>isDark {String(isDark)} </button>
-              </dt>
-            </dl>
-          </div>
+      <div
+        className={`${commonClass} ${isDark ? headerClass["dark"] : headerClass["light"]}`}
+      >
+        <div className="flex max-w-5xl justify-between items-center mx-auto h-full  text-sm">
+          <dl>hi</dl>
+          <dl className="flex space-x-5">
+            <dt>
+              <button>home</button>
+            </dt>
+            <dt>
+              <button>cocktail</button>
+            </dt>
+            <dt>
+              <button onClick={handleUiMode}>isDark {String(isDark)} </button>
+            </dt>
+          </dl>
         </div>
+      </div>
     </header>
-)};
+  );
+};
 
 export default Header;
 // import React from 'react';
-
 
 // type User = {
 //   name: string;

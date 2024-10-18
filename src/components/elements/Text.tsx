@@ -1,19 +1,19 @@
 export interface TextProps {
   size?: 24 | 16 | 14;
   text: string;
-  type: 'default' | 'secondary' | 'accent' | 'white';
-  weight?: 'regular' | 'medium' | 'bold';
+  type: "default" | "secondary" | "accent" | "white";
+  weight?: "regular" | "medium" | "bold";
   lineHeight?: number;
   letterSpacing?: number;
-  className? : string;
+  className?: string;
   onClick?: () => void;
 }
 
 export const Text = ({
   size = 24,
-  text = '텍스트를 입력해주세요.',
-  type = 'default',
-  weight = 'regular',
+  text = "텍스트를 입력해주세요.",
+  type = "default",
+  weight = "regular",
   className,
   lineHeight = 1.5,
   letterSpacing = 0.5,
@@ -21,16 +21,16 @@ export const Text = ({
   ...props
 }: TextProps) => {
   const textColor = {
-    default: '#222',
-    secondary: '#888', 
-    accent: '#007BFF', 
-    white : '#fff'
+    default: "#222",
+    secondary: "#888",
+    accent: "#007BFF",
+    white: "#fff",
   };
 
   // Define font weight mapping
   const fontWeight = {
     regular: 400,
-    medium : 500,
+    medium: 500,
     bold: 700,
   };
 
