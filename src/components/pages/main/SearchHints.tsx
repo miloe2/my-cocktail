@@ -3,7 +3,7 @@ interface SearchHintsProps {
   className?: string;
 }
 
-const SearchHints = ({className}:SearchHintsProps) => {
+const SearchHints = ({ className }: SearchHintsProps) => {
   return (
     <div className={className}>
       <ScrollableBox>

@@ -10,11 +10,11 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        pretendard: ['var(--font-pretendard)'],
+        pretendard: ["var(--font-pretendard)"],
       },
     },
   },
   plugins: [],
-  darkMode: 'class',
+  darkMode: "class",
 };
 export default config;

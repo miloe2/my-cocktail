@@ -7,55 +7,137 @@
 /* @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css); */
 /* @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css"); */
 @font-face {
-  font-family: 'Pretendard';
-  src: url('/fonts/PretendardVariable.woff2') format('woff2'),
-       url('/fonts/PretendardVariable.woff') format('woff');
+  font-family: "Pretendard";
+  src:
+    url("/fonts/PretendardVariable.woff2") format("woff2"),
+    url("/fonts/PretendardVariable.woff") format("woff");
   font-weight: 45 920;
   font-display: swap;
 }
 
 /* reset CSS */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	vertical-align: baseline;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
 }
 
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
 }
 body {
-	line-height: 1;
+  line-height: 1;
 }
-ol, ul {
-	list-style: none;
+ol,
+ul {
+  list-style: none;
 }
-blockquote, q {
-	quotes: none;
+blockquote,
+q {
+  quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
 }
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 *,
 *::before,
@@ -66,8 +148,6 @@ table {
 button {
   box-sizing: border-box; /* Ensure specifically for buttons */
 }
-
-
 
 /* Swiper의 기본 네비게이션 및 페이지네이션 클래스 덮어쓰기 */
 .custom-swiper .swiper-button-next,
@@ -92,13 +172,13 @@ button {
 /* 페이지네이션 스타일 */
 .custom-swiper .swiper-pagination-bullet {
   background-color: #ddd; /* 기본 색상 */
-  width:8px;
+  width: 8px;
   height: 8px;
   opacity: 1;
 }
 
 .custom-swiper .swiper-pagination-bullet-active {
-  background-color: #007BFF; /* 활성화된 페이지네이션 색상 */
+  background-color: #007bff; /* 활성화된 페이지네이션 색상 */
 }
 
 .scroll-container {
@@ -115,7 +195,6 @@ button {
 .scroll-container::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
- 
 
 .scroll-container {
   display: flex;
@@ -133,13 +212,13 @@ button {
 }
 
 /* raido button */
-input[type='radio'] { 
+input[type="radio"] {
   /* display: none;  */
   appearance: none;
   /* height: 1.5rem; */
 }
 
-label:has(input[type='radio']) {
+label:has(input[type="radio"]) {
   padding: 0.5rem 1.25rem;
   font-size: 14px;
   margin-right: 1rem;
@@ -148,7 +227,7 @@ label:has(input[type='radio']) {
   border-radius: 99px;
 }
 
-label:has(input[type='radio']:checked) {
+label:has(input[type="radio"]:checked) {
   background-color: #222;
   color: white;
 }

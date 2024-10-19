@@ -29,11 +29,16 @@ export default [
       ...pluginJs.configs.recommended.rules,
       ...tseslint.configs.recommended.rules,
       ...pluginReact.configs.recommended.rules,
-      "prettier/prettier": "error",
+      "prettier/prettier": [
+        "error",
+        {
+          endOfLine: "auto",
+        },
+      ],
       "react/react-in-jsx-scope": "off", // Disable for React 17+
       // "quotes": ["error", "single"],
-      "semi": ["error", "always"],
-      "indent": ["error", 2],
+      semi: ["error", "always"],
+      indent: ["error", 2],
     },
     settings: {
       react: {
