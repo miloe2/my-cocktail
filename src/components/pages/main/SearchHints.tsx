@@ -10,21 +10,21 @@ const SearchHints = ({ className }: SearchHintsProps) => {
         <div className="bg-stone-600 w-full h-full rounded-md text-sm flex p-2 font-thin">
           <div className="bg-stone-700">img</div>
           <p className="ml-2">
-            내가 가지고 있는거 <br /> OOO, OOOOO, OOOOOOO{" "}
+          Lorem ipsum dolor sit amet consectetur adipi, blanditiis xime, ex?{" "}
           </p>
         </div>
 
         <div className="bg-stone-600 w-full h-full rounded-md text-sm flex p-2 font-thin">
           <div className="bg-stone-700">img</div>
           <p className="ml-2">
-            말리부, 짐빔만 가지고 <br /> 만들 수 있는 거 알려줘{" "}
+           adipisicingmagnam veritatis excepturi qui?{" "}
           </p>
         </div>
 
         <div className="bg-stone-600 w-full h-full rounded-md text-sm flex p-2 font-thin">
           <div className="bg-stone-700">img</div>
           <p className="ml-2">
-            레시피 <br /> 알려줘{" "}
+          r sit amet t. Earum ilmque incidunt magni magnam veritatis {" "}
           </p>
         </div>
       </ScrollableBox>

@@ -9,12 +9,32 @@ export const OptionsButton = ({
   onClick,
   ...props
 }: OptionsButtonProps) => {
-  // 사이즈에 따른 클래스 정의
+  const clicked = 'bg-black'
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const buttonElement = e.currentTarget;
+    clicked.split(' ').forEach((style) => {
+      buttonElement.classList.toggle(style)
+    })
+
+    // 배경색을 추가하거나 제거
+    // if (buttonElement.classList.contains('clicked')) {
+    //   buttonElement.classList.remove('clicked');
+    // } else {
+    //   buttonElement.classList.add('clicked');
+    // }
+
+    // 외부에서 전달받은 onClick 실행
+    // if (onClick) {
+    //   onClick(e);
+    // }
+  };
 
   return (
     <button
-      onClick={onClick}
-      {...props} // 나머지 props 전달
+      onClick={handleClick}
+      className="px-3 py-[2px] rounded-full ring-1 ring-zinc-400 text-sm mr-3 mb-3 "
+      {...props}
     >
       {label}
     </button>

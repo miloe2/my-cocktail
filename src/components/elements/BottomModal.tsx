@@ -6,7 +6,7 @@ interface BottomModalProps {
 }
 
 const BottomModal = ({className, children }:BottomModalProps) => {
-  const modalClass = `${className} bg-stone-500 absolute bottom-0 w-full h-2/3 rounded-t-lg p-4 flex opacity-100`
+  const modalClass = `${className} bg-stone-500 absolute bottom-0 max-w-3xl w-full max-h-[50%] rounded-t-lg px-4 flex left-1/2 -translate-x-1/2 overflow-y-auto`
   return (
     <div className={modalClass}>
       <div className='w-full h-full'>

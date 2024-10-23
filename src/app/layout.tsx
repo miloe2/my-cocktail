@@ -33,7 +33,7 @@ export default function RootLayout({
       <body
         className={`${pretendard.variable} font-pretendard bg-stone-800 text-stone-100`}
       >
-      <button>click</button>
+      {/* <button>click</button> */}
         {children}
         {/* 전역 modal = true && modal */}
         {/* <BottomModal>

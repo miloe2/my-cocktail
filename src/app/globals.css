@@ -143,6 +143,7 @@ table {
 *::before,
 *::after {
   box-sizing: border-box; /* Apply globally */
+  scroll-behavior: smooth; /* 부드러운 스크롤 */
 }
 
 button {
