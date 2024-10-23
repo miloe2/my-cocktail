@@ -1,8 +1,8 @@
 'use client'
 import React, { useState, useRef, useEffect } from 'react'
 import BottomModal from '@/components/elements/BottomModal'
-import { OptionsButton } from '@/components/elements/OptionsButton';
-import { liqueurList } from '@/data/beverage';
+import { liquorList } from '@/data/beverage';
+import TabContents from './TabContents';
 
   // 배열 Ref로 각 버튼을 참조
 const FilterModal = () => {
@@ -48,10 +48,11 @@ const FilterModal = () => {
       <div className='w-full h-12 flex mb-4 sticky top-0 bg-stone-500 -mx-1'>
         {
           idxArr.map((btn, i) => (
-              <div className='flex flex-col w-full py-2 '>
+              <div 
+              key={i}
+              className='flex flex-col w-full py-2 '>
                 <a href={`#index0${i+1}`} className='mx-auto w-1/2'>
                   <button 
-                  key={i}
                   ref={(el) => {
                     buttonRefs.current[i] = el; // 반환값이 없도록 변경
                   }}
@@ -71,21 +72,28 @@ const FilterModal = () => {
           )) 
         }
       </div>
+      {
 
-      <div className='flex flex-col' id='index01' style={{ scrollMarginTop: '60px' }}>
-        <h1 className='mb-4'>idx01</h1>
-        <div>
-          {
-            liqueurList.map((item) => (
-              <OptionsButton
-              label={item}
-              ></OptionsButton>
-            ))
-          }
-        </div>
-      </div>
-      <div className='h-80 w-20 bg-red-500' id='index02'></div>
-      <div className='min-h-svh h-80 w-20 bg-red-400 flex justify-end items-end' id='index03'></div>
+      }
+      <TabContents
+        anchorId='index01'
+        title='liqur'
+        list={liquorList}
+        scrollMarginTop={60}
+      />
+      <TabContents
+        anchorId='index02'
+        title='liqur'
+        list={liquorList}
+        scrollMarginTop={60}
+      />
+      <TabContents
+        anchorId='index03'
+        title='liqur'
+        list={liquorList}
+        scrollMarginTop={60}
+      />
+
     </BottomModal>
   )
 }
