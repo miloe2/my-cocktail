@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <main className="mx-auto max-w-5xl px-4 py-8 relative">
       <SearchBar className="" />
-      <BeverageModal/>
+      <BeverageModalManger/>
       <div className="-mr-4 mt-4">
         <SearchHints />
       </div>

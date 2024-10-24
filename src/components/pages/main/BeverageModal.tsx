@@ -25,9 +25,9 @@ const FilterModal = () => {
           offsetLeft: currentButton.offsetLeft,
           clientWidth: currentButton.clientWidth,
         });
-        console.log(
-          `Initial Button OffsetLeft: ${currentButton.offsetLeft}, ClientWidth: ${currentButton.clientWidth}`,
-        );
+        // console.log(
+        //   `Initial Button OffsetLeft: ${currentButton.offsetLeft}, ClientWidth: ${currentButton.clientWidth}`,
+        // );
       }
     }
   }, []);
@@ -38,7 +38,7 @@ const FilterModal = () => {
     const currentButton = buttonRefs.current[idx];
     if (currentButton) {
       const offsetLeft = currentButton.offsetLeft;
-      console.log(`Button Index: ${idx}, OffsetLeft: ${offsetLeft}`);
+      // console.log(`Button Index: ${idx}, OffsetLeft: ${offsetLeft}`);
       // 기존 dimensions 상태를 복사하고 offsetLeft만 업데이트
       setDimensions((prevDimensions) => ({
         ...prevDimensions,
