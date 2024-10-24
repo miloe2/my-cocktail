@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import React from "react";
 import "./globals.css";
 import localFont from "next/font/local";
-import FilterModal from "@/components/pages/main/FilterModal";
 import BottomModal from "@/components/elements/BottomModal";
 
 const pretendard = localFont({
@@ -39,7 +38,6 @@ export default function RootLayout({
           <div className="bg-red-500 h-auto  inline-flex">hihi</div>
           <div>hihi</div>
         </BottomModal> */}
-        <FilterModal/>
 
       </body>
     </html>

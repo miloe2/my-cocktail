@@ -4,7 +4,6 @@ import useSearchStore from "@/store/useSearchStore";
 
 interface TabContentsProps {
   anchorId: string;
-  scrollMarginTop: number;
   title: string;
   list: string[];
 }
@@ -13,7 +12,6 @@ const TabContents = ({
   anchorId,
   title,
   list,
-  scrollMarginTop,
 }: TabContentsProps) => {
   const { searchKeyword, addKeyword, removeKeyword } = useSearchStore();
 
@@ -33,9 +31,8 @@ const TabContents = ({
     <div
       className="flex flex-col"
       id={anchorId}
-      style={{ scrollMarginTop: `${scrollMarginTop}px` }}
     >
-      <button onClick={click}>click</button>
+      {/* <button onClick={click}>click</button> */}
       <h1 className="mb-4">{title}</h1>
       <div>
         {list.map((item, i) => (

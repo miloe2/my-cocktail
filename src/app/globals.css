@@ -150,6 +150,8 @@ table {
 .no-scroll {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* Internet Explorer 10+ */
+  overscroll-behavior: none;
+
 }
 /* .item {
   #D81519 // primary

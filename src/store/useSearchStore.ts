@@ -1,11 +1,11 @@
 import { create } from "zustand";
-interface useSearchStoreProps {
+interface searchStoreProps {
   searchKeyword: string[];
   addKeyword: (word: string) => void;
   removeKeyword: (word: string) => void;
 }
 
-const useSearchStore = create<useSearchStoreProps>((set) => ({
+const useSearchStore = create<searchStoreProps>((set) => ({
   searchKeyword: [],
   addKeyword: (word) =>
     set((state) => ({
