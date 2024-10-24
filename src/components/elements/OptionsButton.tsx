@@ -1,5 +1,6 @@
-export interface OptionsButtonProps {
+import React from "react";
 
+export interface OptionsButtonProps {
   label: string;
   onClick?: () => void;
 }
@@ -9,13 +10,13 @@ export const OptionsButton = ({
   onClick,
   ...props
 }: OptionsButtonProps) => {
-  const clicked = 'bg-black'
+  const clicked = "bg-black";
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const buttonElement = e.currentTarget;
-    clicked.split(' ').forEach((style) => {
-      buttonElement.classList.toggle(style)
-    })
+    clicked.split(" ").forEach((style) => {
+      buttonElement.classList.toggle(style);
+    });
 
     // 배경색을 추가하거나 제거
     // if (buttonElement.classList.contains('clicked')) {
@@ -25,9 +26,9 @@ export const OptionsButton = ({
     // }
 
     // 외부에서 전달받은 onClick 실행
-    // if (onClick) {
-    //   onClick(e);
-    // }
+    if (onClick) {
+      onClick();
+    }
   };
 
   return (

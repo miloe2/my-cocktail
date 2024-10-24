@@ -146,10 +146,28 @@ table {
   scroll-behavior: smooth; /* 부드러운 스크롤 */
 }
 
-button {
-  box-sizing: border-box; /* Ensure specifically for buttons */
+/* 스크롤바 숨기기 */
+.no-scroll {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
 }
+/* .item {
+  #D81519 // primary
+  #000000 // bg
+  #ffffff // text
+  #666666 // bg-text 연한색
+  #242424 // footer bg (연한색
+  #999999 // footer text 진한색
 
+} */
+
+
+
+
+
+
+
+/* 기존 css 들  */
 /* Swiper의 기본 네비게이션 및 페이지네이션 클래스 덮어쓰기 */
 .custom-swiper .swiper-button-next,
 .custom-swiper .swiper-button-prev {
@@ -203,15 +221,6 @@ button {
   scroll-behavior: smooth; /* 부드러운 스크롤 */
   -webkit-overflow-scrolling: touch; /* iOS에서 부드러운 스크롤을 위해 */
 }
-
-.item {
-  min-width: 200px;
-  margin: 10px;
-  background-color: lightgray;
-  padding: 20px;
-  border-radius: 8px;
-}
-
 /* raido button */
 input[type="radio"] {
   /* display: none;  */

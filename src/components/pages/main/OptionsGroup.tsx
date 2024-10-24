@@ -6,9 +6,7 @@ interface OptionsGroupProps {
 const OptionsGroup = ({ className }: OptionsGroupProps) => {
   return (
     <div className={className}>
-      <OptionsButton
-      label="hihi">
-      </OptionsButton>
+      <OptionsButton label="hihi"></OptionsButton>
     </div>
   );
 };

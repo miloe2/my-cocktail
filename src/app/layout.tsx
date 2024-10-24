@@ -29,7 +29,6 @@ export default function RootLayout({
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
       />
       <head></head>
-      {/* <body> */}
       <body
         className={`${pretendard.variable} font-pretendard bg-stone-800 text-stone-100`}
       >
