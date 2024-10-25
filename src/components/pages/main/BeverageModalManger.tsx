@@ -11,8 +11,6 @@ const BeverageModalManger = () => {
     <div>
       <div>
         <button onClick={() => openModal(modalId)}>open</button>
-        <button onClick={() => closeModal(modalId)}>close</button>
-        {/* {isModalOpen && <BeverageModal></BeverageModal>} */}
       </div>
       <BeverageModal modalId={modalId} />
     </div>

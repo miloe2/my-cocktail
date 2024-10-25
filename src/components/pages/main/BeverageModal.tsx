@@ -10,7 +10,7 @@ interface BeverageModalProps {
 
 // 배열 Ref로 각 버튼을 참조
 const BeverageModal = ({ modalId }: BeverageModalProps) => {
-  const { searchKeyword } = useSearchStore();
+  const { searchKeyword,  } = useSearchStore();
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [selected, setSelected] = useState<number>(0);
   const idxArr = ["index1", "index2", "index3"];
@@ -89,8 +89,8 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
       content={
         <>
           <TabContents anchorId="index01" title="ABCDE" list={liquorList} />
-          <TabContents anchorId="index02" title="liqur" list={liquorList} />
-          <TabContents anchorId="index03" title="liqur" list={liquorList} />
+          <TabContents anchorId="index02" title="FGHIJK" list={liquorList} />
+          <TabContents anchorId="index03" title="LMNOPQ" list={liquorList} />
         </>
       }
     />
