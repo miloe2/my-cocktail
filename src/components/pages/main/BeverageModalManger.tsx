@@ -4,14 +4,12 @@ import BeverageModal from "./BeverageModal";
 import useModalStore from "@/store/useModalStore";
 
 const BeverageModalManger = () => {
-  const { openModal, closeModal } = useModalStore();
+  const { openModal } = useModalStore();
   const modalId = "beverage";
 
   return (
     <div>
-      <div>
-        <button onClick={() => openModal(modalId)}>open</button>
-      </div>
+      <button onClick={() => openModal(modalId)}>open</button>
       <BeverageModal modalId={modalId} />
     </div>
   );

@@ -10,10 +10,12 @@ interface TabContentsProps {
 }
 
 const TabContents = ({ anchorId, title, list }: TabContentsProps) => {
-  const { searchKeyword, addKeyword, removeKeyword } = useSearchStore();
+  // console.log('tab rerender', anchorId)
+
+  const { selectedOption, addKeyword, removeKeyword } = useSearchStore();
 
   const handleClick = (item: string) => {
-    const isContain = searchKeyword.has(item);
+    const isContain = selectedOption.has(item);
     if (!isContain) {
       addKeyword(item);
     } else {
@@ -29,7 +31,7 @@ const TabContents = ({ anchorId, title, list }: TabContentsProps) => {
           <OptionsButton
             key={i}
             label={item}
-            isSelected={searchKeyword.has(item)}
+            isSelected={selectedOption.has(item)}
             onClick={() => handleClick(item)}
           />
         ))}

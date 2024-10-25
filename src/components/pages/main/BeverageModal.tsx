@@ -10,7 +10,7 @@ interface BeverageModalProps {
 
 // 배열 Ref로 각 버튼을 참조
 const BeverageModal = ({ modalId }: BeverageModalProps) => {
-  const { searchKeyword,  } = useSearchStore();
+  const { selectedOption } = useSearchStore();
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [selected, setSelected] = useState<number>(0);
   const idxArr = ["index1", "index2", "index3"];
@@ -52,7 +52,7 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
     }
   };
   const handleApply = () => {
-    console.log(searchKeyword);
+    console.log(selectedOption);
   };
 
   return (
@@ -74,14 +74,14 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
                   {btn}
                 </button>
               </a>
-              {/* <div
-          className={`transition-all duration-500 absolute bottom-0  h-1 border-b-2 border-zinc-50 inline-block mx-auto`}
-          style={{
-            left: dimensions.offsetLeft,
-            width: dimensions.clientWidth,
-            borderBottom: "1px solid #ddd",
-          }}
-        ></div> */}
+              <div
+                className={`transition-all duration-500 absolute bottom-0  h-1 border-b-2 border-zinc-50 inline-block mx-auto`}
+                style={{
+                  left: dimensions.offsetLeft,
+                  width: dimensions.clientWidth,
+                  borderBottom: "1px solid #ddd",
+                }}
+              ></div>
             </div>
           ))}
         </div>

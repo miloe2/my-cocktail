@@ -1,29 +1,29 @@
-"use client";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, KeyboardEvent } from "react";
 
 interface SearchBarProps {
-  className?: string;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onSearchClick: () => void;
+  // onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void; // Enter 키 처리를 위한 핸들러 추가
 }
 
-const SearchBar = ({ className }: SearchBarProps) => {
-  const [inputText, setInputText] = useState("");
+const SearchBar = ({ onChange, onSearchClick }: SearchBarProps) => {
+  // console.log('search rerender')
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputText(e.target.value);
-  };
-
-  const handleSearch = () => {
-    console.log(inputText);
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      onSearchClick();
+    }
   };
 
   return (
-    <div className={`${className} relative`}>
+    <div className={`relative`}>
       <input
-        onChange={handleInputChange}
+        onChange={onChange}
+        onKeyDown={handleKeyDown}
         type="text"
         className="touch-manipulation text-base font-medium rounded-md w-full h-8 focus:ring-blue-900 focus:ring-2 outline-none text-stone-800 px-3"
       />
-      <button className="absolute top-2 right-2" onClick={handleSearch}>
+      <button className="absolute top-2 right-2" onClick={onSearchClick}>
         <svg
           version="1.0"
           xmlns="http://www.w3.org/2000/svg"

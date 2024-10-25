@@ -16,7 +16,7 @@ export const OptionsButton = ({
     <button
       onClick={onClick}
       className={`
-        ${isSelected ? 'bg-black border border-black' : 'border border-zinc-400'}
+        ${isSelected ? "bg-black border border-black" : "border border-zinc-400"}
         px-3 py-[2px] rounded-full text-sm mr-2 mb-3`}
     >
       {label}
