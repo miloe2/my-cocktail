@@ -5,7 +5,6 @@ import SearchManager from "@/components/pages/main/SearchManager";
 // import BottomModal from "@/components/elements/BottomModal";
 import BeverageModalManger from "@/components/pages/main/BeverageModalManger";
 
-
 export default function Home() {
   if (typeof window !== "undefined") {
     const isDarkMode =
@@ -17,7 +16,7 @@ export default function Home() {
   return (
     <main className="mx-auto max-w-5xl px-4 py-8 relative">
       <SearchManager />
-      <BeverageModalManger/>
+      <BeverageModalManger />
       <div className="-mr-4 mt-4">
         <SearchHints />
       </div>

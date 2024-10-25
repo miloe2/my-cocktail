@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 import BottomModal from "@/components/elements/BottomModal";
-import { liquorList } from "@/data/beverage";
+import { liquorList, whiskyList, arrList } from "@/data/beverage";
 import TabContents from "./TabContents";
 import useSearchStore from "@/store/useSearchStore";
 interface BeverageModalProps {
@@ -89,8 +89,8 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
       content={
         <>
           <TabContents anchorId="index01" title="ABCDE" list={liquorList} />
-          <TabContents anchorId="index02" title="FGHIJK" list={liquorList} />
-          <TabContents anchorId="index03" title="LMNOPQ" list={liquorList} />
+          <TabContents anchorId="index02" title="FGHIJK" list={whiskyList} />
+          <TabContents anchorId="index03" title="LMNOPQ" list={arrList} />
         </>
       }
     />

@@ -1,4 +1,38 @@
-export const liquorList = [ 'ㅁㄹㄻㄷ', '1', 'ㅁㅁ', '13124', 'ㅁㅁㅁㄴ', '2623', 'ㅁㅁㅁㄴㅇㄴㄻㄴ', 'ㅁㅇㄴㄻㄶ', 'ㅁㅁ', '214', 'ㅁ', '4', 'ㅁㄹㄻ', '4124124', ];
+export const liquorList = [
+  "lorem",
+  "ipsum",
+  "dolor",
+  "sit",
+  "amet",
+  "consectetur",
+  "adipiscing",
+  "elit",
+  "sed",
+  "do",
+];
 
-export const whiskyList = ['a','n','a','n','a','n',]
+export const whiskyList = [
+  "eiusmod",
+  "tempor",
+  "incididunt",
+  "ut",
+  "labore",
+  "et",
+  "dolore",
+  "magna",
+  "aliqua",
+  "ut",
+];
 
+export const arrList = [
+  "enim",
+  "ad",
+  "minim",
+  "veniam",
+  "quis",
+  "nostrud",
+  "exercitation",
+  "ullamco",
+  "laboris",
+  "nisi",
+];

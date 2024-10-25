@@ -12,14 +12,14 @@ interface TabContentsProps {
 const TabContents = ({ anchorId, title, list }: TabContentsProps) => {
   // console.log('tab rerender', anchorId)
 
-  const { selectedOption, addKeyword, removeKeyword } = useSearchStore();
+  const { selectedOption, addOption, removeOption } = useSearchStore();
 
   const handleClick = (item: string) => {
     const isContain = selectedOption.has(item);
     if (!isContain) {
-      addKeyword(item);
+      addOption(item);
     } else {
-      removeKeyword(item);
+      removeOption(item);
     }
   };
 

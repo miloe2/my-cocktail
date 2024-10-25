@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import React from "react";
 import "./globals.css";
 import localFont from "next/font/local";
-import BottomModal from "@/components/elements/BottomModal";
 
 const pretendard = localFont({
   src: "../../public/fonts/PretendardVariable.woff2",
@@ -31,13 +30,7 @@ export default function RootLayout({
       <body
         className={`${pretendard.variable} font-pretendard bg-stone-800 text-stone-100`}
       >
-      {/* <button>click</button> */}
         {children}
-        {/* 전역 modal = true && modal */}
-        {/* <BottomModal>
-          <div className="bg-red-500 h-auto  inline-flex">hihi</div>
-          <div>hihi</div>
-        </BottomModal> */}
 
       </body>
     </html>

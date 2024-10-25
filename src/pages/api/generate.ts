@@ -1,8 +1,8 @@
 const apiKey = process.env.OPENAI_API_KEY;
-const apiEndpoint = 'https://api.openai.com/v1/chat/completions';
+const apiEndpoint = "https://api.openai.com/v1/chat/completions";
 
-const handleSendMessage = async () => {
-  const question = '피치트리로 만들수있는 칵테일 알려줘 ';
+const handleSendMessage = async (query: string) => {
+  // const question = '피치트리로 만들수있는 칵테일 알려줘 ';
   const notice = `
 [
     {
@@ -19,33 +19,37 @@ const handleSendMessage = async () => {
 ]
 `;
   try {
-      const response = await fetch(apiEndpoint, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${apiKey}`,
-        },
-        body: JSON.stringify({
-            model: 'gpt-4o-mini',
-            messages: [{ role: 'user', content: `${question}, 답변형식 : ${notice} 답변은 다음 JSON 형식에 맞춰서 작성해줘.` }],
-            max_tokens: 1024, // 답변 최대 글자 수, 
-            top_p: 1, // 다음 단어를 선택할 때 상위 p%의 확률 분포를 사용하는 매개변수, 높을수록 안정된 선택
-            temperature: 1, // 답변의 다양성과 창의성, 낮을수록 일관적 (0~2)
-            frequency_penalty: 0.5, // 전문적 단어의 빈도, 낮을수록 전문적 (0~1)
-            presence_penalty: 0.5, // 반복되는 구문 억제, 낮을수록 억제하지 않음 (0~1)
-            // stop: ['문장 생성 중단 단어'],
-        }),
-      });
+    const response = await fetch(apiEndpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: "gpt-4o-mini",
+        messages: [
+          {
+            role: "user",
+            content: `${query}, 답변형식 : ${notice} 답변은 다음 JSON 형식에 맞춰서 작성해줘.`,
+          },
+        ],
+        max_tokens: 1024, // 답변 최대 글자 수,
+        top_p: 1, // 다음 단어를 선택할 때 상위 p%의 확률 분포를 사용하는 매개변수, 높을수록 안정된 선택
+        temperature: 1, // 답변의 다양성과 창의성, 낮을수록 일관적 (0~2)
+        frequency_penalty: 0.5, // 전문적 단어의 빈도, 낮을수록 전문적 (0~1)
+        presence_penalty: 0.5, // 반복되는 구문 억제, 낮을수록 억제하지 않음 (0~1)
+        // stop: ['문장 생성 중단 단어'],
+      }),
+    });
 
-      const data = await response.json();
-      const aiResponse = data.choices?.[0]?.message?.content || 'No response';
-      console.log(aiResponse)
+    const data = await response.json();
+    const aiResponse = data.choices?.[0]?.message?.content || "No response";
+    console.log(aiResponse);
   } catch (error) {
-      console.error('오류 발생!', error);
+    console.error("오류 발생!", error);
   } finally {
-    console.log('finally')
+    console.log("finally");
   }
 };
-
 
 export default handleSendMessage;

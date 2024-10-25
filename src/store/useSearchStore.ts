@@ -1,24 +1,34 @@
 import { create } from "zustand";
 interface searchStoreProps {
   selectedOption: Set<string>;
-  addKeyword: (word: string) => void;
-  removeKeyword: (word: string) => void;
+  addOption: (word: string) => void;
+  removeOption: (word: string) => void;
+
+  searchQuery: string;
+  updateQuery: (query: string) => void;
 }
 
 const useSearchStore = create<searchStoreProps>((set) => ({
   selectedOption: new Set(),
-  addKeyword: (word) =>
+  searchQuery: "",
+  addOption: (word) =>
     set((state) => {
       const newSet = new Set(state.selectedOption);
       newSet.add(word);
-      return { selectedOption : newSet};
+      return { selectedOption: newSet };
     }),
-  removeKeyword: (word) =>
+  removeOption: (word) =>
     set((state) => {
       const newSet = new Set(state.selectedOption);
       newSet.delete(word);
-      return { selectedOption : newSet} 
-    })
+      return { selectedOption: newSet };
+    }),
+
+  updateQuery: (query) =>
+    set(() => {
+      console.log("useStore", query);
+      return { searchQuery: query };
+    }),
 }));
 
 export default useSearchStore;
