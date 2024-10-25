@@ -11,25 +11,27 @@ interface TabContentsProps {
 const TabContents = ({ anchorId, title, list }: TabContentsProps) => {
   const { searchKeyword, addKeyword, removeKeyword } = useSearchStore();
 
-  const handleClick = (item: string) => {
-    const isContain = searchKeyword.includes(item);
-    if (!isContain) {
-      addKeyword(item);
-    } else {
-      removeKeyword(item);
-    }
+  const handleClick = (item : string , isSelected : boolean) => {
+    console.log(item, isSelected)
+    // const isContain = searchKeyword.includes(item);
+    // if (!isContain) {
+    //   addKeyword(item);
+    // } else {
+    //   removeKeyword(item);
+    // }
   };
 
   return (
-    <div className="flex flex-col" id={anchorId}>
+    <div className="w-full flex flex-col" id={anchorId}>
       {/* <button onClick={click}>click</button> */}
       <h1 className="mb-4">{title}</h1>
-      <div>
+      <div className="w-full">
         {list.map((item, i) => (
           <OptionsButton
             key={i}
             label={item}
-            onClick={() => handleClick(item)}
+            // isSelected={searchKeyword.includes(item)}
+            onClick={(isSelected) => handleClick(item, isSelected)}
           ></OptionsButton>
         ))}
       </div>

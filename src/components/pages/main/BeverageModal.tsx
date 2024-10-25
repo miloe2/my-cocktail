@@ -88,7 +88,7 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
       }
       content={
         <>
-          <TabContents anchorId="index01" title="liqur" list={liquorList} />
+          <TabContents anchorId="index01" title="ABCDE" list={liquorList} />
           <TabContents anchorId="index02" title="liqur" list={liquorList} />
           <TabContents anchorId="index03" title="liqur" list={liquorList} />
         </>
