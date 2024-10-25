@@ -1,8 +1,10 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+
 const apiKey = process.env.OPENAI_API_KEY;
 const apiEndpoint = "https://api.openai.com/v1/chat/completions";
 
-const handleSendMessage = async (query: string) => {
-  // const question = '피치트리로 만들수있는 칵테일 알려줘 ';
+const handleSendMessage = async (req: NextApiRequest, res: NextApiResponse) => {
+  const { query } = req.body;
   const notice = `
 [
     {
@@ -26,7 +28,8 @@ const handleSendMessage = async (query: string) => {
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: "gpt-4o-mini",
+        model: "gpt-3.5-turbo",
+        // model: "gpt-4o-mini",
         messages: [
           {
             role: "user",
@@ -44,7 +47,7 @@ const handleSendMessage = async (query: string) => {
 
     const data = await response.json();
     const aiResponse = data.choices?.[0]?.message?.content || "No response";
-    console.log(aiResponse);
+    return res.status(200).json({ response: aiResponse });
   } catch (error) {
     console.error("오류 발생!", error);
   } finally {

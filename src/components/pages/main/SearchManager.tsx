@@ -1,10 +1,11 @@
 "use client";
-import { useState, useCallback, ChangeEvent } from "react";
+import { useState, ChangeEvent } from "react";
 import SearchBar from "@/components/elements/SearchBar";
-import { test } from "@/api";
+import { searchQuery } from "@/api";
 
 const SearchManager = () => {
   const [searchText, setSearchText] = useState("");
+  const [result] = useState("");
   // const debouncedQuery = useCallback(
   //   debounce((value: string) => {
   //     updateQuery(value);
@@ -18,12 +19,15 @@ const SearchManager = () => {
     // debouncedQuery(searchText);
   };
   const handleSearch = async () => {
-    await test();
+    const rsp = await searchQuery(searchText);
+    console.log("components rsp", rsp);
+    // setResult(rsp)
     // console.log("검색어", searchText);
   };
   return (
     <div>
       <SearchBar onChange={handleInputChange} onSearchClick={handleSearch} />
+      {result}
     </div>
   );
 };

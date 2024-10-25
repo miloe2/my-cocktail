@@ -31,7 +31,6 @@ export default function RootLayout({
         className={`${pretendard.variable} font-pretendard bg-stone-800 text-stone-100`}
       >
         {children}
-
       </body>
     </html>
   );
