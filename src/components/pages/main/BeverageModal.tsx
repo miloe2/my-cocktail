@@ -3,9 +3,14 @@ import React, { useState, useRef, useEffect } from "react";
 import BottomModal from "@/components/elements/BottomModal";
 import { liquorList } from "@/data/beverage";
 import TabContents from "./TabContents";
+import useSearchStore from "@/store/useSearchStore";
+interface BeverageModalProps {
+  modalId: string;
+}
 
 // 배열 Ref로 각 버튼을 참조
-const FilterModal = () => {
+const BeverageModal = ({ modalId }: BeverageModalProps) => {
+  const { searchKeyword } = useSearchStore();
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [selected, setSelected] = useState<number>(0);
   const idxArr = ["index1", "index2", "index3"];
@@ -46,25 +51,30 @@ const FilterModal = () => {
       }));
     }
   };
+  const handleApply = () => {
+    console.log(searchKeyword);
+  };
 
   return (
     <BottomModal
-    tab={
-      <div className="flex ">
-{idxArr.map((btn, i) => (
-      <div key={i} className="flex flex-col w-full py-2 ">
-        <a href={`#index0${i + 1}`} className="mx-auto w-1/2">
-          <button
-            ref={(el) => {
-              buttonRefs.current[i] = el; // 반환값이 없도록 변경
-            }}
-            className={`${selected === i ? "font-bold" : "font-medium"} pt-2 w-full  text-sm   `}
-            onClick={() => handleClick(i)}
-          >
-            {btn}
-          </button>
-        </a>
-        {/* <div
+      id={modalId}
+      onClick={handleApply}
+      tab={
+        <div className="flex ">
+          {idxArr.map((btn, i) => (
+            <div key={i} className="flex flex-col w-full py-2 ">
+              <a href={`#index0${i + 1}`} className="mx-auto w-1/2">
+                <button
+                  ref={(el) => {
+                    buttonRefs.current[i] = el; // 반환값이 없도록 변경
+                  }}
+                  className={`${selected === i ? "font-bold" : "font-medium"} pt-2 w-full  text-sm   `}
+                  onClick={() => handleClick(i)}
+                >
+                  {btn}
+                </button>
+              </a>
+              {/* <div
           className={`transition-all duration-500 absolute bottom-0  h-1 border-b-2 border-zinc-50 inline-block mx-auto`}
           style={{
             left: dimensions.offsetLeft,
@@ -72,40 +82,25 @@ const FilterModal = () => {
             borderBottom: "1px solid #ddd",
           }}
         ></div> */}
-      </div>
-    ))}
-      </div>
-
-    }
-    content={
-      <>
-      <TabContents
-      anchorId="index01"
-      title="liqur"
-      list={liquorList}
+            </div>
+          ))}
+        </div>
+      }
+      content={
+        <>
+          <TabContents anchorId="index01" title="liqur" list={liquorList} />
+          <TabContents anchorId="index02" title="liqur" list={liquorList} />
+          <TabContents anchorId="index03" title="liqur" list={liquorList} />
+        </>
+      }
     />
-    <TabContents
-      anchorId="index02"
-      title="liqur"
-      list={liquorList}
-    />
-    <TabContents
-      anchorId="index03"
-      title="liqur"
-      list={liquorList}
-    />
-      </>
-    }/>
-
-
   );
 };
 
-export default FilterModal;
+export default BeverageModal;
 
-
-
-    {/* {idxArr.map((btn, i) => (
+{
+  /* {idxArr.map((btn, i) => (
       <div key={i} className="flex flex-col w-full py-2 ">
         <a href={`#index0${i + 1}`} className="mx-auto w-1/2">
           <button
@@ -127,5 +122,8 @@ export default FilterModal;
           }}
         ></div>
       </div>
-    ))} */}
-  {/* </div> */}
+    ))} */
+}
+{
+  /* </div> */
+}

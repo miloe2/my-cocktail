@@ -8,11 +8,7 @@ interface TabContentsProps {
   list: string[];
 }
 
-const TabContents = ({
-  anchorId,
-  title,
-  list,
-}: TabContentsProps) => {
+const TabContents = ({ anchorId, title, list }: TabContentsProps) => {
   const { searchKeyword, addKeyword, removeKeyword } = useSearchStore();
 
   const handleClick = (item: string) => {
@@ -23,15 +19,9 @@ const TabContents = ({
       removeKeyword(item);
     }
   };
-  const click = () => {
-    console.log(searchKeyword);
-  };
 
   return (
-    <div
-      className="flex flex-col"
-      id={anchorId}
-    >
+    <div className="flex flex-col" id={anchorId}>
       {/* <button onClick={click}>click</button> */}
       <h1 className="mb-4">{title}</h1>
       <div>
