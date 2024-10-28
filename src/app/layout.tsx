@@ -28,7 +28,7 @@ export default function RootLayout({
       />
       <head></head>
       <body
-        className={`${pretendard.variable} font-pretendard bg-stone-800 text-stone-100`}
+        className={`${pretendard.variable} font-pretendard bg-[#2f2f2f] text-stone-100`}
       >
         {children}
       </body>

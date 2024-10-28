@@ -14,11 +14,14 @@ export default function Home() {
   }
 
   return (
-    <main className="mx-auto max-w-5xl px-4 py-8 relative">
-      <SearchManager />
-      <BeverageModalManger />
-      <div className="-mr-4 mt-4">
-        <SearchHints />
+    <main className="mx-auto max-w-5xl px-4 py-8 relative h-svh flex items-center">
+      <div className="w-full pb-32">
+        <SearchManager />
+        <div className="-mr-4 mt-4">
+          <SearchHints />
+        </div>
+      {/* <BeverageModalManger /> */}
+
       </div>
     </main>
   );
