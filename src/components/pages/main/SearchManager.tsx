@@ -5,9 +5,10 @@ import { searchQuery } from "@/api";
 import useSearchStore from "@/store/useSearchStore";
 import SearchHints from "./SearchHints";
 import useChatStore from "@/store/useChatStore";
+import ChatBubble from "@/components/elements/ChatBubble";
 
 const SearchManager = () => {
-  const { isChatStart } = useChatStore();
+  const { isChatStart, chatMessages, updateChatMessage } = useChatStore();
   const [searchText, setSearchText] = useState("");
   const { searchQuery: query } = useSearchStore();
 
@@ -28,14 +29,21 @@ const SearchManager = () => {
     // debouncedQuery(searchText);
   };
   const handleSearch = async () => {
-    const rsp = await searchQuery(searchText);
-    console.log("components rsp", rsp);
+    try {
+      const rsp = await searchQuery(searchText);
+      if(rsp && rsp.data) {
+        updateChatMessage(searchText, 'user');
+        updateChatMessage(rsp.data.response, 'gpt');
+      }
+    } catch (error) {
+      console.log(error)      
+    }
     // setResult(rsp)
     // console.log("검색어", searchText);
   };
   return (
     <div className="flex flex-col w-full">
-      {!isChatStart ? (
+      {isChatStart ? (
         <>
           <SearchBar
             onChange={handleInputChange}
@@ -45,10 +53,41 @@ const SearchManager = () => {
           <div className="-mr-4 mt-4">
             <SearchHints />
           </div>
+          {/* <div> 
+            {
+            chatMessages.map((msg) => (
+              <div key={msg.time.toISOString()}>
+                <div>{msg.msg}</div>
+              </div>
+            ))
+            }
+          </div> */}
         </>
       ) : (
-        <div className="bg-red-500 flex">
+        <div className="bg-red- flex flex-col">
           <div>isChatStart {isChatStart.toString()}</div>
+          <div>
+
+          </div>
+          <ChatBubble          user="user"/>
+          <ChatBubble          user="gpt"/>
+          <ChatBubble          user="user"/>
+          <ChatBubble          user="user"/>
+          <ChatBubble          user="gpt"/>
+          <ChatBubble          user="gpt"/>
+
+          {/* <div>
+      {chatMessages.map((message) => (
+        <div key={message.time.toISOString()} className={`message ${message.user}`}>
+          <span className="time">{message.time.toLocaleTimeString()}</span>
+          <span className="user">{message.user}</span>
+          <p className="msg">
+            {typeof message.msg === 'string' ? message.msg : JSON.stringify(message.msg)}
+          </p>
+        </div>
+      ))}
+    </div> */}
+
         </div>
       )}
     </div>
