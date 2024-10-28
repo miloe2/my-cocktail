@@ -36,7 +36,7 @@ const handleSendMessage = async (req: NextApiRequest, res: NextApiResponse) => {
             content: `${query}, 답변형식 : ${notice} 답변은 다음 JSON 형식에 맞춰서 작성해줘.`,
           },
         ],
-        max_tokens: 1024, // 답변 최대 글자 수,
+        max_tokens: 128, // 답변 최대 글자 수,
         top_p: 1, // 다음 단어를 선택할 때 상위 p%의 확률 분포를 사용하는 매개변수, 높을수록 안정된 선택
         temperature: 1, // 답변의 다양성과 창의성, 낮을수록 일관적 (0~2)
         frequency_penalty: 0.5, // 전문적 단어의 빈도, 낮을수록 전문적 (0~1)

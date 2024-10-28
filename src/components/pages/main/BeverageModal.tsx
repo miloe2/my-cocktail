@@ -12,7 +12,7 @@ interface BeverageModalProps {
 // 배열 Ref로 각 버튼을 참조
 const BeverageModal = ({ modalId }: BeverageModalProps) => {
   const { selectedOption, updateQuery } = useSearchStore();
-  const { modals, closeModal } = useModalStore();
+  const { closeModal } = useModalStore();
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [selected, setSelected] = useState<number>(0);
   const idxArr = ["index1", "index2", "index3"];
@@ -56,11 +56,11 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
   const handleApply = () => {
     const selectedOptionArray = Array.from(selectedOption);
     // console.log(JSON.stringify(selectedOptionArray));
-    let query = selectedOptionArray.join(', ');
+    let query = selectedOptionArray.join(", ");
     // console.log(query)
     // console.log('selectOption', selectedOption);
     updateQuery(query);
-    closeModal(modalId)
+    closeModal(modalId);
   };
 
   return (

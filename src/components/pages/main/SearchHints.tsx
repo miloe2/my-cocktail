@@ -13,8 +13,10 @@ const SearchHints = ({ className }: SearchHintsProps) => {
   return (
     <div className={className}>
       <ScrollableBox>
-        <div className="bg-stone-700 w-full h-full rounded-md text-sm flex p-2 font-thin"
-        onClick={() => openModal(modalId)}>
+        <div
+          className="bg-stone-700 w-full h-full rounded-md text-sm flex p-2 font-thin"
+          onClick={() => openModal(modalId)}
+        >
           <div className="bg-stone-600">img</div>
           <p className="ml-2">
             Lorem ipsum dolor sit amet consectetur adipi, blanditiis xime, ex?{" "}

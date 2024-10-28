@@ -24,8 +24,8 @@ const TabContents = ({ anchorId, title, list }: TabContentsProps) => {
   };
 
   return (
-    <div className="flex flex-col" id={anchorId}>
-      <h1 className="mb-4">{title}</h1>
+    <div className="flex flex-col mb-12" id={anchorId}>
+      <h1 className="my-4">{title}</h1>
       <div>
         {list.map((item, i) => (
           <OptionsButton
