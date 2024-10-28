@@ -3,6 +3,7 @@ interface searchStoreProps {
   selectedOption: Set<string>;
   addOption: (word: string) => void;
   removeOption: (word: string) => void;
+  clearOptions: () => void;
 
   searchQuery: string;
   updateQuery: (query: string) => void;
@@ -23,7 +24,11 @@ const useSearchStore = create<searchStoreProps>((set) => ({
       newSet.delete(word);
       return { selectedOption: newSet };
     }),
-
+  clearOptions: () =>
+    set(() => {
+      const newSet = new Set<string>();
+      return { selectedOption: newSet };
+    }),
   updateQuery: (query) =>
     set(() => {
       console.log(query, "-------SearchQuery useStore");

@@ -11,7 +11,7 @@ interface BeverageModalProps {
 
 // 배열 Ref로 각 버튼을 참조
 const BeverageModal = ({ modalId }: BeverageModalProps) => {
-  const { selectedOption, updateQuery } = useSearchStore();
+  const { selectedOption, updateQuery, clearOptions } = useSearchStore();
   const { closeModal } = useModalStore();
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [selected, setSelected] = useState<number>(0);
@@ -62,11 +62,15 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
     updateQuery(query);
     closeModal(modalId);
   };
+  const handleRefresh = () => {
+    clearOptions();
+  }
 
   return (
     <BottomModal
       id={modalId}
-      onClick={handleApply}
+      onPrimaryAction={handleApply}
+      onSecondaryAction={handleRefresh}
       tab={
         <div className="flex ">
           {idxArr.map((btn, i) => (
