@@ -1,12 +1,13 @@
 import { ChangeEvent, KeyboardEvent } from "react";
 
 interface SearchBarProps {
+  value?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   onSearchClick: () => void;
   // onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void; // Enter 키 처리를 위한 핸들러 추가
 }
 
-const SearchBar = ({ onChange, onSearchClick }: SearchBarProps) => {
+const SearchBar = ({ onChange, value, onSearchClick }: SearchBarProps) => {
   // console.log('search rerender')
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -20,6 +21,7 @@ const SearchBar = ({ onChange, onSearchClick }: SearchBarProps) => {
       <input
         onChange={onChange}
         onKeyDown={handleKeyDown}
+        value={value}
         type="text"
         className="touch-manipulation text-base font-medium rounded-md w-full h-8 focus:ring-blue-900 focus:ring-2 outline-none text-stone-800 px-3"
       />

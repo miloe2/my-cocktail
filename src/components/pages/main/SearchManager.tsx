@@ -1,11 +1,14 @@
 "use client";
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useEffect } from "react";
 import SearchBar from "@/components/elements/SearchBar";
 import { searchQuery } from "@/api";
+import useSearchStore from "@/store/useSearchStore";
 
 const SearchManager = () => {
   const [searchText, setSearchText] = useState("");
+  const {searchQuery : query} = useSearchStore();
   const [result] = useState("");
+  
   // const debouncedQuery = useCallback(
   //   debounce((value: string) => {
   //     updateQuery(value);
@@ -13,6 +16,10 @@ const SearchManager = () => {
   //   }, 1000),
   //   [],
   // );
+
+  useEffect(() => {
+    setSearchText(query)
+  }, [query])
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
@@ -26,8 +33,7 @@ const SearchManager = () => {
   };
   return (
     <div>
-      <SearchBar onChange={handleInputChange} onSearchClick={handleSearch} />
-      {result}
+      <SearchBar onChange={handleInputChange} onSearchClick={handleSearch} value={searchText} />
     </div>
   );
 };

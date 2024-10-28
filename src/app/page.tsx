@@ -3,7 +3,7 @@ import SearchHints from "@/components/pages/main/SearchHints";
 import SearchManager from "@/components/pages/main/SearchManager";
 // import OptionsGroup from "@/components/pages/main/OptionsGroup";
 // import BottomModal from "@/components/elements/BottomModal";
-import BeverageModalManger from "@/components/pages/main/BeverageModalManger";
+// import BeverageModalManger from "@/components/pages/main/BeverageModalManger";
 
 export default function Home() {
   if (typeof window !== "undefined") {
@@ -20,8 +20,6 @@ export default function Home() {
         <div className="-mr-4 mt-4">
           <SearchHints />
         </div>
-      {/* <BeverageModalManger /> */}
-
       </div>
     </main>
   );

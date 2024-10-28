@@ -26,7 +26,7 @@ const useSearchStore = create<searchStoreProps>((set) => ({
 
   updateQuery: (query) =>
     set(() => {
-      console.log("useStore", query);
+      console.log(query, "-------SearchQuery useStore", );
       return { searchQuery: query };
     }),
 }));
