@@ -5,22 +5,22 @@ const apiEndpoint = "https://api.openai.com/v1/chat/completions";
 
 const handleSendMessage = async (req: NextApiRequest, res: NextApiResponse) => {
   const { query } = req.body;
-//   const { query } = req.body;
-//   const notice = `
-// [
-//     {
-//         "name": "칵테일 이름 (string)",
-//         "receipt": [
-//             { "ingredient": "재료 이름 (string)", "amount": "재료 양 (string)" },
-//             { "ingredient": "재료 이름 (string)", "amount": "재료 양 (string)" },
-//             ...
-//         ],
-//         "degree": "도수 (number)",
-//         "taste": "맛 설명 (string)"
-//     },
-//     ...
-// ]
-// `;
+  //   const { query } = req.body;
+  //   const notice = `
+  // [
+  //     {
+  //         "name": "칵테일 이름 (string)",
+  //         "receipt": [
+  //             { "ingredient": "재료 이름 (string)", "amount": "재료 양 (string)" },
+  //             { "ingredient": "재료 이름 (string)", "amount": "재료 양 (string)" },
+  //             ...
+  //         ],
+  //         "degree": "도수 (number)",
+  //         "taste": "맛 설명 (string)"
+  //     },
+  //     ...
+  // ]
+  // `;
   try {
     const response = await fetch(apiEndpoint, {
       method: "POST",

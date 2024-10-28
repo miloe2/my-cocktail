@@ -8,7 +8,7 @@ import useChatStore from "@/store/useChatStore";
 import ChattingRoom from "./ChattingRoom";
 
 const SearchManager = () => {
-  const { isChatStart, updateChatStatus, chatMessages, updateChatMessage } = useChatStore();
+  const { isChatStart, updateChatStatus, updateChatMessage } = useChatStore();
   const [searchText, setSearchText] = useState("");
   const { searchQuery: query } = useSearchStore();
 
@@ -20,25 +20,24 @@ const SearchManager = () => {
     setSearchText(e.target.value);
   };
   const handleSearch = async () => {
-    setSearchText('');
-    if(!isChatStart){
+    setSearchText("");
+    if (!isChatStart) {
       updateChatStatus();
     }
     try {
       const rsp = await searchQuery(searchText);
-      if(rsp && rsp.data) {
-        updateChatMessage(searchText, 'user');
-        updateChatMessage(rsp.data.response, 'gpt');
+      if (rsp && rsp.data) {
+        updateChatMessage(searchText, "user");
+        updateChatMessage(rsp.data.response, "gpt");
       }
     } catch (error) {
-      console.log(error)      
+      console.log(error);
     }
   };
   return (
-    <div className="flex flex-col w-full">
-      {
-        !isChatStart ? (
-          <>
+    <div className="flex flex-col w-full relative">
+      {!isChatStart ? (
+        <>
           <SearchBar
             onChange={handleInputChange}
             onSearchClick={handleSearch}
@@ -48,24 +47,23 @@ const SearchManager = () => {
             <SearchHints />
           </div>
         </>
-        ) : (
-          <>
-          <div className="relative w-full pb-4 overflow-scroll"
-          style={{height:`calc(100vh - 80px)`}}>
-            <ChattingRoom/>
+      ) : (
+        <>
+          <div
+            className="relative w-full pb-0 overflow-scroll"
+            style={{ height: `calc(100vh)` }}
+          >
+            <ChattingRoom />
           </div>
-            <div className="bg-red- fixed bottom-4 left-0 w-full h-auto px-4">
-              <SearchBar
-                onChange={handleInputChange}
-                onSearchClick={handleSearch}
-                value={searchText}
-                />
-            </div>
-          </>
-
-        )
-      }
-
+          <div className="sticky bottom-4 w-full h-auto ">
+            <SearchBar
+              onChange={handleInputChange}
+              onSearchClick={handleSearch}
+              value={searchText}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 };
