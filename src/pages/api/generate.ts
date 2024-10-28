@@ -4,6 +4,16 @@ const apiKey = process.env.OPENAI_API_KEY;
 const apiEndpoint = "https://api.openai.com/v1/chat/completions";
 
 const handleSendMessage = async (req: NextApiRequest, res: NextApiResponse) => {
+   // CORS 설정
+   res.setHeader("Access-Control-Allow-Origin", "*");
+   res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+ 
+   // OPTIONS 메서드에 대한 예비 요청(Preflight request) 처리
+   if (req.method === "OPTIONS") {
+     return res.status(200).end();
+   }
+  console.log('api 호출 시작')
   const { query } = req.body;
   const notice = `
   [

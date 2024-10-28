@@ -21,6 +21,7 @@ const SearchManager = () => {
   };
   const handleSearch = async () => {
     setSearchText("");
+    // setSearchText("api는 호출됨");
     if (!isChatStart) {
       updateChatStatus();
     }
@@ -35,7 +36,7 @@ const SearchManager = () => {
     }
   };
   return (
-    <div className="flex flex-col w-full relative">
+    <div className="flex flex-col w-full relative ">
       {!isChatStart ? (
         <>
           <SearchBar
@@ -50,7 +51,7 @@ const SearchManager = () => {
       ) : (
         <>
           <div
-            className="relative w-full pb-0 overflow-scroll"
+            className="relative w-full pb-0 overflow-scroll no-scroll"
             style={{ height: `calc(100vh)` }}
           >
             <ChattingRoom />
