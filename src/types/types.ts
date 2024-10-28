@@ -1,6 +1,6 @@
 export interface ChatMessage {
   // id: string;
-  time: Date;
+  // time: Date;
   user: 'user' | 'gpt';
   msg: string ;
 }

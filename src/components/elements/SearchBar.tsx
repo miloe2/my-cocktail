@@ -23,7 +23,7 @@ const SearchBar = ({ onChange, value, onSearchClick }: SearchBarProps) => {
         onKeyDown={handleKeyDown}
         value={value}
         type="text"
-        className="touch-manipulation text-base font-medium rounded-md w-full h-8 focus:ring-blue-900 focus:ring-2 outline-none text-stone-800 px-3"
+        className="touch-manipulation text-base font-medium rounded-md w-full h-9 focus:ring-blue-900 focus:ring-2 outline-none text-stone-800 pl-3 pr-8"
       />
       <button className="absolute top-2 right-2" onClick={onSearchClick}>
         <svg

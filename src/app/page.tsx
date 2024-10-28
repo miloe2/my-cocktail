@@ -1,5 +1,6 @@
 // import SearchBar from "@/components/elements/SearchBar";
 import SearchManager from "@/components/pages/main/SearchManager";
+import ChattingRoom from "@/components/pages/main/ChattingRoom";
 // import OptionsGroup from "@/components/pages/main/OptionsGroup";
 // import BottomModal from "@/components/elements/BottomModal";
 // import BeverageModalManger from "@/components/pages/main/BeverageModalManger";
@@ -14,9 +15,7 @@ export default function Home() {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-8 relative h-svh flex">
-      {/* <div className="w-full pb-32"> */}
       <SearchManager />
-      {/* </div> */}
     </main>
   );
 }

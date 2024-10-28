@@ -1,4 +1,3 @@
-"use client";
 import BeverageModal from "./BeverageModal";
 import useModalStore from "@/store/useModalStore";
 

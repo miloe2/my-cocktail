@@ -5,20 +5,12 @@ import { searchQuery } from "@/api";
 import useSearchStore from "@/store/useSearchStore";
 import SearchHints from "./SearchHints";
 import useChatStore from "@/store/useChatStore";
-import ChatBubble from "@/components/elements/ChatBubble";
+import ChattingRoom from "./ChattingRoom";
 
 const SearchManager = () => {
-  const { isChatStart, chatMessages, updateChatMessage } = useChatStore();
+  const { isChatStart, updateChatStatus, chatMessages, updateChatMessage } = useChatStore();
   const [searchText, setSearchText] = useState("");
   const { searchQuery: query } = useSearchStore();
-
-  // const debouncedQuery = useCallback(
-  //   debounce((value: string) => {
-  //     updateQuery(value);
-  //     console.log('searchQuery', searchQuery);
-  //   }, 1000),
-  //   [],
-  // );
 
   useEffect(() => {
     setSearchText(query);
@@ -26,9 +18,12 @@ const SearchManager = () => {
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
-    // debouncedQuery(searchText);
   };
   const handleSearch = async () => {
+    setSearchText('');
+    if(!isChatStart){
+      updateChatStatus();
+    }
     try {
       const rsp = await searchQuery(searchText);
       if(rsp && rsp.data) {
@@ -38,13 +33,12 @@ const SearchManager = () => {
     } catch (error) {
       console.log(error)      
     }
-    // setResult(rsp)
-    // console.log("검색어", searchText);
   };
   return (
     <div className="flex flex-col w-full">
-      {isChatStart ? (
-        <>
+      {
+        !isChatStart ? (
+          <>
           <SearchBar
             onChange={handleInputChange}
             onSearchClick={handleSearch}
@@ -53,43 +47,25 @@ const SearchManager = () => {
           <div className="-mr-4 mt-4">
             <SearchHints />
           </div>
-          {/* <div> 
-            {
-            chatMessages.map((msg) => (
-              <div key={msg.time.toISOString()}>
-                <div>{msg.msg}</div>
-              </div>
-            ))
-            }
-          </div> */}
         </>
-      ) : (
-        <div className="bg-red- flex flex-col">
-          <div>isChatStart {isChatStart.toString()}</div>
-          <div>
-
+        ) : (
+          <>
+          <div className="relative w-full pb-4 overflow-scroll"
+          style={{height:`calc(100vh - 80px)`}}>
+            <ChattingRoom/>
           </div>
-          <ChatBubble          user="user"/>
-          <ChatBubble          user="gpt"/>
-          <ChatBubble          user="user"/>
-          <ChatBubble          user="user"/>
-          <ChatBubble          user="gpt"/>
-          <ChatBubble          user="gpt"/>
+            <div className="bg-red- fixed bottom-4 left-0 w-full h-auto px-4">
+              <SearchBar
+                onChange={handleInputChange}
+                onSearchClick={handleSearch}
+                value={searchText}
+                />
+            </div>
+          </>
 
-          {/* <div>
-      {chatMessages.map((message) => (
-        <div key={message.time.toISOString()} className={`message ${message.user}`}>
-          <span className="time">{message.time.toLocaleTimeString()}</span>
-          <span className="user">{message.user}</span>
-          <p className="msg">
-            {typeof message.msg === 'string' ? message.msg : JSON.stringify(message.msg)}
-          </p>
-        </div>
-      ))}
-    </div> */}
+        )
+      }
 
-        </div>
-      )}
     </div>
   );
 };
