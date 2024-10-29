@@ -1,21 +1,40 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useCallback, useMemo } from "react";
 import useChatStore from "@/store/useChatStore";
 import ChatBubble from "@/components/elements/ChatBubble";
+import { useRouter } from "next/navigation";
 
-const ChattingRoom = () => {
+const ChattingRoom = React.memo(() => {
   const chatEndRef = useRef<HTMLDivElement | null>(null);
   const { updateChatStatus, chatMessages } = useChatStore();
-  const handleChatStatus = () => {
+  const router = useRouter();
+
+  const handleChatStatus = useCallback(() => {
     updateChatStatus();
-  };
+    console.log("Status UPDATE");
+  }, [updateChatStatus]);
+
   useEffect(() => {
     if (chatEndRef.current) {
       chatEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [chatMessages]);
+
+  // 메모이제이션된 메시지
+  const memoizedChatMessages = useMemo(() => {
+    return chatMessages.map((chat, index) => (
+      <ChatBubble key={index} user={chat.user} msg={chat.msg} />
+    ));
+  }, [chatMessages]);
+
+  const handleBack = () => {
+    router.back();
+  };
+
+  console.log("chattingRoom render");
+
   return (
-    <div className="flex flex-col relative w-full">
-      <div className="fixed top-6 flex">
+    <div className="flex flex-col relative w-full bg-yellow-00 px-4">
+      <div className="fixed top-4 flex" onClick={handleBack}>
         <div
           className="bg-stone-600 rounded-full w-6 h-6 flex justify-center items-center"
           onClick={handleChatStatus}
@@ -41,15 +60,10 @@ const ChattingRoom = () => {
           </svg>
         </div>
       </div>
-      {/* <div>isChatStart {isChatStart.toString()}</div> */}
-      <div>
-        {chatMessages.map((chat) => (
-          <ChatBubble key={chat.msg} user={chat.user} msg={chat.msg} />
-        ))}
-        <div ref={chatEndRef} className="" />
-      </div>
+      {memoizedChatMessages}
+      <div ref={chatEndRef} className="" />
     </div>
   );
-};
-
+});
+ChattingRoom.displayName = "ChattingRoom";
 export default ChattingRoom;

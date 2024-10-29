@@ -4,16 +4,16 @@ const apiKey = process.env.OPENAI_API_KEY;
 const apiEndpoint = "https://api.openai.com/v1/chat/completions";
 
 const handleSendMessage = async (req: NextApiRequest, res: NextApiResponse) => {
-   // CORS 설정
-   res.setHeader("Access-Control-Allow-Origin", "*");
-   res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
-   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
- 
-   // OPTIONS 메서드에 대한 예비 요청(Preflight request) 처리
-   if (req.method === "OPTIONS") {
-     return res.status(200).end();
-   }
-  console.log('api 호출 시작')
+  // CORS 설정
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+  // OPTIONS 메서드에 대한 예비 요청(Preflight request) 처리
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+  console.log("api 호출 시작");
   const { query } = req.body;
   const notice = `
   [
@@ -47,7 +47,7 @@ const handleSendMessage = async (req: NextApiRequest, res: NextApiResponse) => {
             content: `${query}, 답변형식 : ${notice} 답변은 다음 JSON 형식에 맞춰서 작성해줘.`,
           },
         ],
-        max_tokens: 512, // 답변 최대 글자 수,
+        max_tokens: 16, // 답변 최대 글자 수,
         top_p: 1, // 다음 단어를 선택할 때 상위 p%의 확률 분포를 사용하는 매개변수, 높을수록 안정된 선택
         temperature: 1, // 답변의 다양성과 창의성, 낮을수록 일관적 (0~2)
         frequency_penalty: 0.5, // 전문적 단어의 빈도, 낮을수록 전문적 (0~1)

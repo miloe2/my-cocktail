@@ -1,18 +1,16 @@
 "use client";
-import { useState, ChangeEvent, useEffect } from "react";
+import React, { useState, useEffect, ChangeEvent } from "react";
+import ChattingRoom from "@/components/pages/main/ChattingRoom";
 import SearchBar from "@/components/elements/SearchBar";
-import { searchQuery } from "@/api";
-import useSearchStore from "@/store/useSearchStore";
-import SearchHints from "./SearchHints";
 import useChatStore from "@/store/useChatStore";
-import { useRouter } from "next/navigation";
+import useSearchStore from "@/store/useSearchStore";
+import { searchQuery } from "@/api";
 
-const SearchManager = () => {
+const AskCocktailPage = () => {
   const { updateChatMessage } = useChatStore();
   const [searchText, setSearchText] = useState("");
   const [log, setLog] = useState("");
   const { searchQuery: query } = useSearchStore();
-  const router = useRouter();
 
   useEffect(() => {
     setSearchText(query);
@@ -22,12 +20,7 @@ const SearchManager = () => {
     setSearchText(e.target.value);
   };
   const handleSearch = async () => {
-    setLog("요청시작");
     setSearchText("");
-
-    // if (!isChatStart) {
-    // updateChatStatus();
-    // }
     try {
       const rsp = await searchQuery(searchText);
       if (rsp && rsp.data) {
@@ -38,25 +31,26 @@ const SearchManager = () => {
     } catch (error) {
       console.log(error);
       setLog(`오류 발생: ${error}`);
-    } finally {
-      router.push("/ask-cocktail");
+      console.log(log);
     }
   };
   return (
-    <div className="flex flex-col w-full relative ">
-      <div className="bg-blue-900 hidden">LOG TEST {log}</div>
-      <>
+    <div>
+      <div className="pb-14">
+        <ChattingRoom />
+      </div>
+      <div
+        className="fixed bottom-0 h-14 bg-[#2f2f2f] px-4 pt-2"
+        style={{ width: `calc(100vw)` }}
+      >
         <SearchBar
           onChange={handleInputChange}
           onSearchClick={handleSearch}
           value={searchText}
         />
-        <div className="-mr-4 mt-4">
-          <SearchHints />
-        </div>
-      </>
+      </div>
     </div>
   );
 };
 
-export default SearchManager;
+export default AskCocktailPage;

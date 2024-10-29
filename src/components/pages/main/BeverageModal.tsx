@@ -64,7 +64,7 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
   };
   const handleRefresh = () => {
     clearOptions();
-  }
+  };
 
   return (
     <BottomModal

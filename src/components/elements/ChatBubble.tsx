@@ -1,10 +1,9 @@
 import React from "react";
 import { ChatMessage } from "@/types/types";
 
-// const ChatBubble = () => {
-const ChatBubble = ({ user, msg }: ChatMessage) => {
+const ChatBubble = React.memo(({ user, msg }: ChatMessage) => {
   const time = "2024-10-28";
-
+  console.log("chatbubble render");
   return (
     <>
       {user === "user" ? (
@@ -24,6 +23,7 @@ const ChatBubble = ({ user, msg }: ChatMessage) => {
       )}
     </>
   );
-};
+});
 
+ChatBubble.displayName = "ChatBubble";
 export default ChatBubble;
