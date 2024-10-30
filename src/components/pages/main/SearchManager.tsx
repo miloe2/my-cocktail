@@ -24,14 +24,13 @@ const SearchManager = () => {
   const handleSearch = async () => {
     setLog("요청시작");
     setSearchText("");
-
+    updateChatMessage(searchText, "user");
     // if (!isChatStart) {
     // updateChatStatus();
     // }
     try {
       const rsp = await searchQuery(searchText);
       if (rsp && rsp.data) {
-        updateChatMessage(searchText, "user");
         updateChatMessage(rsp.data.response, "gpt");
         setLog(`응답 받음: ${JSON.stringify(rsp.data)}`);
       }

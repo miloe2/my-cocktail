@@ -21,10 +21,10 @@ const AskCocktailPage = () => {
   };
   const handleSearch = async () => {
     setSearchText("");
+    updateChatMessage(searchText, "user");
     try {
       const rsp = await searchQuery(searchText);
       if (rsp && rsp.data) {
-        updateChatMessage(searchText, "user");
         updateChatMessage(rsp.data.response, "gpt");
         setLog(`응답 받음: ${JSON.stringify(rsp.data)}`);
       }
@@ -35,7 +35,7 @@ const AskCocktailPage = () => {
     }
   };
   return (
-    <div>
+    <div className="">
       <div className="pb-14">
         <ChattingRoom />
       </div>

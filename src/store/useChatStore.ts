@@ -4,14 +4,14 @@ import { ChatStore } from "@/types/types";
 const useChatStore = create<ChatStore>((set) => ({
   isChatStart: false,
   chatMessages: [
-    //     {
-    //       user: "user",
-    //       msg: "hello",
-    //     },
-    //     {
-    //       user: "gpt",
-    //       msg: "Counting objects: 100% (29/29), done.",
-    //     },
+    {
+      user: "user",
+      msg: "hello",
+    },
+    // {
+    //   user: "gpt",
+    //   msg: "Counting objects: 100% (29/29), done.",
+    // },
     //     {
     //       user: "user",
     //       msg: `Compressing objects: 100% (15/15), done.
