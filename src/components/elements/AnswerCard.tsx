@@ -15,26 +15,27 @@ const AnswerCard = ({ msg }: { msg: string }) => {
   const cocktails = JSON.parse(msg).cocktails;
 
   return (
-    <div>
+    <div className="">
       {cocktails.map((cocktail: CocktailRecipt, index: number) => (
         <div
           key={index}
-          style={{
-            border: "1px solid #ccc",
-            padding: "16px",
-            margin: "16px 0",
-          }}
+          className="w-full bg-black rounded-md p-4 mb-4 flex text-sm"
         >
-          <h2>{cocktail.name}</h2>
-          <p>도수: {cocktail.degree}°</p>
-          <h4>재료:</h4>
-          <ul>
-            {cocktail.ingredients.map((ingredient: Reciept, idx: number) => (
-              <li key={idx}>
-                {ingredient.name} - {ingredient.amountValue} {ingredient.unit}
-              </li>
-            ))}
-          </ul>
+          <div className="w-20 h-20 bg-stone-700 mr-2">
+            <img src="" alt="" />
+          </div>
+          <div>
+            <h2>{cocktail.name}</h2>
+            {/* <p>도수: {cocktail.degree}°</p> */}
+            <h4>재료:</h4>
+            <ul>
+              {cocktail.ingredients.map((ingredient: Reciept, idx: number) => (
+                <li key={idx}>
+                  {ingredient.name} - {ingredient.amountValue} {ingredient.unit}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       ))}
     </div>

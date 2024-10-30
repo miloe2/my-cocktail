@@ -15,8 +15,9 @@ const ChatBubble = React.memo(({ user, msg }: ChatMessage) => {
           </div>
         </div>
       ) : (
-        // <div>hihi</div>
-        <AnswerCard msg={msg} />
+        <div className="">
+          <AnswerCard msg={msg} />
+        </div>
         // <AnswerCard
         // />
         // <div className="bg-stone-00 flex justify-start items-end py-2 ">

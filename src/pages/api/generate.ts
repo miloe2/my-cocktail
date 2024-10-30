@@ -56,12 +56,10 @@ const handleSendMessage = async (req: NextApiRequest, res: NextApiResponse) => {
           {
             role: "system",
             content: `You are a helpfull assistant. Your response should be in this ${notice} JSON format.`,
-            // content: `${query}, 답변형식 : ${notice} 답변은 다음 JSON 형식에 맞춰서 작성해줘.`,
           },
           {
             role: "user",
             content: `${query}`,
-            // content: `${query}, 답변형식 : ${notice} 답변은 다음 JSON 형식에 맞춰서 작성해줘.`,
           },
         ],
         max_tokens: 1024, // 답변 최대 글자 수,

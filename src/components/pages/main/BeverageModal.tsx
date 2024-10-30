@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 import BottomModal from "@/components/elements/BottomModal";
-import { liquorList, whiskyList, arrList } from "@/data/beverage";
+import { liquorList, ginList, rumList } from "@/data/beverage";
 import TabContents from "./TabContents";
 import useSearchStore from "@/store/useSearchStore";
 import useModalStore from "@/store/useModalStore";
@@ -15,7 +15,7 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
   const { closeModal } = useModalStore();
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [selected, setSelected] = useState<number>(0);
-  const idxArr = ["index1", "index2", "index3"];
+  const idxArr = ["리큐르", "진", "럼"];
   const [dimensions, setDimensions] = useState<{
     offsetLeft: number;
     clientWidth: number;
@@ -100,9 +100,9 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
       }
       content={
         <>
-          <TabContents anchorId="index01" title="ABCDE" list={liquorList} />
-          <TabContents anchorId="index02" title="FGHIJK" list={whiskyList} />
-          <TabContents anchorId="index03" title="LMNOPQ" list={arrList} />
+          <TabContents anchorId="index01" title={idxArr[0]} list={liquorList} />
+          <TabContents anchorId="index02" title={idxArr[1]} list={ginList} />
+          <TabContents anchorId="index03" title={idxArr[2]} list={rumList} />
         </>
       }
     />
