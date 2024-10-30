@@ -9,7 +9,7 @@ const ChattingRoom = React.memo(() => {
   const router = useRouter();
 
   const handleChatStatus = useCallback(() => {
-    updateChatStatus();
+    // updateChatStatus();
     console.log("Status UPDATE");
   }, [updateChatStatus]);
 

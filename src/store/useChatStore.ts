@@ -9,8 +9,8 @@ const useChatStore = create<ChatStore>((set) => ({
       msg: "hello",
     },
     {
-      user: 'gpt',
-      msg : `
+      user: "gpt",
+      msg: `
       {
   "cocktails": [
     {
@@ -34,8 +34,8 @@ const useChatStore = create<ChatStore>((set) => ({
       "degree": 30
     }
   ]
-}`
-    }
+}`,
+    },
     // {
     //   user: "gpt",
     //   msg: "Counting objects: 100% (29/29), done.",
