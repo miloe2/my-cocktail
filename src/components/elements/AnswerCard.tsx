@@ -1,7 +1,9 @@
 import React from "react";
 import { ChatGptResponse } from "@/types/types";
+import { findImage } from "@/utils/imageUrls";
 
 const AnswerCard = ({ cocktails }: ChatGptResponse) => {
+  console.log('answerCard redner')
   return (
     <div>
       {cocktails.map((cocktail, index) => (
@@ -10,7 +12,7 @@ const AnswerCard = ({ cocktails }: ChatGptResponse) => {
           className="w-full bg-black rounded-md p-4 mb-4 flex text-sm"
         >
           <div className="w-20 h-20 bg-stone-700 mr-2">
-            <img src="" alt={`${cocktail.name} 이미지`} />
+            <img src={findImage(cocktail.name)} alt={`${cocktail.name}`} />
           </div>
           <div>
             <h2>{cocktail.name}</h2>

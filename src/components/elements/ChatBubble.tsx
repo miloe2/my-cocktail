@@ -6,7 +6,7 @@ const ChatBubble = React.memo(
   ({ chat }: { chat: ChatGptMessage | ChatUserMessage }) => {
     const time = "2024-10-28";
     console.log("chatbubble render");
-    console.log(chat.msg);
+    // console.log(chat.msg);
     return (
       <>
         {chat.user === "user" ? (
