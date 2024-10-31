@@ -22,7 +22,7 @@ const ChattingRoom = React.memo(() => {
   // 메모이제이션된 메시지
   const memoizedChatMessages = useMemo(() => {
     return chatMessages.map((chat, index) => (
-      <ChatBubble key={index} user={chat.user} msg={chat.msg} />
+      <ChatBubble key={index} chat={chat} />
     ));
   }, [chatMessages]);
 

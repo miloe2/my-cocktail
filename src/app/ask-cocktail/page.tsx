@@ -4,29 +4,28 @@ import ChattingRoom from "@/components/pages/main/ChattingRoom";
 import SearchBar from "@/components/elements/SearchBar";
 import useChatStore from "@/store/useChatStore";
 import useSearchStore from "@/store/useSearchStore";
-import { searchQuery } from "@/api";
+import { fetchSearchResult } from "@/api";
 
 const AskCocktailPage = () => {
-  const { updateChatMessage } = useChatStore();
+  const { updateUserMessage, updateGptMessage } = useChatStore();
   const [searchText, setSearchText] = useState("");
   const [log, setLog] = useState("");
-  const { searchQuery: query } = useSearchStore();
+  const { searchQuery } = useSearchStore();
 
   useEffect(() => {
-    setSearchText(query);
-  }, [query]);
+    setSearchText(searchQuery);
+  }, [searchQuery]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
   };
   const handleSearch = async () => {
     setSearchText("");
-    updateChatMessage(searchText, "user");
+    updateUserMessage(searchText, "user");
     try {
-      const rsp = await searchQuery(searchText);
-      if (rsp && rsp.data) {
-        updateChatMessage(rsp.data.response, "gpt");
-        setLog(`응답 받음: ${JSON.stringify(rsp.data)}`);
+      const rsp = await fetchSearchResult(searchText);
+      if (rsp) {
+        updateGptMessage(rsp, "gpt");
       }
     } catch (error) {
       console.log(error);

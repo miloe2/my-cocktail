@@ -1,7 +1,7 @@
 "use client";
 import { useState, ChangeEvent, useEffect } from "react";
 import SearchBar from "@/components/elements/SearchBar";
-import { searchQuery } from "@/api";
+import { fetchSearchResult } from "@/api";
 import useSearchStore from "@/store/useSearchStore";
 import SearchHints from "./SearchHints";
 import useChatStore from "@/store/useChatStore";
@@ -9,15 +9,15 @@ import { searchGpt } from "@/utils/searchGpt";
 import { useRouter } from "next/navigation";
 
 const SearchManager = () => {
-  const { updateChatMessage } = useChatStore();
+  const { updateGptMessage,  } = useChatStore();
   const [searchText, setSearchText] = useState("");
   const [log, setLog] = useState("");
-  const { searchQuery: query } = useSearchStore();
+  const { searchQuery, updateQuery } = useSearchStore();
   const router = useRouter();
 
   useEffect(() => {
-    setSearchText(query);
-  }, [query]);
+    setSearchText(searchQuery);
+  }, [searchQuery]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
@@ -39,21 +39,21 @@ const SearchManager = () => {
   const handleSearch = async () => {
     setLog("요청시작");
     setSearchText("");
-    updateChatMessage(searchText, "user");
+    router.push('/ask-cocktail')
+    // updateChatMessage(searchText, "user");
+
     // if (!isChatStart) {
     // updateChatStatus();
     // }
     try {
-      const rsp = await searchQuery(searchText);
-      if (rsp && rsp.data) {
-        updateChatMessage(rsp.data.response, "gpt");
-        setLog(`응답 받음: ${JSON.stringify(rsp.data)}`);
+      const rsp = await fetchSearchResult(searchText);
+      if (rsp) {
+        updateGptMessage(rsp, "gpt");
       }
     } catch (error) {
       console.log(error);
-      setLog(`오류 발생: ${error}`);
     } finally {
-      updateQuery("");
+      // updateQuery("");
     }
   };
   return (

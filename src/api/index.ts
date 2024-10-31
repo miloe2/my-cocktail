@@ -1,14 +1,18 @@
 import axios from "axios";
+import { ChatGptResponse } from "@/types/types";
+
 const BASE_URL = "http://localhost:3000/api";
 
-export const searchQuery = async (query: string) => {
+export const fetchSearchResult = async (query: string):Promise <ChatGptResponse | undefined> => {
   console.log("API 호출합니다", query);
   try {
     const rsp = await axios.post(`${BASE_URL}/generate`, {
       query,
     });
-    // console.log("FE API RSP", rsp);
-    return rsp;
+    const parsedMsg = JSON.parse(rsp.data.response);
+    console.log(parsedMsg, typeof parsedMsg)
+    // console.log(rsp.data.response, typeof rsp.data.response) // {cocktails : [..] , string}
+    return parsedMsg;
   } catch (error) {
     console.log(error);
   }

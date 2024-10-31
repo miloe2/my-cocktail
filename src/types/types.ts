@@ -1,9 +1,12 @@
-export interface ChatMessage {
-  // id: string;
-  // time: Date;
-  user: "user" | "gpt";
-  msg: string | { Cocktails : Array<CocktailRecipt>};
-};
+export interface ChatGptMessage {
+  user : "gpt";
+  msg : ChatGptResponse;
+}
+
+export interface ChatUserMessage {
+  user : "user";
+  msg : string;
+}
 
 export interface CocktailRecipt {
   name: string;
@@ -21,6 +24,11 @@ export interface Reciept {
 export interface ChatStore {
   isChatStart: boolean;
   updateChatStatus: () => void;
-  chatMessages: ChatMessage[];
-  updateChatMessage: (msg: string, user: "user" | "gpt") => void;
+  chatMessages: Array<ChatGptMessage | ChatUserMessage>;
+  updateGptMessage : (msg: ChatGptResponse, user : 'gpt') => void;
+  updateUserMessage: (msg: string, user: "user") => void;
+}
+
+export interface ChatGptResponse {
+  cocktails : Array<CocktailRecipt>
 }
