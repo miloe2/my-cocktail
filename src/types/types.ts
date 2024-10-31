@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export interface ChatMessage {
   // id: string;
   // time: Date;
@@ -17,6 +19,19 @@ export interface Reciept {
   unit: string;
 };
 
+export interface GptApiResponse {
+  data : {
+    response : string;
+  }
+};
+// 핸들러 함수에 필요한 타입
+export interface HandleSearchParams {
+  searchText: string;
+  setSearchText: Dispatch<SetStateAction<string>>;
+  fetchSearchResults: (text: string) => Promise<GptApiResponse | undefined>;
+  updateChatMessage: (message: string, sender: "user" | "gpt") => void;
+  finalCallback?: () => void;
+}
 
 export interface ChatStore {
   isChatStart: boolean;

@@ -16,9 +16,7 @@ const ChatBubble = React.memo(({ user, msg }: ChatMessage) => {
         </div>
       ) : (
         <div className="">
-          <AnswerCard
-          user='gpt' 
-          msg={msg} />                                                                                               
+          <AnswerCard msg={msg} />
         </div>
       )}
     </>
