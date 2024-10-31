@@ -5,11 +5,11 @@ import SearchBar from "@/components/elements/SearchBar";
 import useChatStore from "@/store/useChatStore";
 import useSearchStore from "@/store/useSearchStore";
 import { fetchSearchResult } from "@/api";
+import { searchGpt } from "@/utils/searchGpt";
 
 const AskCocktailPage = () => {
   const { updateUserMessage, updateGptMessage } = useChatStore();
   const [searchText, setSearchText] = useState("");
-  const [log, setLog] = useState("");
   const { searchQuery } = useSearchStore();
 
   useEffect(() => {
@@ -19,20 +19,17 @@ const AskCocktailPage = () => {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
   };
+
   const handleSearch = async () => {
     setSearchText("");
     updateUserMessage(searchText, "user");
-    try {
-      const rsp = await fetchSearchResult(searchText);
-      if (rsp) {
-        updateGptMessage(rsp, "gpt");
-      }
-    } catch (error) {
-      console.log(error);
-      setLog(`오류 발생: ${error}`);
-      console.log(log);
-    }
+    searchGpt({
+      searchText,
+      fetchSearchResult,
+      updateGptMessage,
+    });
   };
+
   return (
     <div className="">
       <div className="pb-14">

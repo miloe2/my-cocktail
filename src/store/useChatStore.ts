@@ -13,19 +13,19 @@ const useChatStore = create<ChatStore>((set) => ({
     set((state) => ({
       isChatStart: !state.isChatStart,
     })),
-  updateGptMessage : (msg, user) => 
+  updateGptMessage: (msg, user) =>
     set((state) => {
       // const parsedMsg = JSON.parse(msg);
       return {
-        chatMessages : [
+        chatMessages: [
           ...state.chatMessages,
           {
             user,
-            msg 
-          }
-        ]
-      }
-  }),
+            msg,
+          },
+        ],
+      };
+    }),
   updateUserMessage: (msg, user) =>
     set((state) => ({
       chatMessages: [
@@ -35,8 +35,7 @@ const useChatStore = create<ChatStore>((set) => ({
           msg, // 실제 메시지 내용
         },
       ],
-    })
-  ),
+    })),
   // updateChatMessage: (msg, user) =>
   //   set((state) => ({
   //     chatMessages: [

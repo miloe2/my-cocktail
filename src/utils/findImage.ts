@@ -1,3 +1,1 @@
-export const findImage = ( ) => {
-
-}
+export const findImage = () => {};

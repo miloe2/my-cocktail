@@ -1,7 +1,7 @@
 import React from "react";
-import { ChatGptResponse} from "@/types/types";
+import { ChatGptResponse } from "@/types/types";
 
-const AnswerCard = ({ cocktails } : ChatGptResponse) => {
+const AnswerCard = ({ cocktails }: ChatGptResponse) => {
   return (
     <div>
       {cocktails.map((cocktail, index) => (

@@ -1,28 +1,19 @@
-import { Dispatch, SetStateAction } from "react";
-interface HandleSearchParams {
-  searchText: string;
-  setSearchText: Dispatch<SetStateAction<string>>;
-  fetchSearchResult: (text: string) => Promise<{ data: { response: string } }>;
-  updateChatMessage: (message: string, sender: "user" | "gpt") => void;
-  finalCallback : () => void;
-}
+import { HandleSearchParams } from "@/types/types";
+
 export const searchGpt = async ({
   searchText,
-  setSearchText,
   fetchSearchResult,
-  updateChatMessage,
+  updateGptMessage,
   finalCallback,
 }: HandleSearchParams) => {
-  setSearchText("");
-  updateChatMessage(searchText, "user");
   try {
     const rsp = await fetchSearchResult(searchText);
-    if (rsp && rsp.data) {
-      updateChatMessage(rsp.data.response, "gpt");
+    if (rsp) {
+      updateGptMessage(rsp, "gpt");
     }
   } catch (error) {
     console.log(error);
   } finally {
-    finalCallback();
+    if (finalCallback) finalCallback();
   }
 };
