@@ -5,6 +5,7 @@ import { searchQuery } from "@/api";
 import useSearchStore from "@/store/useSearchStore";
 import SearchHints from "./SearchHints";
 import useChatStore from "@/store/useChatStore";
+import { searchGpt } from "@/utils/searchGpt";
 import { useRouter } from "next/navigation";
 
 const SearchManager = () => {
@@ -20,6 +21,20 @@ const SearchManager = () => {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
   };
+  const finalCallback = () => {
+    updateQuery('');
+    router.push('/ask-cocktail')
+  }
+  // const handleSearch = async () => {
+  //   searchGpt({
+  //     searchText,
+  //     setSearchText,
+  //     searchQuery: query, // `query`를 `searchQuery`로 변경하여 전달
+  //     updateChatMessage,
+  //     finalCallback,
+  //   });
+  // };
+  
   const handleSearch = async () => {
     router.push("/ask-cocktail");
     setSearchText("");
@@ -36,6 +51,7 @@ const SearchManager = () => {
       console.log(error);
     } finally {
       updateQuery("");
+      router.push('/ask-cocktail')
     }
   };
   return (

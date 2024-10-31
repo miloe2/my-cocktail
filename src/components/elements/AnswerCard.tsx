@@ -1,14 +1,9 @@
 import React from "react";
-interface CocktailRecipt {
-  name: string;
-  ingredients: Reciept[];
-  degree: number;
-}
-interface Reciept {
-  name: string;
-  amountValue: number;
-  unit: string;
-}
+import { CocktailRecipt, Reciept, ChatMessage } from "@/types/types";
+
+const cocktailsImage = new Set(
+
+);
 
 const AnswerCard = ({ msg }: { msg: string }) => {
   // 전달받은 msg 문자열을 JSON 객체로 변환

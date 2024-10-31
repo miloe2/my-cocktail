@@ -25,3 +25,23 @@ export const test = async () => {
     console.error("오류 발생!", error);
   }
 };
+
+
+/**
+ * TODO
+ * 스켈레톤 페이지
+ * 모달 index 애니메이션
+ * 필터로 api 호출 할 때, notice2 로 넘기기
+ * 모바일에서 api 호출  
+ * 카드아이템 디자인
+ * handlerSearch 모듈화
+ * 기본적인 item 사진 찾기
+ * 메인 페이지 디자인
+ * 채팅에 Date() 같이 전달하기
+ * 유튜브 링크 걸기
+ * 배포
+ * 버튼 효과 
+ * chat gpt history 전달해서 같이 물어보기
+ * 애드센스
+ * 
+ */
