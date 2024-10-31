@@ -21,7 +21,7 @@ const BottomModal = ({
   const isOpen = modals[id] || false;
   const modalClass = ` bg-stone-700 fixed ${
     isOpen ? "translate-y-0" : "translate-y-full"
-  } bottom-0 max-w-3xl w-full max-h-[400px] rounded-t-3xl px-4 flex flex-col left-1/2 -translate-x-1/2 transition-transform duration-300`;
+  } bottom-0 max-w-3xl w-full max-h-[400px] rounded-t-lg px-4 flex flex-col left-1/2 -translate-x-1/2 transition-transform duration-300`;
 
   return (
     <div className={modalClass}>

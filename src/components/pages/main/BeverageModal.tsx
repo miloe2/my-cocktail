@@ -96,29 +96,6 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
               ></div>
             </div>
           ))}
-          {/* {idxArr.map((btn, i) => (
-            <div key={i} className="flex flex-col w-full py-2 ">
-              <a href={`#index0${i + 1}`} className="mx-auto w-1/2">
-                <button
-                  ref={(el) => {
-                    buttonRefs.current[i] = el; // 반환값이 없도록 변경
-                  }}
-                  className={`${selected === i ? "font-bold" : "font-medium"} pt-2 w-full  text-sm   `}
-                  onClick={() => handleClick(i)}
-                >
-                  {btn}
-                </button>
-              </a>
-              <div
-                className={`transition-all duration-500 absolute bottom-0  h-1 border-b-2 border-zinc-50 inline-block mx-auto`}
-                style={{
-                  left: dimensions.offsetLeft,
-                  width: dimensions.clientWidth,
-                  borderBottom: "1px solid #ddd",
-                }}
-              ></div>
-            </div>
-          ))} */}
         </div>
       }
       content={

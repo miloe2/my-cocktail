@@ -11,7 +11,8 @@ import { useRouter } from "next/navigation";
 const SearchManager = () => {
   const { updateChatMessage } = useChatStore();
   const [searchText, setSearchText] = useState("");
-  const { searchQuery: query, updateQuery } = useSearchStore();
+  const [log, setLog] = useState("");
+  const { searchQuery: query } = useSearchStore();
   const router = useRouter();
 
   useEffect(() => {
@@ -36,7 +37,7 @@ const SearchManager = () => {
   // };
   
   const handleSearch = async () => {
-    router.push("/ask-cocktail");
+    setLog("요청시작");
     setSearchText("");
     updateChatMessage(searchText, "user");
     // if (!isChatStart) {
@@ -46,16 +47,18 @@ const SearchManager = () => {
       const rsp = await searchQuery(searchText);
       if (rsp && rsp.data) {
         updateChatMessage(rsp.data.response, "gpt");
+        setLog(`응답 받음: ${JSON.stringify(rsp.data)}`);
       }
     } catch (error) {
       console.log(error);
+      setLog(`오류 발생: ${error}`);
     } finally {
       updateQuery("");
-      router.push('/ask-cocktail')
     }
   };
   return (
     <div className="flex flex-col w-full relative ">
+      <div className="bg-blue-900 hidden">LOG TEST {log}</div>
       <>
         <SearchBar
           onChange={handleInputChange}
