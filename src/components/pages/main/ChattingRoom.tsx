@@ -2,11 +2,13 @@ import React, { useEffect, useRef, useCallback, useMemo } from "react";
 import useChatStore from "@/store/useChatStore";
 import ChatBubble from "@/components/elements/ChatBubble";
 import { useRouter } from "next/navigation";
+import useAppStore from "@/store/useAppStore";
 import SkeletoneAnswerCard from "@/components/elements/SkeletoneAnswerCard";
 
 const ChattingRoom = React.memo(() => {
   const chatEndRef = useRef<HTMLDivElement | null>(null);
   const { updateChatStatus, chatMessages } = useChatStore();
+  const { isLoading } = useAppStore();
   const router = useRouter();
 
   const handleChatStatus = useCallback(() => {
@@ -62,8 +64,8 @@ const ChattingRoom = React.memo(() => {
         </div>
       </div>
       {memoizedChatMessages}
-      <SkeletoneAnswerCard/>
-      <div ref={chatEndRef} className="" />
+      {isLoading && <SkeletoneAnswerCard />}
+      <div ref={chatEndRef} />
     </div>
   );
 });

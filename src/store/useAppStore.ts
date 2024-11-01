@@ -1,14 +1,16 @@
 import { create } from "zustand";
 
 interface AppStore {
-  isLoading : boolean;
+  isLoading: boolean;
+  setLoadingStatus: () => void;
 }
 
-const useModalStore = create<AppStore>((set) => ({
-  isLoading : false,
-  setLoadingStatus : () => set((state) => ({
-    isLoading : !state.isLoading
-  })),
+const useAppStore = create<AppStore>((set) => ({
+  isLoading: false,
+  setLoadingStatus: () =>
+    set((state) => ({
+      isLoading: !state.isLoading,
+    })),
 }));
 
-export default useModalStore;
+export default useAppStore;

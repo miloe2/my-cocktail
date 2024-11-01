@@ -19,7 +19,7 @@ const useChatStore = create<ChatStore>((set) => ({
     })),
   updateGptMessage: (msg, user) =>
     set((state) => {
-      console.log(state.chatMessages)
+      console.log(state.chatMessages);
       return {
         chatMessages: [
           ...state.chatMessages,
@@ -30,14 +30,6 @@ const useChatStore = create<ChatStore>((set) => ({
         ],
       };
     }),
-    setLastGptMessage: (newMsg) => 
-      set((state) => {
-        console.log('로딩컴퍼넌트를 실제 레시피로')
-        const copied = [...state.chatMessages];
-        copied[copied.length - 1].msg = newMsg;
-
-        return { chatMessages : copied }
-      }),
   updateUserMessage: (msg, user) =>
     set((state) => ({
       chatMessages: [

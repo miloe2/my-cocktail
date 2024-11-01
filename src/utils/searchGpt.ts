@@ -1,25 +1,22 @@
 import { HandleSearchParams } from "@/types/types";
 
 export const searchGpt = async ({
+  setLoadingStatus,
   searchText,
   fetchSearchResult,
   updateGptMessage,
-  setLastGptMessage,
   finalCallback,
 }: HandleSearchParams) => {
-  // const loadingMsg = {
-  //   cocktails : []
-  // }
-  // updateGptMessage(loadingMsg, "gpt");
+  setLoadingStatus();
   try {
     const rsp = await fetchSearchResult(searchText);
     if (rsp) {
-      // setLastGptMessage(rsp);
       updateGptMessage(rsp, "gpt");
     }
   } catch (error) {
     console.log(error);
   } finally {
+    setLoadingStatus();
     if (finalCallback) finalCallback();
   }
 };

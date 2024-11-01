@@ -47,7 +47,7 @@ export const test = async () => {
  * 버튼 효과
  * chat gpt history 전달해서 같이 물어보기
  * 애드센스
-*
-* 
+ *
+ *
  * handlerSearch 모듈화
  */

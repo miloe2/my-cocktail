@@ -6,9 +6,11 @@ import useChatStore from "@/store/useChatStore";
 import useSearchStore from "@/store/useSearchStore";
 import { fetchSearchResult } from "@/api";
 import { searchGpt } from "@/utils/searchGpt";
+import useAppStore from "@/store/useAppStore";
 
 const AskCocktailPage = () => {
-  const { updateUserMessage, updateGptMessage, setLastGptMessage } = useChatStore();
+  const { updateUserMessage, updateGptMessage } = useChatStore();
+  const { setLoadingStatus } = useAppStore();
   const [searchText, setSearchText] = useState("");
   const { searchQuery } = useSearchStore();
 
@@ -21,14 +23,14 @@ const AskCocktailPage = () => {
   };
 
   const handleSearch = async () => {
-    console.log('################# 검색창 엔터 ######################')
+    console.log("################# 검색창 엔터 ######################");
     setSearchText("");
     updateUserMessage(searchText, "user");
     searchGpt({
+      setLoadingStatus,
       searchText,
       fetchSearchResult,
       updateGptMessage,
-      setLastGptMessage
     });
   };
 

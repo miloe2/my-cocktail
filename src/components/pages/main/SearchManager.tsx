@@ -7,11 +7,13 @@ import SearchHints from "./SearchHints";
 import useChatStore from "@/store/useChatStore";
 import { searchGpt } from "@/utils/searchGpt";
 import { useRouter } from "next/navigation";
+import useAppStore from "@/store/useAppStore";
 
 const SearchManager = () => {
-  const { updateGptMessage, setLastGptMessage, updateUserMessage } = useChatStore();
+  const { updateGptMessage, updateUserMessage } = useChatStore();
+  const { setLoadingStatus } = useAppStore();
   const [searchText, setSearchText] = useState("");
-  const { searchQuery, updateQuery } = useSearchStore();
+  const { searchQuery } = useSearchStore();
   const router = useRouter();
 
   useEffect(() => {
@@ -31,10 +33,10 @@ const SearchManager = () => {
     router.push("/ask-cocktail");
     updateUserMessage(searchText, "user");
     searchGpt({
+      setLoadingStatus,
       searchText,
       fetchSearchResult,
       updateGptMessage,
-      setLastGptMessage
     });
   };
 

@@ -6,7 +6,10 @@ const ChatBubble = React.memo(
   ({ chat }: { chat: ChatGptMessage | ChatUserMessage }) => {
     const time = "2024-11-01";
     // console.log("chatbubble render");
-  console.log("채팅 버블 여기에서 user vs gpt로 나눠서 렌더링", new Date().getSeconds());
+    console.log(
+      "채팅 버블 여기에서 user vs gpt로 나눠서 렌더링",
+      new Date().getSeconds(),
+    );
 
     // console.log(chat.msg);
     return (
@@ -20,12 +23,11 @@ const ChatBubble = React.memo(
           </div>
         ) : (
           <AnswerCard cocktails={chat.msg.cocktails} />
-        )
-        }
+        )}
       </>
     );
-  }
-)
+  },
+);
 ChatBubble.displayName = "ChatBubble";
 export default ChatBubble;
 // import React from "react";
