@@ -21,12 +21,12 @@ const BottomModal = ({
   const isOpen = modals[id] || false;
   const modalClass = ` bg-stone-700 fixed ${
     isOpen ? "translate-y-0" : "translate-y-full"
-  } bottom-0 max-w-3xl w-full max-h-[400px] rounded-t-lg px-4 flex flex-col left-1/2 -translate-x-1/2 transition-transform duration-300`;
+  } bottom-0 max-w-3xl w-full max-h-[400px] rounded-t-2xl px-4 flex flex-col left-1/2 -translate-x-1/2 transition-transform duration-300`;
 
   return (
     <div className={modalClass}>
       <div>{tab}</div>
-      <div className="w-full h-full overflow-y-auto pb-44 relative no-scroll">
+      <div className="w-full h-full overflow-y-auto pb-24 relative no-scroll">
         {content}
         <div className="bg-stone-700 w-full h-14 fixed bottom-0 left-0  px-4 py-2 flex text-sm space-x-2">
           <button

@@ -30,7 +30,7 @@ const SearchManager = () => {
 
   const handleSearch = async () => {
     setSearchText("");
-    router.push("/ask-cocktail");
+    router.push("/cocktail-chat");
     updateUserMessage(searchText, "user");
     searchGpt({
       setLoadingStatus,

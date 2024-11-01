@@ -7,12 +7,16 @@ import useSearchStore from "@/store/useSearchStore";
 import { fetchSearchResult } from "@/api";
 import { searchGpt } from "@/utils/searchGpt";
 import useAppStore from "@/store/useAppStore";
+import useModalStore from "@/store/useModalStore";
+import BeverageModal from "@/components/pages/main/BeverageModal";
 
 const AskCocktailPage = () => {
   const { updateUserMessage, updateGptMessage } = useChatStore();
   const { setLoadingStatus } = useAppStore();
   const [searchText, setSearchText] = useState("");
   const { searchQuery } = useSearchStore();
+  const { openModal} = useModalStore();
+  const modalId = "beverage"
 
   useEffect(() => {
     setSearchText(searchQuery);
@@ -40,15 +44,20 @@ const AskCocktailPage = () => {
         <ChattingRoom />
       </div>
       <div
-        className="fixed bottom-0 h-14 bg-[#2f2f2f] px-4 pt-2"
-        style={{ width: `calc(100vw)` }}
+        className="fixed bottom-0 h-14 bg-[#2f2f2f] px-4 pt-2 w-full flex"
       >
-        <SearchBar
-          onChange={handleInputChange}
-          onSearchClick={handleSearch}
-          value={searchText}
-        />
+        <div className="bg-stone-700 w-9 h-9 rounded-full mr-2 flex justify-center items-center text-3xl font-thin align-top"
+        onClick={() => openModal(modalId)}>+</div>
+        <div className="w-11/12">
+          <SearchBar
+            onChange={handleInputChange}
+            onSearchClick={handleSearch}
+            value={searchText}
+          />
+
+        </div>
       </div>
+      <BeverageModal modalId={modalId} />
     </div>
   );
 };
