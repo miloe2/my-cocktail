@@ -39,7 +39,6 @@ export const test = async () => {
  * 필터로 api 호출 할 때, notice2 로 넘기기
  * 모바일에서 api 호출
  * 카드아이템 디자인
- * handlerSearch 모듈화
  * 기본적인 item 사진 찾기
  * 메인 페이지 디자인
  * 채팅에 Date() 같이 전달하기
@@ -48,5 +47,7 @@ export const test = async () => {
  * 버튼 효과
  * chat gpt history 전달해서 같이 물어보기
  * 애드센스
- *
+*
+* 
+ * handlerSearch 모듈화
  */

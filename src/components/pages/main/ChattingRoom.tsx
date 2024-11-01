@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useCallback, useMemo } from "react";
 import useChatStore from "@/store/useChatStore";
 import ChatBubble from "@/components/elements/ChatBubble";
 import { useRouter } from "next/navigation";
+import SkeletoneAnswerCard from "@/components/elements/SkeletoneAnswerCard";
 
 const ChattingRoom = React.memo(() => {
   const chatEndRef = useRef<HTMLDivElement | null>(null);
@@ -30,7 +31,7 @@ const ChattingRoom = React.memo(() => {
     router.back();
   };
 
-  console.log("chattingRoom render");
+  console.log("채팅방 (검색창도있고, 뒤로가기도있음)", new Date().getSeconds());
 
   return (
     <div className="flex flex-col relative w-full bg-yellow-00 px-4">
@@ -61,6 +62,7 @@ const ChattingRoom = React.memo(() => {
         </div>
       </div>
       {memoizedChatMessages}
+      <SkeletoneAnswerCard/>
       <div ref={chatEndRef} className="" />
     </div>
   );

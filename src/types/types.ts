@@ -25,6 +25,7 @@ export interface ChatStore {
   updateChatStatus: () => void;
   chatMessages: Array<ChatGptMessage | ChatUserMessage>;
   updateGptMessage: (msg: ChatGptResponse, user: "gpt") => void;
+  setLastGptMessage: (msg: ChatGptResponse) => void;
   updateUserMessage: (msg: string, user: "user") => void;
 }
 
@@ -36,5 +37,6 @@ export interface HandleSearchParams {
   searchText: string;
   fetchSearchResult: (text: string) => Promise<ChatGptResponse | undefined>;
   updateGptMessage: (msg: ChatGptResponse, user: "gpt") => void;
+  setLastGptMessage: (msg: ChatGptResponse) => void;
   finalCallback?: () => void;
 }

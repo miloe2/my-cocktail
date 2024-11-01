@@ -9,7 +9,7 @@ import { searchGpt } from "@/utils/searchGpt";
 import { useRouter } from "next/navigation";
 
 const SearchManager = () => {
-  const { updateGptMessage, updateUserMessage } = useChatStore();
+  const { updateGptMessage, setLastGptMessage, updateUserMessage } = useChatStore();
   const [searchText, setSearchText] = useState("");
   const { searchQuery, updateQuery } = useSearchStore();
   const router = useRouter();
@@ -21,19 +21,20 @@ const SearchManager = () => {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
   };
-  const finalCallback = () => {
-    updateQuery("");
-    router.push("/ask-cocktail");
-  };
+  // const finalCallback = () => {
+  //   updateQuery("");
+  //   router.push("/ask-cocktail");
+  // };
 
   const handleSearch = async () => {
     setSearchText("");
+    router.push("/ask-cocktail");
     updateUserMessage(searchText, "user");
     searchGpt({
       searchText,
       fetchSearchResult,
       updateGptMessage,
-      finalCallback,
+      setLastGptMessage
     });
   };
 
