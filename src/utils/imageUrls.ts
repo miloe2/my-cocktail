@@ -4,7 +4,8 @@ const imageUrls = [
   { name: "마가리타", url: "/images/beverages/margarita.webp" },
 ];
 
-export const findImage = (name: string): string | undefined => {
+const defaultUrl = `/images/beverages/default-cocktail.webp`;
+export const findImage = (name: string): string  => {
   const found = imageUrls.find((item) => name.includes(item.name));
-  return found ? found.url : undefined;
+  return found ? found.url : defaultUrl;
 };

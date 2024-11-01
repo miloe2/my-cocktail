@@ -13,8 +13,8 @@ const AnswerCard = ({ cocktails }: ChatGptResponse) => {
           key={index}
           className="w-11/12 bg-black rounded-md p-4 mb-4 flex text-sm"
         >
-          <div className="w-20 h-20 bg-stone-700 mr-4">
-            <img src={findImage(cocktail.name)} alt={`${cocktail.name}`} />
+          <div className="w-20 h-20 bg-stone-700 mr-4 rounded-md overflow-hidden">
+            <img src={findImage(cocktail.name)} alt={`${cocktail.name}`} className="object-cover w-full h-full"/>
           </div>
           <div>
             <h2>{cocktail.name}</h2>
