@@ -1,21 +1,33 @@
 // OptionsButton.tsx
-import React from "react";
+'use client'
+import React, {useState} from "react";
 
 export interface OptionsButtonProps {
   label: string;
   onClick?: () => void;
-  isSelected?: boolean;
+  onUpdateSelection : (label:string) => void;
+  // isSelected?: boolean;
 }
 
-export const OptionsButton = ({
+export const OptionsButton =({
   label = "button",
   onClick,
-  isSelected = false,
+  onUpdateSelection,
+  // isSelected = false,
 }: OptionsButtonProps) => {
-  console.log('optionBottn')
+  const [isSelected, setIsSelected] = useState(false);
+
+  const handleClick = (label:string) => {
+    setIsSelected((prev) => !prev); // 이전 상태를 반전
+    onUpdateSelection(label)
+    if(onClick) {
+      onClick()
+    }
+  };
+
   return (
     <button
-      onClick={onClick}
+      onClick={() => handleClick(label)}
       className={`
         ${isSelected ? "bg-black border border-black" : "border border-zinc-400"}
         px-3 py-[2px] rounded-full text-sm mr-2 mb-3`}
@@ -25,4 +37,4 @@ export const OptionsButton = ({
   );
 };
 
-export default OptionsButton;
+export default  React.memo(OptionsButton);
