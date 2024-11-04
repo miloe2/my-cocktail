@@ -25,7 +25,7 @@ const SearchManager = () => {
   };
 
   const handleSearch = async () => {
-    if(searchText === "") return;
+    if (searchText === "") return;
     router.push("/cocktail-chat");
     updateUserMessage(searchText, "user");
     searchGpt({

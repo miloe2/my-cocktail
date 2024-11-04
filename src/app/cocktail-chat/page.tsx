@@ -28,7 +28,7 @@ const AskCocktailPage = () => {
 
   const handleSearch = async () => {
     console.log("################# 검색창 엔터 ######################");
-    if(searchText === "") return;
+    if (searchText === "") return;
     updateUserMessage(searchText, "user");
     searchGpt({
       setLoadingStatus,

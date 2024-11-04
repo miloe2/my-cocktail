@@ -8,6 +8,11 @@ export interface ChatUserMessage {
   msg: string;
 }
 
+export interface ChatNoticeMessage {
+  user: "notice";
+  msg: string;
+}
+
 export interface CocktailRecipt {
   name: string;
   ingredients: Reciept[];
@@ -23,7 +28,7 @@ export interface Reciept {
 export interface ChatStore {
   isChatStart: boolean;
   updateChatStatus: () => void;
-  chatMessages: Array<ChatGptMessage | ChatUserMessage>;
+  chatMessages: Array<ChatGptMessage | ChatUserMessage | ChatNoticeMessage>;
   updateGptMessage: (msg: ChatGptResponse, user: "gpt") => void;
   updateUserMessage: (msg: string, user: "user") => void;
 }

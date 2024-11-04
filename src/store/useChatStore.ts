@@ -4,10 +4,10 @@ import { ChatStore } from "@/types/types";
 const useChatStore = create<ChatStore>((set) => ({
   isChatStart: false,
   chatMessages: [
-    // {
-    //   user: "user",
-    //   msg: "hello",
-    // },
+    {
+      user: "notice",
+      msg: "welcome",
+    },
     // {
     //   user: "user",
     //   msg: "hello",

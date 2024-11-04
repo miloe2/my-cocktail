@@ -5,8 +5,12 @@ import OptionsButton from "@/components/elements/OptionsButton";
 interface TabContentsProps {
   anchorId: string;
   title: string;
-  list: string[];
+  list: ListArray[];
   onSelectOption: (options: string) => void;
+}
+interface ListArray {
+  name : string;
+  eng : string;
 }
 
 const TabContents = ({
@@ -20,18 +24,18 @@ const TabContents = ({
   };
 
   return (
-    <div className="flex flex-col mb-12" id={anchorId}>
+    <div className="flex flex-col mb-8" id={anchorId}>
       <div className="my-4 flex space-x-2">
         <div className="w-4 h-4 bg-stone-500">
           <img src="" alt="" />
-          </div>
+        </div>
         <h1>{title}</h1>
       </div>
       <div>
         {list.map((item, i) => (
           <OptionsButton
             key={i}
-            label={item}
+            label={item.name}
             onUpdateSelection={handleUpdateClick}
           />
         ))}
