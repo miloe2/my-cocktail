@@ -96,8 +96,6 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
   return (
     <BottomModal
       id={modalId}
-      onPrimaryAction={handleApply}
-      onSecondaryAction={handleRefresh}
       tab={
         <SwiperModule
           loop={false}
@@ -129,6 +127,8 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
           />
         </>
       }
+      onPrimaryAction={handleApply}
+      onSecondaryAction={handleRefresh}
     />
   );
 };
