@@ -15,6 +15,7 @@ export const OptionsButton = ({
   onUpdateSelection,
   // isSelected = false,
 }: OptionsButtonProps) => {
+  console.log("option Button");
   const [isSelected, setIsSelected] = useState(false);
 
   const handleClick = (label: string) => {

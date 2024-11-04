@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useRef } from "react";
 import BottomModal from "@/components/elements/BottomModal";
-import { liquorList, drinkList, fruitList} from "@/data/beverage";
+import { liquorCategoryList, drinkList, fruitList } from "@/data/beverage";
 import TabContents from "./TabContents";
 import useSearchStore from "@/store/useSearchStore";
 import useModalStore from "@/store/useModalStore";
@@ -110,7 +110,7 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
           <TabContents
             anchorId="index01"
             title={idxArr[0]}
-            list={liquorList}
+            list={liquorCategoryList}
             onSelectOption={(label) => addOptionToSet(label)}
           />
           <TabContents

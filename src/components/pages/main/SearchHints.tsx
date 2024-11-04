@@ -1,3 +1,4 @@
+import { memo } from "react";
 import BeverageModal from "./BeverageModal";
 import useModalStore from "@/store/useModalStore";
 
@@ -68,4 +69,4 @@ const SearchHints = ({ className }: SearchHintsProps) => {
     </div>
   );
 };
-export default SearchHints;
+export default memo(SearchHints);

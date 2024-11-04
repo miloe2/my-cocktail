@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useCallback, useMemo } from "react";
+import React, { useEffect, useRef, useCallback, useMemo, memo } from "react";
 import useChatStore from "@/store/useChatStore";
 import ChatBubble from "@/components/elements/ChatBubble";
 import { useRouter } from "next/navigation";
 import useAppStore from "@/store/useAppStore";
 import SkeletoneAnswerCard from "@/components/elements/SkeletoneAnswerCard";
 
-const ChattingRoom = React.memo(() => {
+const ChattingRoom = () => {
   const chatEndRef = useRef<HTMLDivElement | null>(null);
   const { updateChatStatus, chatMessages } = useChatStore();
   const { isLoading } = useAppStore();
@@ -68,6 +68,5 @@ const ChattingRoom = React.memo(() => {
       <div ref={chatEndRef} />
     </div>
   );
-});
-ChattingRoom.displayName = "ChattingRoom";
-export default ChattingRoom;
+};
+export default memo(ChattingRoom);

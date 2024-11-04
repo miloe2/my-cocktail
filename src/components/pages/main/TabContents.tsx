@@ -9,8 +9,8 @@ interface TabContentsProps {
   onSelectOption: (options: string) => void;
 }
 interface ListArray {
-  name : string;
-  eng : string;
+  name: string;
+  eng: string;
 }
 
 const TabContents = ({
@@ -19,6 +19,7 @@ const TabContents = ({
   list,
   onSelectOption,
 }: TabContentsProps) => {
+  console.log("tab contents");
   const handleUpdateClick = (label: string) => {
     onSelectOption(label);
   };
