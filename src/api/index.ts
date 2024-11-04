@@ -1,7 +1,8 @@
 import axios from "axios";
 import { ChatGptResponse } from "@/types/types";
 
-const BASE_URL = "http://localhost:3000/api";
+const BASE_URL = "http://172.20.10.3:3000/api";
+// const BASE_URL = "http://localhost:3000/api";
 
 export const fetchSearchResult = async (
   query: string,
@@ -20,7 +21,7 @@ export const fetchSearchResult = async (
   }
 };
 
-export const test = async () => {
+export const testPhone = async () => {
   console.log("api start");
   try {
     const rsp = await axios.post(`${BASE_URL}/test`, {
@@ -38,7 +39,6 @@ export const test = async () => {
  * 모달 index 애니메이션 
  * 필터로 api 호출 할 때, notice2 로 넘기기2 
  * 모달창 필터 수정 하기 - 술이 아닌 진 / 칵테일 / 라임 / 콜라/ 이런식으로 만들기, 
- * 모바일에서 api 호출
  * 카드아이템 디자인
  * 기본적인 item 사진 찾기
  * 메인 페이지 디자인
@@ -52,5 +52,6 @@ export const test = async () => {
 *
 *
 * handlerSearch 모듈화
- * 스켈레톤 페이지
+* 스켈레톤 페이지
+* 모바일에서 api 호출
  */
