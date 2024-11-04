@@ -10,7 +10,7 @@ interface TabContentsProps {
 }
 
 const TabContents = ({ anchorId, title, list }: TabContentsProps) => {
-  // console.log('tab rerender', anchorId)
+  console.log('tab rerender', )
 
   const { selectedOption, addOption, removeOption } = useSearchStore();
 

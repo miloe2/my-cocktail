@@ -12,6 +12,7 @@ export const OptionsButton = ({
   onClick,
   isSelected = false,
 }: OptionsButtonProps) => {
+  console.log('optionBottn')
   return (
     <button
       onClick={onClick}

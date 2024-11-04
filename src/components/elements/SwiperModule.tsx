@@ -6,22 +6,22 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 interface SwiperModuleProps {
-  loop: boolean;
-  navigation: boolean;
-  pagination: boolean;
-  spaceBetween: number;
-  slidesPerView: number | "auto";
+  loop?: boolean;
+  navigation?: boolean;
+  pagination?: boolean;
+  spaceBetween?: number;
+  slidesPerView?: number | "auto";
   className?: string;
   slides: ReactNode[];
   freeMode?: boolean;
 }
 
 const SwiperModule = ({
-  loop,
-  navigation,
-  pagination,
-  spaceBetween,
-  slidesPerView,
+  loop=true,
+  navigation=true,
+  pagination=true,
+  spaceBetween = 0,
+  slidesPerView = 1,
   className,
   slides,
   freeMode = true,
