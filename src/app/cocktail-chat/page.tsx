@@ -28,7 +28,6 @@ const AskCocktailPage = () => {
 
   const handleSearch = async () => {
     console.log("################# 검색창 엔터 ######################");
-    setSearchText("");
     updateUserMessage(searchText, "user");
     searchGpt({
       setLoadingStatus,
@@ -36,6 +35,7 @@ const AskCocktailPage = () => {
       fetchSearchResult,
       updateGptMessage,
     });
+    setSearchText("");
   };
 
   return (

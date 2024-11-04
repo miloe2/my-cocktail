@@ -13,7 +13,7 @@ const SearchManager = () => {
   const { updateGptMessage, updateUserMessage } = useChatStore();
   const { setLoadingStatus } = useAppStore();
   const [searchText, setSearchText] = useState("");
-  const { searchQuery } = useSearchStore();
+  const { searchQuery, updateQuery } = useSearchStore();
   const router = useRouter();
 
   useEffect(() => {
@@ -23,13 +23,8 @@ const SearchManager = () => {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
   };
-  // const finalCallback = () => {
-  //   updateQuery("");
-  //   router.push("/ask-cocktail");
-  // };
 
   const handleSearch = async () => {
-    setSearchText("");
     router.push("/cocktail-chat");
     updateUserMessage(searchText, "user");
     searchGpt({
@@ -38,6 +33,8 @@ const SearchManager = () => {
       fetchSearchResult,
       updateGptMessage,
     });
+    setSearchText("");
+    updateQuery("");
   };
 
   return (

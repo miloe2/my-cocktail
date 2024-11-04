@@ -13,7 +13,8 @@ interface BeverageModalProps {
 
 const BeverageModal = ({ modalId }: BeverageModalProps) => {
   console.log('beverage modal')
-  const { selectedOption, updateQuery, clearOptions } = useSearchStore();
+  const { updateQuery, } = useSearchStore();
+  const optionsSet = useRef(new Set());
   const { closeModal } = useModalStore();
   const [selected, setSelected] = useState<number>(0);
   const idxArr = ["리큐르", "진", "럼", "test1", "test2", "test3"];
@@ -34,16 +35,12 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
   }
   // const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const handleApply = () => {
-    const selectedOptionArray = Array.from(selectedOption);
-    // console.log(JSON.stringify(selectedOptionArray));
-    let query = selectedOptionArray.join(", ");
-    // console.log(query)
-    // console.log('selectOption', selectedOption);
+    let query = Array.from(optionsSet.current).join(", ");
     updateQuery(query);
     closeModal(modalId);
   };
   const handleRefresh = () => {
-    clearOptions();
+    optionsSet.current.clear()
   };
   // const [dimensions, setDimensions] = useState<{
   //   offsetLeft: number;
@@ -83,6 +80,14 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
   //     }));
   //   }
   // };
+  const addOptionToSet = (label:string) => {
+    if(optionsSet.current.has(label)){
+      optionsSet.current.delete(label)
+    }else {
+      optionsSet.current.add(label)
+    }
+    console.log(optionsSet)
+  }
 
 
   return (
@@ -101,9 +106,9 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
       }
       content={
         <>
-          <TabContents anchorId="index01" title={idxArr[0]} list={liquorList} />
-          <TabContents anchorId="index02" title={idxArr[1]} list={ginList} />
-          <TabContents anchorId="index03" title={idxArr[2]} list={rumList} />
+          <TabContents anchorId="index01" title={idxArr[0]} list={liquorList} onSelectOption={(label) => addOptionToSet(label)}/>
+          <TabContents anchorId="index02" title={idxArr[1]} list={ginList} onSelectOption={(label) => addOptionToSet(label)}/>
+          <TabContents anchorId="index03" title={idxArr[2]} list={rumList} onSelectOption={(label) => addOptionToSet(label)}/>
         </>
       }
     />
