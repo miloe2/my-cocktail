@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import BottomModal from "@/components/elements/BottomModal";
 import { liquorList, ginList, rumList } from "@/data/beverage";
 import TabContents from "./TabContents";
@@ -12,27 +12,31 @@ interface BeverageModalProps {
 }
 
 const BeverageModal = ({ modalId }: BeverageModalProps) => {
-  console.log('beverage modal')
-  const { updateQuery, } = useSearchStore();
+  console.log("beverage modal");
+  const { updateQuery } = useSearchStore();
   const optionsSet = useRef(new Set());
   const { closeModal } = useModalStore();
   const [selected, setSelected] = useState<number>(0);
   const idxArr = ["리큐르", "진", "럼", "test1", "test2", "test3"];
   const slides = idxArr.map((slide, index) => (
     <SwiperSlide key={index + 1}>
-      <a href={`#index0${index + 1}`} 
-      className="mx-auto w-1/2"
-      onClick={() => handleTab(index)}>
-        <div className={`${selected === index ? 'text-white':'text-stone-500'} bg-red-00 text-center py-4`}>
+      <a
+        href={`#index0${index + 1}`}
+        className="mx-auto w-1/2"
+        onClick={() => handleTab(index)}
+      >
+        <div
+          className={`${selected === index ? "text-white" : "text-stone-500"} bg-red-00 text-center py-4`}
+        >
           {slide}
         </div>
       </a>
     </SwiperSlide>
   ));
 
-  const handleTab = (index : number) => {
-    setSelected(index)
-  }
+  const handleTab = (index: number) => {
+    setSelected(index);
+  };
   // const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const handleApply = () => {
     let query = Array.from(optionsSet.current).join(", ");
@@ -40,7 +44,7 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
     closeModal(modalId);
   };
   const handleRefresh = () => {
-    optionsSet.current.clear()
+    optionsSet.current.clear();
   };
   // const [dimensions, setDimensions] = useState<{
   //   offsetLeft: number;
@@ -80,15 +84,14 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
   //     }));
   //   }
   // };
-  const addOptionToSet = (label:string) => {
-    if(optionsSet.current.has(label)){
-      optionsSet.current.delete(label)
-    }else {
-      optionsSet.current.add(label)
+  const addOptionToSet = (label: string) => {
+    if (optionsSet.current.has(label)) {
+      optionsSet.current.delete(label);
+    } else {
+      optionsSet.current.add(label);
     }
-    console.log(optionsSet)
-  }
-
+    console.log(optionsSet);
+  };
 
   return (
     <BottomModal
@@ -97,18 +100,33 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
       onSecondaryAction={handleRefresh}
       tab={
         <SwiperModule
-        loop={false}
-        navigation={false}
-        pagination={false}
-        slidesPerView={3.6}
-        slides={slides}
-      />
+          loop={false}
+          navigation={false}
+          pagination={false}
+          slidesPerView={3.6}
+          slides={slides}
+        />
       }
       content={
         <>
-          <TabContents anchorId="index01" title={idxArr[0]} list={liquorList} onSelectOption={(label) => addOptionToSet(label)}/>
-          <TabContents anchorId="index02" title={idxArr[1]} list={ginList} onSelectOption={(label) => addOptionToSet(label)}/>
-          <TabContents anchorId="index03" title={idxArr[2]} list={rumList} onSelectOption={(label) => addOptionToSet(label)}/>
+          <TabContents
+            anchorId="index01"
+            title={idxArr[0]}
+            list={liquorList}
+            onSelectOption={(label) => addOptionToSet(label)}
+          />
+          <TabContents
+            anchorId="index02"
+            title={idxArr[1]}
+            list={ginList}
+            onSelectOption={(label) => addOptionToSet(label)}
+          />
+          <TabContents
+            anchorId="index03"
+            title={idxArr[2]}
+            list={rumList}
+            onSelectOption={(label) => addOptionToSet(label)}
+          />
         </>
       }
     />

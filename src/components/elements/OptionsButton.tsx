@@ -1,15 +1,15 @@
 // OptionsButton.tsx
-'use client'
-import React, {useState} from "react";
+"use client";
+import React, { useState } from "react";
 
 export interface OptionsButtonProps {
   label: string;
   onClick?: () => void;
-  onUpdateSelection : (label:string) => void;
+  onUpdateSelection: (label: string) => void;
   // isSelected?: boolean;
 }
 
-export const OptionsButton =({
+export const OptionsButton = ({
   label = "button",
   onClick,
   onUpdateSelection,
@@ -17,11 +17,11 @@ export const OptionsButton =({
 }: OptionsButtonProps) => {
   const [isSelected, setIsSelected] = useState(false);
 
-  const handleClick = (label:string) => {
+  const handleClick = (label: string) => {
     setIsSelected((prev) => !prev); // 이전 상태를 반전
-    onUpdateSelection(label)
-    if(onClick) {
-      onClick()
+    onUpdateSelection(label);
+    if (onClick) {
+      onClick();
     }
   };
 
@@ -37,4 +37,4 @@ export const OptionsButton =({
   );
 };
 
-export default  React.memo(OptionsButton);
+export default React.memo(OptionsButton);

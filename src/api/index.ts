@@ -36,9 +36,9 @@ export const testPhone = async () => {
 /**
  * TODO
  * 모달 클릭시 검색창도 translate Y
- * 모달 index 애니메이션 
- * 필터로 api 호출 할 때, notice2 로 넘기기2 
- * 모달창 필터 수정 하기 - 술이 아닌 진 / 칵테일 / 라임 / 콜라/ 이런식으로 만들기, 
+ * 모달 index 애니메이션
+ * 필터로 api 호출 할 때, notice2 로 넘기기2
+ * 모달창 필터 수정 하기 - 술이 아닌 진 / 칵테일 / 라임 / 콜라/ 이런식으로 만들기,
  * 카드아이템 디자인
  * 기본적인 item 사진 찾기
  * 메인 페이지 디자인
@@ -49,9 +49,9 @@ export const testPhone = async () => {
  * firebase analistic
  * 애드센스
  * chat gpt history 전달해서 같이 물어보기
-*
-*
-* handlerSearch 모듈화
-* 스켈레톤 페이지
-* 모바일에서 api 호출
+ *
+ *
+ * handlerSearch 모듈화
+ * 스켈레톤 페이지
+ * 모바일에서 api 호출
  */

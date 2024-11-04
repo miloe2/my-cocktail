@@ -17,9 +17,9 @@ interface SwiperModuleProps {
 }
 
 const SwiperModule = ({
-  loop=true,
-  navigation=true,
-  pagination=true,
+  loop = true,
+  navigation = true,
+  pagination = true,
   spaceBetween = 0,
   slidesPerView = 1,
   className,

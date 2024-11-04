@@ -15,8 +15,8 @@ const AskCocktailPage = () => {
   const { setLoadingStatus } = useAppStore();
   const [searchText, setSearchText] = useState("");
   const { searchQuery } = useSearchStore();
-  const { openModal} = useModalStore();
-  const modalId = "beverage"
+  const { openModal } = useModalStore();
+  const modalId = "beverage";
 
   useEffect(() => {
     setSearchText(searchQuery);
@@ -43,18 +43,19 @@ const AskCocktailPage = () => {
       <div className="pb-14">
         <ChattingRoom />
       </div>
-      <div
-        className="fixed bottom-0 h-14 bg-[#2f2f2f] px-4 pt-2 w-full flex"
-      >
-        <div className="bg-stone-700 w-9 h-9 rounded-full mr-2 flex justify-center items-center text-3xl font-thin align-top"
-        onClick={() => openModal(modalId)}>+</div>
+      <div className="fixed bottom-0 h-14 bg-[#2f2f2f] px-4 pt-2 w-full flex">
+        <div
+          className="bg-stone-700 w-9 h-9 rounded-full mr-2 flex justify-center items-center text-3xl font-thin align-top"
+          onClick={() => openModal(modalId)}
+        >
+          +
+        </div>
         <div className="w-11/12">
           <SearchBar
             onChange={handleInputChange}
             onSearchClick={handleSearch}
             value={searchText}
           />
-
         </div>
       </div>
       <BeverageModal modalId={modalId} />
