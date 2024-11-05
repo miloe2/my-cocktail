@@ -6,7 +6,17 @@ const imageUrls = [
   },
   {
     name: "마가리타",
-    aliases: ["마가리타"],
+    aliases: ["마가리타", "마르가리타"],
+    url: "/images/beverages/margarita.webp",
+  },
+  {
+    name: "진",
+    aliases: ["진"],
+    url: "/images/beverages/margarita.webp",
+  },
+  {
+    name: "보드카",
+    aliases: ["보드카"],
     url: "/images/beverages/margarita.webp",
   },
 ];

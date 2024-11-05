@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, ChangeEvent } from "react";
-import ChattingRoom from "@/components/pages/main/ChattingRoom";
+import ChattingRoom from "@/components/pages/chat/ChattingRoom";
 import SearchBar from "@/components/elements/SearchBar";
 import useChatStore from "@/store/useChatStore";
 import useSearchStore from "@/store/useSearchStore";
@@ -15,7 +15,7 @@ const AskCocktailPage = () => {
   const { setLoadingStatus } = useAppStore();
   const [searchText, setSearchText] = useState("");
   const { searchQuery } = useSearchStore();
-  const { openModal } = useModalStore();
+  const { modals, openModal } = useModalStore();
   const modalId = "beverage";
 
   useEffect(() => {
@@ -59,7 +59,7 @@ const AskCocktailPage = () => {
           />
         </div>
       </div>
-      <BeverageModal modalId={modalId} />
+      {modals[modalId] && <BeverageModal modalId={modalId} />}
     </div>
   );
 };

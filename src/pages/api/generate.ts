@@ -55,11 +55,11 @@ const handleSendMessage = async (req: NextApiRequest, res: NextApiResponse) => {
         messages: [
           {
             role: "system",
-            content: `You are a helpfull assistant. Your response should be in this ${notice} JSON format.`,
+            content: `You are a helpful assistant specialized in cocktail recommendations. Always provide responses in the ${notice} JSON format with matches for the user's query.`,
           },
           {
             role: "user",
-            content: `${query}`,
+            content: `Please suggest up to 3 cocktails that include "${query}" as an ingredient. If there are many ingredients, give a recommended recipe focusing on essential ingredients. If there are few ingredients, suggest simple recipes that can be made with just those.`,
           },
         ],
         max_tokens: 512, // 답변 최대 글자 수,
