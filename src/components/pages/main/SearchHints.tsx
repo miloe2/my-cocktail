@@ -25,9 +25,9 @@ const SearchHints = ({ className }: SearchHintsProps) => {
             />
           </div>
           <div className="ml-3">
-            <p className="font-medium text-sm mb-1">갖고 술로 찾기</p>
+            <p className="font-medium text-sm mb-1">재료로 찾기</p>
             <p className="text-[12px]">
-              가지고 있는 술을 <br /> 필터로 찾아보세요{" "}
+              가지고 있는 재료를 <br /> 필터로 찾아보세요{" "}
             </p>
           </div>
         </div>
@@ -41,7 +41,7 @@ const SearchHints = ({ className }: SearchHintsProps) => {
             />
           </div>
           <div className="ml-3">
-            <p className="font-medium text-sm mb-1">직접 검색해서 찾기</p>
+            <p className="font-medium text-sm mb-1">직접 검색하기</p>
             <p className="text-[12px]">
               라임이랑 진으로 <br />
               만들수 있는 칵테일

@@ -11,23 +11,28 @@ const AnswerCard = ({ cocktails }: ChatGptResponse) => {
       {cocktails.map((cocktail, index) => (
         <div
           key={index}
-          className="w-11/12 bg-black rounded-md p-4 mb-4 flex text-sm"
+          className="w-[95%] bg-black rounded-md p-4 mb-4 flex text-sm relative"
         >
-          <div className="w-20 h-20 bg-stone-700 mr-4 rounded-md overflow-hidden">
+          <span className="absolute -top-2 -right-2 bg-stone-500 text-white text-xs  w-9 h-6 flex justify-center items-center rounded-full">
+            {cocktail.degree}°
+          </span>
+          <div className="w-20 h-20 bg-stone-700 mr-4 rounded-md overflow-hidden flex-shrink-0">
             <img
               src={findImage(cocktail.name)}
               alt={`${cocktail.name}`}
               className="object-cover w-full h-full"
             />
+            {/* <span className="absolute top-1 right-1 bg-red-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
+    {cocktail.degree}°
+  </span> */}
           </div>
-          <div>
-            <h2>{cocktail.name}</h2>
-            <p>도수: {cocktail.degree}°</p>
-            <h4>재료:</h4>
-            <ul>
+          <div className="">
+            <h2 className="font-bold text-base mb-1.5">{cocktail.name}</h2>
+            <ul className="grid grid-cols-2 text-[12px] w-full gap-1">
               {cocktail.ingredients.map((ingredient, idx) => (
-                <li key={idx}>
-                  {ingredient.name} - {ingredient.amountValue} {ingredient.unit}
+                <li key={idx} className="min-w-1/2 ">
+                  {ingredient.name} {ingredient.amountValue}
+                  {ingredient.unit}
                 </li>
               ))}
             </ul>

@@ -1,7 +1,15 @@
 "use client";
 import React, { useState, useRef } from "react";
 import BottomModal from "@/components/elements/BottomModal";
-import { liquorCategoryList, drinkList, fruitList, syrupList,  liquorList, ginList, rumList } from "@/data/beverage";
+import {
+  liquorCategoryList,
+  drinkList,
+  fruitList,
+  syrupList,
+  liquorList,
+  ginList,
+  rumList,
+} from "@/data/beverage";
 import TabContents from "./TabContents";
 import useSearchStore from "@/store/useSearchStore";
 import useModalStore from "@/store/useModalStore";
