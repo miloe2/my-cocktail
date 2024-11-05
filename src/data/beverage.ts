@@ -19,16 +19,12 @@ export const syrupList = [
   { name: "코코넛 시럽", eng: "coconut syrup" },
 ];
 
-export const sodaList = [
+export const drinkList = [
   { name: "탄산수", eng: "club soda" },
   { name: "진저 에일", eng: "ginger ale" },
   { name: "토닉 워터", eng: "tonic water" },
   { name: "콜라", eng: "cola" },
   { name: "사이다", eng: "sprite" },
-  { name: "레몬 라임 소다", eng: "lemon-lime soda" },
-];
-
-export const drinkList = [
   { name: "파인애플 주스", eng: "pineapple juice" },
   { name: "오렌지 주스", eng: "orange juice" },
   { name: "우유", eng: "milk" },

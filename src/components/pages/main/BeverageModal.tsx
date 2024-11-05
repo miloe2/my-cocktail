@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useRef } from "react";
 import BottomModal from "@/components/elements/BottomModal";
-import { liquorCategoryList, drinkList, fruitList } from "@/data/beverage";
+import { liquorCategoryList, drinkList, fruitList, syrupList,  liquorList, ginList, rumList } from "@/data/beverage";
 import TabContents from "./TabContents";
 import useSearchStore from "@/store/useSearchStore";
 import useModalStore from "@/store/useModalStore";
@@ -17,7 +17,7 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
   const optionsSet = useRef(new Set());
   const { closeModal } = useModalStore();
   const [selected, setSelected] = useState<number>(0);
-  const idxArr = ["Liquor", "Juice", "Fruit", "test1", "test2", "test3"];
+  const idxArr = ["주류", "음료", "과일", "리큐르", "진", "럼", "시럽"];
   const slides = idxArr.map((slide, index) => (
     <SwiperSlide key={index + 1}>
       <a
@@ -123,6 +123,30 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
             anchorId="index03"
             title={idxArr[2]}
             list={fruitList}
+            onSelectOption={(label) => addOptionToSet(label)}
+          />
+          <TabContents
+            anchorId="index04"
+            title={idxArr[3]}
+            list={liquorList}
+            onSelectOption={(label) => addOptionToSet(label)}
+          />
+          <TabContents
+            anchorId="index05"
+            title={idxArr[4]}
+            list={ginList}
+            onSelectOption={(label) => addOptionToSet(label)}
+          />
+          <TabContents
+            anchorId="index06"
+            title={idxArr[5]}
+            list={rumList}
+            onSelectOption={(label) => addOptionToSet(label)}
+          />
+          <TabContents
+            anchorId="index07"
+            title={idxArr[6]}
+            list={syrupList}
             onSelectOption={(label) => addOptionToSet(label)}
           />
         </>
