@@ -25,11 +25,13 @@ const AskCocktailPage = () => {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
   };
+  const today = new Date();
+  const time = `${today.getHours()}:${today.getMinutes()}`
 
   const handleSearch = async () => {
     console.log("################# 검색창 엔터 ######################");
     if (searchText === "") return;
-    updateUserMessage(searchText, "user");
+    updateUserMessage(searchText, time);
     searchGpt({
       setLoadingStatus,
       searchText,

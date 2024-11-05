@@ -23,11 +23,13 @@ const SearchManager = () => {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
   };
+  const today = new Date();
+  const time = `${today.getHours()}:${today.getMinutes()}`
 
   const handleSearch = async () => {
     if (searchText === "") return;
     router.push("/cocktail-chat");
-    updateUserMessage(searchText, "user");
+    updateUserMessage(searchText, time);
     searchGpt({
       setLoadingStatus,
       searchText,

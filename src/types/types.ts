@@ -6,6 +6,7 @@ export interface ChatGptMessage {
 export interface ChatUserMessage {
   user: "user";
   msg: string;
+  time: string;
 }
 
 export interface ChatNoticeMessage {
@@ -30,7 +31,7 @@ export interface ChatStore {
   updateChatStatus: () => void;
   chatMessages: Array<ChatGptMessage | ChatUserMessage | ChatNoticeMessage>;
   updateGptMessage: (msg: ChatGptResponse, user: "gpt") => void;
-  updateUserMessage: (msg: string, user: "user") => void;
+  updateUserMessage: (msg: string, time :string) => void;
 }
 
 export interface ChatGptResponse {

@@ -59,13 +59,14 @@ const useChatStore = create<ChatStore>((set) => ({
         ],
       };
     }),
-  updateUserMessage: (msg, user) =>
+  updateUserMessage: (msg, time) =>
     set((state) => ({
       chatMessages: [
         ...state.chatMessages,
         {
-          user, // 메시지의 발신자 정보 ('user' 또는 'gpt')
+          user : "user", // 메시지의 발신자 정보 ('user' 또는 'gpt')
           msg, // 실제 메시지 내용
+          time,
         },
       ],
     })),
