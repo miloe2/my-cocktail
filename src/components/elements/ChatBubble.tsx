@@ -11,7 +11,9 @@ const ChatBubble = ({
 }: {
   chat: ChatGptMessage | ChatUserMessage | ChatNoticeMessage;
 }) => {
-  const time = "2024-11-01";
+  const today = new Date();
+  const time = `${today.getHours()}:${today.getMinutes()}`
+  console.log(time)
   // console.log("chatbubble render");
   console.log(
     "채팅 버블 여기에서 user vs gpt로 나눠서 렌더링",
@@ -21,7 +23,7 @@ const ChatBubble = ({
     <>
       {chat.user === "notice" ? (
         <div className="bg-stone-00 flex py-4">
-          <div className="bg-black px-4 py-2 max-w-64 flex-wrap break-words ml-2 rounded-md  leading-5 text-sm">
+          <div className="bg-black px-4 py-2 max-w-64 flex-wrap break-words rounded-md  leading-5 text-sm">
             가지고 계신 재료로 <br />딱 맞는 칵테일을 찾아드릴게요!
           </div>
         </div>

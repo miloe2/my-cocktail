@@ -38,7 +38,7 @@ const ChattingRoom = () => {
   return (
     <div className="flex flex-col relative w-full bg-yellow-00 px-4">
       <div className="fixed top-4 flex" onClick={handleBack}>
-        <div
+        {/* <div
           className="bg-stone-600 rounded-full w-6 h-6 flex justify-center items-center"
           onClick={handleChatStatus}
         >
@@ -61,7 +61,7 @@ const ChattingRoom = () => {
               </g>
             </g>
           </svg>
-        </div>
+        </div> */}
       </div>
       {memoizedChatMessages}
       {isLoading && <SkeletoneAnswerCard />}
