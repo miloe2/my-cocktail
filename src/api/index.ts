@@ -36,7 +36,6 @@ export const testPhone = async () => {
 /**
  * TODO
  * 필터로 api 호출 할 때, notice2 로 넘기기
- * 모달창 스크롤 이벤트 => 뒤로가기버튼 되게
  * 모달 클릭시 검색창도 translate Y
  * 모달 index 애니메이션
  * 카드아이템 디자인
@@ -57,5 +56,7 @@ export const testPhone = async () => {
  * 스켈레톤 페이지
  * 모바일에서 api 호출
  * 모달창 필터 수정 하기 - 술이 아닌 진 / 칵테일 / 라임 / 콜라/ 이런식으로 만들기,
+ * 모달창 스크롤 이벤트 => 뒤로가기버튼 되게
+ *
  *
  */

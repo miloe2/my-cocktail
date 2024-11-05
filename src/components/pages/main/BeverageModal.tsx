@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useMemo } from "react";
 import BottomModal from "@/components/elements/BottomModal";
 import {
   liquorCategoryList,
@@ -18,6 +18,10 @@ import { SwiperSlide } from "swiper/react";
 interface BeverageModalProps {
   modalId: string;
 }
+interface tabListProps {
+  title: string;
+  list: { name: string; eng: string }[];
+}
 
 const BeverageModal = ({ modalId }: BeverageModalProps) => {
   console.log("beverage modal");
@@ -25,44 +29,72 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
   const optionsSet = useRef(new Set());
   const { closeModal } = useModalStore();
   const [selected, setSelected] = useState<number>(0);
+
   const tabList = [
-    { title : "주류", list: liquorCategoryList },
+    { title: "주류", list: liquorCategoryList },
     { title: "음료", list: drinkList },
     { title: "과일", list: fruitList },
     { title: "리큐르", list: liquorList },
     { title: "진", list: ginList },
     { title: "럼", list: rumList },
     { title: "시럽", list: syrupList },
-  ]
-  const slides = tabList.map((slide, index) => (
-    <SwiperSlide key={index}>
-      <div
-        className="mx-auto w-1/2"
-        onClick={() => handleTab(index)}
-      >
-        <div
-          className={`${selected === index ? "text-white" : "text-stone-500"} bg-red-00 text-center py-4`}
-        >
-          {slide.title}
-        </div>
-      </div>
-    </SwiperSlide>
-  ));
-
-
-  const contentRefs = useRef([]);
-  const scrollToContent = (index : number) => {
-    // 해당 ref가 존재하는 경우 스크롤 이동
+  ];
+  const contentRefs = useRef<(HTMLElement | null)[]>([]);
+  const scrollToContent = (index: number) => {
     if (contentRefs.current[index]) {
-      //@ts-ignore
-      contentRefs.current[index].scrollIntoView({ behavior: 'smooth' });
+      contentRefs.current[index].scrollIntoView({ behavior: "smooth" });
     }
   };
 
   const handleTab = (index: number) => {
     setSelected(index);
-    scrollToContent(index)
+    scrollToContent(index);
   };
+  const slides = useMemo(
+    () =>
+      tabList.map((slide, index) => (
+        <SwiperSlide key={index}>
+          <div className="mx-auto w-1/2" onClick={() => handleTab(index)}>
+            <div
+              className={`${
+                selected === index ? "text-white" : "text-stone-500"
+              } bg-red-00 text-center py-4`}
+            >
+              {slide.title}
+            </div>
+          </div>
+        </SwiperSlide>
+      )),
+    [selected, handleTab],
+  );
+
+  const ContentsMemo = React.memo(
+    ({
+      tabList,
+      addOptionToSet,
+      contentRefs,
+    }: {
+      tabList: tabListProps[];
+      addOptionToSet: (label: string) => void;
+      contentRefs: React.MutableRefObject<(HTMLElement | null)[]>;
+    }) => (
+      <>
+        {tabList.map((tab: tabListProps, index: number) => (
+          <TabContents
+            key={index}
+            title={tab.title}
+            list={tab.list}
+            onSelectOption={(label) => addOptionToSet(label)}
+            ref={(el) => {
+              contentRefs.current[index] = el;
+            }}
+          />
+        ))}
+      </>
+    ),
+  );
+  ContentsMemo.displayName = "ContentsMemo";
+
   // const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const handleApply = () => {
     let query = Array.from(optionsSet.current).join(", ");
@@ -80,7 +112,7 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
       optionsSet.current.add(label);
     }
   }, []);
-  
+
   return (
     <BottomModal
       id={modalId}
@@ -94,20 +126,11 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
         />
       }
       content={
-        <>
-        {
-          tabList.map((tab, index) => (
-            <TabContents
-              key={index}
-              title={tab.title}
-              list={tab.list}
-              onSelectOption={(label) => addOptionToSet(label)}
-              //@ts-ignore
-              ref={(el) => (contentRefs.current[index] = el)}
-            />
-          ))
-        }
-        </>
+        <ContentsMemo
+          tabList={tabList}
+          addOptionToSet={addOptionToSet}
+          contentRefs={contentRefs}
+        />
       }
       onPrimaryAction={handleApply}
       onSecondaryAction={handleRefresh}

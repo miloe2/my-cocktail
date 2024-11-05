@@ -1,5 +1,5 @@
 // TabContents.tsx
-import React, { forwardRef } from 'react';
+import React, { forwardRef } from "react";
 import OptionsButton from "@/components/elements/OptionsButton";
 
 interface TabContentsProps {
@@ -12,68 +12,34 @@ interface ListArray {
   eng: string;
 }
 
-const TabContents = forwardRef(function TabContents( { title, list, onSelectOption }: TabContentsProps, ref) {
-  console.log("tab contents");
+const TabContents = forwardRef<HTMLDivElement, TabContentsProps>(
+  function TabContents({ title, list, onSelectOption }, ref) {
+    console.log("tab contents");
 
-  const handleUpdateClick = (label: string) => {
-    onSelectOption(label);
-  };
+    const handleUpdateClick = (label: string) => {
+      onSelectOption(label);
+    };
 
-  return (
-    //@ts-ignore
-    <div className="flex flex-col mb-8"  ref={ref}>
-      <div className="my-4 flex space-x-2">
-        <div className="w-4 h-4 bg-stone-500">
-          <img src="" alt="" />
+    return (
+      <div className="flex flex-col mb-8" ref={ref}>
+        <div className="my-4 flex space-x-2">
+          <div className="w-4 h-4 bg-stone-500">
+            <img src="" alt="" />
+          </div>
+          <h1>{title}</h1>
         </div>
-        <h1>{title}</h1>
+        <div>
+          {list.map((item, i) => (
+            <OptionsButton
+              key={i}
+              label={item.name}
+              onUpdateSelection={handleUpdateClick}
+            />
+          ))}
+        </div>
       </div>
-      <div>
-        {list.map((item, i) => (
-          <OptionsButton
-            key={i}
-            label={item.name}
-            onUpdateSelection={handleUpdateClick}
-          />
-        ))}
-      </div>
-    </div>
-  );
-});
+    );
+  },
+);
 
 export default React.memo(TabContents);
-
-
-// const TabContents = ({
-//   anchorId,
-//   title,
-//   list,
-//   onSelectOption,
-// }: TabContentsProps) => {
-//   console.log("tab contents");
-//   const handleUpdateClick = (label: string) => {
-//     onSelectOption(label);
-//   };
-
-//   return (
-//     <div className="flex flex-col mb-8" id={anchorId}>
-//       <div className="my-4 flex space-x-2">
-//         <div className="w-4 h-4 bg-stone-500">
-//           <img src="" alt="" />
-//         </div>
-//         <h1>{title}</h1>
-//       </div>
-//       <div>
-//         {list.map((item, i) => (
-//           <OptionsButton
-//             key={i}
-//             label={item.name}
-//             onUpdateSelection={handleUpdateClick}
-//           />
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default React.memo(TabContents);
