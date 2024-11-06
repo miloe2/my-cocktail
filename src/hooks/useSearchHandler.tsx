@@ -18,16 +18,15 @@ const useSearchHandler = () => {
     setSearchText(searchQuery);
   }, [searchQuery]);
 
-
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
   };
   const today = new Date();
-  const time = `${today.getHours()}:${today.getMinutes()}`
+  const time = `${today.getHours()}:${today.getMinutes()}`;
 
   const handleSearch = async (redirectToPath?: string) => {
     if (searchText === "") return;
-    if(redirectToPath) {
+    if (redirectToPath) {
       router.push(redirectToPath);
     }
     updateUserMessage(searchText, time);
@@ -41,6 +40,6 @@ const useSearchHandler = () => {
     updateQuery("");
   };
 
-  return { handleInputChange, handleSearch, searchText }
-}
+  return { handleInputChange, handleSearch, searchText };
+};
 export default useSearchHandler;

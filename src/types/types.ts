@@ -31,7 +31,7 @@ export interface ChatStore {
   updateChatStatus: () => void;
   chatMessages: Array<ChatGptMessage | ChatUserMessage | ChatNoticeMessage>;
   updateGptMessage: (msg: ChatGptResponse) => void;
-  updateUserMessage: (msg: string, time :string) => void;
+  updateUserMessage: (msg: string, time: string) => void;
 }
 
 export interface ChatGptResponse {

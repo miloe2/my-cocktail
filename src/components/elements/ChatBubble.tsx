@@ -11,7 +11,6 @@ const ChatBubble = ({
 }: {
   chat: ChatGptMessage | ChatUserMessage | ChatNoticeMessage;
 }) => {
-
   // console.log(time)
   // console.log("chatbubble render");
   console.log(

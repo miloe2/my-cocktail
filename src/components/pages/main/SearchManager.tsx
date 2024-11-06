@@ -11,7 +11,7 @@ const SearchManager = () => {
         <SearchBar
           onChange={handleInputChange}
           onSearchClick={handleSearch}
-          path={'/cocktail-chat'}
+          path={"/cocktail-chat"}
           value={searchText}
         />
         <div className="-mr-4 mt-4">

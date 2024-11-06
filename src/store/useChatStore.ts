@@ -53,7 +53,7 @@ const useChatStore = create<ChatStore>((set) => ({
         chatMessages: [
           ...state.chatMessages,
           {
-            user : "gpt",
+            user: "gpt",
             msg,
           },
         ],
@@ -64,7 +64,7 @@ const useChatStore = create<ChatStore>((set) => ({
       chatMessages: [
         ...state.chatMessages,
         {
-          user : "user", // 메시지의 발신자 정보 ('user' 또는 'gpt')
+          user: "user", // 메시지의 발신자 정보 ('user' 또는 'gpt')
           msg, // 실제 메시지 내용
           time,
         },

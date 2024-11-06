@@ -2,7 +2,6 @@
 import React, { useState, useRef, useCallback, useMemo } from "react";
 import BottomModal from "@/components/elements/BottomModal";
 import {
-  liquorCategoryList,
   drinkList,
   fruitList,
   liquorList,
