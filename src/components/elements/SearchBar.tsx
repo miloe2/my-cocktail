@@ -3,16 +3,16 @@ import { ChangeEvent, KeyboardEvent } from "react";
 interface SearchBarProps {
   value?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-  onSearchClick: () => void;
-  // onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void; // Enter 키 처리를 위한 핸들러 추가
+  onSearchClick: (path?: string) => void;
+  path?: string
 }
 
-const SearchBar = ({ onChange, value, onSearchClick }: SearchBarProps) => {
+const SearchBar = ({ onChange, value, onSearchClick, path }: SearchBarProps) => {
   // console.log('search rerender')
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      onSearchClick();
+      onSearchClick(path);
     }
   };
 
@@ -25,7 +25,7 @@ const SearchBar = ({ onChange, value, onSearchClick }: SearchBarProps) => {
         type="text"
         className="touch-manipulation text-base font-medium rounded-md w-full h-9 focus:ring-stone-500 focus:ring-1 bg-stone-700  outline-none text-stone-100 pl-3 pr-8"
       />
-      <button className="absolute top-2 right-2 " onClick={onSearchClick}>
+      <button className="absolute top-2 right-2 " onClick={() => onSearchClick(path)}>
         <svg
           version="1.0"
           xmlns="http://www.w3.org/2000/svg"

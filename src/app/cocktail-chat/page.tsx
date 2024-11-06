@@ -1,45 +1,15 @@
 "use client";
-import React, { useState, useEffect, ChangeEvent } from "react";
+import React from "react";
 import ChattingRoom from "@/components/pages/chat/ChattingRoom";
 import SearchBar from "@/components/elements/SearchBar";
-import useChatStore from "@/store/useChatStore";
-import useSearchStore from "@/store/useSearchStore";
-import { fetchSearchResult } from "@/api";
-import { searchGpt } from "@/utils/searchGpt";
-import useAppStore from "@/store/useAppStore";
 import useModalStore from "@/store/useModalStore";
 import BeverageModal from "@/components/pages/main/BeverageModal";
+import useSearchHandler from "@/hooks/useSearchHandler";
 
 const AskCocktailPage = () => {
-  const { updateUserMessage, updateGptMessage } = useChatStore();
-  const { setLoadingStatus } = useAppStore();
-  const [searchText, setSearchText] = useState("");
-  const { searchQuery } = useSearchStore();
   const { modals, openModal } = useModalStore();
   const modalId = "beverage";
-
-  useEffect(() => {
-    setSearchText(searchQuery);
-  }, [searchQuery]);
-
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchText(e.target.value);
-  };
-  const today = new Date();
-  const time = `${today.getHours()}:${today.getMinutes()}`
-
-  const handleSearch = async () => {
-    console.log("################# 검색창 엔터 ######################");
-    if (searchText === "") return;
-    updateUserMessage(searchText, time);
-    searchGpt({
-      setLoadingStatus,
-      searchText,
-      fetchSearchResult,
-      updateGptMessage,
-    });
-    setSearchText("");
-  };
+  const { searchText, handleInputChange, handleSearch } = useSearchHandler();
 
   return (
     <div className="max-w-5xl mx-auto">

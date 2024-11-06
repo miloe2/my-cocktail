@@ -11,7 +11,7 @@ export const searchGpt = async ({
   try {
     const rsp = await fetchSearchResult(searchText);
     if (rsp) {
-      updateGptMessage(rsp, "gpt");
+      updateGptMessage(rsp);
     }
   } catch (error) {
     console.log(error);

@@ -30,7 +30,7 @@ export interface ChatStore {
   isChatStart: boolean;
   updateChatStatus: () => void;
   chatMessages: Array<ChatGptMessage | ChatUserMessage | ChatNoticeMessage>;
-  updateGptMessage: (msg: ChatGptResponse, user: "gpt") => void;
+  updateGptMessage: (msg: ChatGptResponse) => void;
   updateUserMessage: (msg: string, time :string) => void;
 }
 
@@ -42,6 +42,6 @@ export interface HandleSearchParams {
   setLoadingStatus: () => void;
   searchText: string;
   fetchSearchResult: (text: string) => Promise<ChatGptResponse | undefined>;
-  updateGptMessage: (msg: ChatGptResponse, user: "gpt") => void;
+  updateGptMessage: (msg: ChatGptResponse) => void;
   finalCallback?: () => void;
 }

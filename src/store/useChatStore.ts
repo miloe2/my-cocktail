@@ -46,14 +46,14 @@ const useChatStore = create<ChatStore>((set) => ({
     set((state) => ({
       isChatStart: !state.isChatStart,
     })),
-  updateGptMessage: (msg, user) =>
+  updateGptMessage: (msg) =>
     set((state) => {
       console.log(state.chatMessages);
       return {
         chatMessages: [
           ...state.chatMessages,
           {
-            user,
+            user : "gpt",
             msg,
           },
         ],
