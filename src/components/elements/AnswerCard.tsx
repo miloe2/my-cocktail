@@ -26,11 +26,11 @@ const AnswerCard = ({ cocktails }: ChatGptResponse) => {
     {cocktail.degree}°
   </span> */}
           </div>
-          <div className="">
+          <div className="w-full">
             <h2 className="font-bold text-base mb-1.5">{cocktail.name}</h2>
             <ul className="grid grid-cols-2 text-[12px] w-full gap-1">
               {cocktail.ingredients.map((ingredient, idx) => (
-                <li key={idx} className="min-w-1/2 ">
+                <li key={idx} className="min-w-1/2">
                   {ingredient.name} {ingredient.amountValue}
                   {ingredient.unit}
                 </li>

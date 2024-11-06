@@ -31,13 +31,13 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
   const [selected, setSelected] = useState<number>(0);
 
   const tabList = [
-    { title: "주류", list: liquorCategoryList },
-    { title: "음료", list: drinkList },
-    { title: "과일", list: fruitList },
     { title: "리큐르", list: liquorList },
     { title: "진", list: ginList },
     { title: "럼", list: rumList },
+    { title: "음료", list: drinkList },
+    { title: "과일", list: fruitList },
     { title: "시럽", list: syrupList },
+    // { title: "주류", list: liquorCategoryList },
   ];
   const contentRefs = useRef<(HTMLElement | null)[]>([]);
   const scrollToContent = (index: number) => {
