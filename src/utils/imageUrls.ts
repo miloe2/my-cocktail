@@ -26,7 +26,7 @@ const imageUrls = [
   },
   {
     name: "럼",
-    aliases: ["rum", "럼", "피나콜라다"],
+    aliases: ["rum", "럼", "피나콜라다", "피나 콜라다"],
     url: "/images/beverages/rum.webp",
   },
 ];
