@@ -59,8 +59,12 @@ const handleSendMessage = async (req: NextApiRequest, res: NextApiResponse) => {
           },
           {
             role: "user",
-            content: `Please suggest up to 3 cocktails that include "${query}" as an ingredient. If there are many ingredients, give a recommended recipe focusing on essential ingredients. If there are few ingredients, suggest simple recipes that can be made with just those.`,
+            content: `${query}`,
           },
+          // {
+          //   role: "user",
+          //   content: `Please suggest up to 3 cocktails that include "${query}" as an ingredient. If there are many ingredients, give a recommended recipe focusing on essential ingredients. If there are few ingredients, suggest simple recipes that can be made with just those.`,
+          // },
         ],
         max_tokens: 512, // 답변 최대 글자 수,
         top_p: 1, // 다음 단어를 선택할 때 상위 p%의 확률 분포를 사용하는 매개변수, 높을수록 안정된 선택

@@ -10,7 +10,9 @@ const AskCocktailPage = () => {
   const { modals, openModal } = useModalStore();
   const modalId = "beverage";
   const { searchText, handleInputChange, handleSearch } = useSearchHandler();
-
+  const handleChatSearch = () => {
+    handleSearch("chat");
+  };
   return (
     <div className="max-w-5xl mx-auto">
       <div className="pb-14">
@@ -26,7 +28,7 @@ const AskCocktailPage = () => {
         <div className="w-full">
           <SearchBar
             onChange={handleInputChange}
-            onSearchClick={handleSearch}
+            onSearchClick={handleChatSearch}
             value={searchText}
           />
         </div>

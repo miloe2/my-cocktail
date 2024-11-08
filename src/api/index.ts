@@ -3,14 +3,21 @@ import { ChatGptResponse } from "@/types/types";
 
 const BASE_URL = "http://172.20.10.3:3000/api";
 // const BASE_URL = "http://localhost:3000/api";
-
 export const fetchSearchResult = async (
   query: string,
+  searchType: "chat" | "filter",
 ): Promise<ChatGptResponse | undefined> => {
   console.log("API 호출합니다", query);
+  let content;
+  if (searchType === "filter") {
+    content = `Please suggest up to 1 cocktail that includes ${query}.`;
+  } else {
+    content = `Please suggest up to 1 cocktail. ${query}`;
+  }
+  console.log(content);
   try {
     const rsp = await axios.post(`${BASE_URL}/generate`, {
-      query,
+      query: content,
     });
     const parsedMsg = JSON.parse(rsp.data.response);
     console.log(parsedMsg, typeof parsedMsg);

@@ -4,7 +4,6 @@ import { fetchSearchResult } from "@/api";
 import useSearchStore from "@/store/useSearchStore";
 import useChatStore from "@/store/useChatStore";
 import { searchGpt } from "@/utils/searchGpt";
-import { useRouter } from "next/navigation";
 import useAppStore from "@/store/useAppStore";
 
 const useSearchHandler = () => {
@@ -12,7 +11,6 @@ const useSearchHandler = () => {
   const { setLoadingStatus } = useAppStore();
   const { searchQuery, updateQuery } = useSearchStore();
   const [searchText, setSearchText] = useState("");
-  const router = useRouter();
 
   useEffect(() => {
     setSearchText(searchQuery);
@@ -24,16 +22,22 @@ const useSearchHandler = () => {
   const today = new Date();
   const time = `${today.getHours()}:${today.getMinutes()}`;
 
-  const handleSearch = async (redirectToPath?: string) => {
-    if (searchText === "") return;
-    if (redirectToPath) {
-      router.push(redirectToPath);
+  const handleSearch = async (
+    searchType: "chat" | "filter",
+    filterItem?: string,
+  ) => {
+    if (!searchText && !filterItem) {
+      console.log("검색어 없음");
+      return;
     }
-    updateUserMessage(searchText, time);
+    const query = searchText || (filterItem as string);
+    updateUserMessage(query, time);
+    console.log("searchGPT 실행해!!");
     searchGpt({
       setLoadingStatus,
-      searchText,
+      searchText: query,
       fetchSearchResult,
+      searchType,
       updateGptMessage,
     });
     setSearchText("");

@@ -10,10 +10,11 @@ import {
   syrupList,
 } from "@/data/beverage";
 import TabContents from "./TabContents";
-import useSearchStore from "@/store/useSearchStore";
 import useModalStore from "@/store/useModalStore";
 import SwiperModule from "@/components/elements/SwiperModule";
 import { SwiperSlide } from "swiper/react";
+import useSearchHandler from "@/hooks/useSearchHandler";
+import { useRouter } from "next/navigation";
 interface BeverageModalProps {
   modalId: string;
 }
@@ -24,10 +25,11 @@ interface tabListProps {
 
 const BeverageModal = ({ modalId }: BeverageModalProps) => {
   console.log("beverage modal");
-  const { updateQuery } = useSearchStore();
   const optionsSet = useRef(new Set());
   const { closeModal } = useModalStore();
   const [selected, setSelected] = useState<number>(0);
+  const { handleSearch } = useSearchHandler();
+  const router = useRouter();
 
   const tabList = [
     { title: "리큐르", list: liquorList },
@@ -95,9 +97,12 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
   ContentsMemo.displayName = "ContentsMemo";
 
   // const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
-  const handleApply = () => {
-    let query = Array.from(optionsSet.current).join(", ");
-    updateQuery(query);
+  const handleApply = async () => {
+    router.push("/cocktail-chat");
+    let filterItem = Array.from(optionsSet.current).join(", ");
+    // updateQuery(query);
+    console.log("searchQuery", filterItem);
+    handleSearch("filter", filterItem);
     closeModal(modalId);
   };
   const handleRefresh = () => {

@@ -9,11 +9,11 @@ export const Tutorial = () => {
     if (step < 2) setStep(step + 1);
   };
 
-  // useEffect(() => {
-  //   if (step === 2) {
-  //     document.cookie = "hasVisited=true; Path=/; SameSite=Lax";
-  //   }
-  // }, [step]);
+  useEffect(() => {
+    if (step === 2) {
+      document.cookie = "hasVisited=true; Path=/; SameSite=Lax";
+    }
+  }, [step]);
 
   const images = [
     "/images/common/tutorial_01.png",
@@ -21,12 +21,17 @@ export const Tutorial = () => {
   ];
 
   return (
-    <div className={`${step === 2 ? "hidden" : "block"} absolute top-0 left-0 w-full h-full`}>
+    <div
+      className={`${step === 2 ? "hidden" : "block"} absolute top-0 left-0 w-full h-full`}
+    >
       {/* Overlay */}
       <div className="absolute inset-0 bg-black w-full h-full " />
 
       {/* Tutorial content */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-full " onClick={handleClick}>
+      <div
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-full "
+        onClick={handleClick}
+      >
         {images.map((src, index) => (
           <img
             key={index}

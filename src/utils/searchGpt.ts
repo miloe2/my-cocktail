@@ -5,11 +5,12 @@ export const searchGpt = async ({
   searchText,
   fetchSearchResult,
   updateGptMessage,
+  searchType,
   finalCallback,
 }: HandleSearchParams) => {
   setLoadingStatus();
   try {
-    const rsp = await fetchSearchResult(searchText);
+    const rsp = await fetchSearchResult(searchText, searchType);
     if (rsp) {
       updateGptMessage(rsp);
     }

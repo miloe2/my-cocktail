@@ -41,7 +41,11 @@ export interface ChatGptResponse {
 export interface HandleSearchParams {
   setLoadingStatus: () => void;
   searchText: string;
-  fetchSearchResult: (text: string) => Promise<ChatGptResponse | undefined>;
+  fetchSearchResult: (
+    text: string,
+    searchType: "chat" | "filter",
+  ) => Promise<ChatGptResponse | undefined>;
   updateGptMessage: (msg: ChatGptResponse) => void;
+  searchType: "chat" | "filter";
   finalCallback?: () => void;
 }
