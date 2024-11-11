@@ -1,19 +1,13 @@
 "use client";
 import React from "react";
 import ChattingRoom from "@/components/pages/chat/ChattingRoom";
-import SearchBar from "@/components/elements/SearchBar";
 import useModalStore from "@/store/useModalStore";
 import BeverageModal from "@/components/pages/main/BeverageModal";
-import useSearchHandler from "@/hooks/useSearchHandler";
+import SearchManager from "@/components/pages/main/SearchManager";
 
 const AskCocktailPage = () => {
   const { modals, openModal } = useModalStore();
   const modalId = "beverage";
-  const { searchText, handleInputChange, handleSearch, clearSearchText } =
-    useSearchHandler();
-  const handleChatSearch = () => {
-    handleSearch("chat");
-  };
   return (
     <div className="max-w-5xl mx-auto">
       <div className="pb-14">
@@ -27,12 +21,7 @@ const AskCocktailPage = () => {
           +
         </div>
         <div className="w-full">
-          <SearchBar
-            onChange={handleInputChange}
-            onSearchClick={handleChatSearch}
-            clearSearchText={clearSearchText}
-            value={searchText}
-          />
+          <SearchManager showHintComponent={false} />
         </div>
       </div>
       {modals[modalId] && <BeverageModal modalId={modalId} />}

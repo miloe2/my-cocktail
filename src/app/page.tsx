@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <>
       <main className="mx-auto max-w-5xl px-4 py-5 relative flex items-center justify-center h-svh pb-32">
-        <SearchManager />
+        <SearchManager showHintComponent={true} />
       </main>
       {isFirstVisit && <Tutorial />}
     </>

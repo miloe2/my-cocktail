@@ -3,8 +3,11 @@ import SearchBar from "@/components/elements/SearchBar";
 import SearchHints from "./SearchHints";
 import useSearchHandler from "@/hooks/useSearchHandler";
 import { useRouter } from "next/navigation";
+interface SearchManagerProps {
+  showHintComponent: boolean;
+}
 
-const SearchManager = () => {
+const SearchManager = ({ showHintComponent }: SearchManagerProps) => {
   const { searchText, handleInputChange, handleSearch, clearSearchText } =
     useSearchHandler();
   const router = useRouter();
@@ -22,9 +25,11 @@ const SearchManager = () => {
           clearSearchText={clearSearchText}
           value={searchText}
         />
-        <div className="-mr-4 mt-4">
-          <SearchHints />
-        </div>
+        {showHintComponent && (
+          <div className="-mr-4 mt-4">
+            <SearchHints />
+          </div>
+        )}
       </>
     </div>
   );
