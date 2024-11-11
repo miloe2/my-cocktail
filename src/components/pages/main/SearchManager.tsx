@@ -5,7 +5,8 @@ import useSearchHandler from "@/hooks/useSearchHandler";
 import { useRouter } from "next/navigation";
 
 const SearchManager = () => {
-  const { searchText, handleInputChange, handleSearch } = useSearchHandler();
+  const { searchText, handleInputChange, handleSearch, clearSearchText } =
+    useSearchHandler();
   const router = useRouter();
   // 3. 페이지별 특화된 핸들러
   const handleMainSearch = () => {
@@ -18,6 +19,7 @@ const SearchManager = () => {
         <SearchBar
           onChange={handleInputChange}
           onSearchClick={handleMainSearch}
+          clearSearchText={clearSearchText}
           value={searchText}
         />
         <div className="-mr-4 mt-4">

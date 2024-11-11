@@ -4,9 +4,15 @@ interface SearchBarProps {
   value?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   onSearchClick: () => void;
+  clearSearchText: () => void;
 }
 
-const SearchBar = ({ onChange, value, onSearchClick }: SearchBarProps) => {
+const SearchBar = ({
+  onChange,
+  value,
+  onSearchClick,
+  clearSearchText,
+}: SearchBarProps) => {
   // console.log('search rerender')
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -24,6 +30,14 @@ const SearchBar = ({ onChange, value, onSearchClick }: SearchBarProps) => {
         type="text"
         className="touch-manipulation text-base font-medium rounded-md w-full h-9 focus:ring-stone-500 focus:ring-1 bg-stone-700  outline-none text-stone-100 pl-3 pr-8"
       />
+      {value && (
+        <button
+          className="bg-stone-500 w-6 h-6 absolute top-1.5 right-10 rounded-full"
+          onClick={clearSearchText}
+        >
+          &times;
+        </button>
+      )}
       <button
         className="absolute top-2 right-2 "
         onClick={() => onSearchClick()}

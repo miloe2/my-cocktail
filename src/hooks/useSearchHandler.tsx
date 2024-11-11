@@ -19,8 +19,13 @@ const useSearchHandler = () => {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
   };
+  const clearSearchText = () => {
+    setSearchText("");
+    console.log("clicked", searchText);
+  };
+
   const today = new Date();
-  const time = `${today.getHours()}:${today.getMinutes()}`;
+  const time = `${today.getHours().toString().padStart(2, "0")}:${today.getMinutes().toString().padStart(2, "0")}`;
 
   const handleSearch = async (
     searchType: "chat" | "filter",
@@ -32,7 +37,7 @@ const useSearchHandler = () => {
     }
     const query = searchText || (filterItem as string);
     updateUserMessage(query, time);
-    console.log("searchGPT 실행해!!");
+    // console.log("searchGPT 실행해!!");
     searchGpt({
       setLoadingStatus,
       searchText: query,
@@ -44,6 +49,6 @@ const useSearchHandler = () => {
     updateQuery("");
   };
 
-  return { handleInputChange, handleSearch, searchText };
+  return { handleInputChange, handleSearch, searchText, clearSearchText };
 };
 export default useSearchHandler;

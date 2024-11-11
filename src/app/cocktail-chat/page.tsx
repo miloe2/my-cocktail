@@ -9,7 +9,8 @@ import useSearchHandler from "@/hooks/useSearchHandler";
 const AskCocktailPage = () => {
   const { modals, openModal } = useModalStore();
   const modalId = "beverage";
-  const { searchText, handleInputChange, handleSearch } = useSearchHandler();
+  const { searchText, handleInputChange, handleSearch, clearSearchText } =
+    useSearchHandler();
   const handleChatSearch = () => {
     handleSearch("chat");
   };
@@ -29,6 +30,7 @@ const AskCocktailPage = () => {
           <SearchBar
             onChange={handleInputChange}
             onSearchClick={handleChatSearch}
+            clearSearchText={clearSearchText}
             value={searchText}
           />
         </div>
