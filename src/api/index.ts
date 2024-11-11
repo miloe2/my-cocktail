@@ -2,13 +2,13 @@ import axios from "axios";
 import { ChatGptResponse } from "@/types/types";
 
 // const BASE_URL = "http://172.20.10.3:3000";
-const BASE_URL = process.env.BASE_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const fetchSearchResult = async (
   query: string,
   searchType: "chat" | "filter",
 ): Promise<ChatGptResponse | undefined> => {
-  console.log("API 호출합니다", query);
+  console.log("API 호출합니다", BASE_URL);
   let content;
   if (searchType === "filter") {
     content = `Please suggest up to 3 cocktails that include the following ingredients: ${query}. Focus on recipes that highlight these ingredients and suggest simple, achievable recipes based on the selected items.`;
