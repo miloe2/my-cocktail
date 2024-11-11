@@ -41,7 +41,6 @@ export const testPhone = async () => {
 
 /**
  * TODO
- * 초기화 버튼 고치기
  * 모달 스크롤에 따라 버튼 활성화
  * 배포
  * bottom Modal 올라오는 효과 (&& 조건? 어떻게 처리?)

@@ -43,7 +43,7 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
   const contentRefs = useRef<(HTMLElement | null)[]>([]);
   const scrollToContent = (index: number) => {
     if (contentRefs.current[index]) {
-      contentRefs.current[index].scrollIntoView({ behavior: "smooth" });
+      contentRefs.current[index]?.scrollIntoView({ behavior: "smooth" });
     }
   };
 
