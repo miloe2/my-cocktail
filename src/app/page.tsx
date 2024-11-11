@@ -12,7 +12,7 @@ export default function Home() {
   // }
   const cookieStore = cookies();
   const isFirstVisit = !cookieStore.get("hasVisited");
-  console.log(isFirstVisit);
+  // console.log(isFirstVisit);
   return (
     <>
       <main className="mx-auto max-w-5xl px-4 py-5 relative flex items-center justify-center h-svh pb-32">

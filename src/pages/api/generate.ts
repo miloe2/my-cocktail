@@ -2,12 +2,15 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 const apiKey = process.env.OPENAI_API_KEY;
 const apiEndpoint = "https://api.openai.com/v1/chat/completions";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const handleSendMessage = async (req: NextApiRequest, res: NextApiResponse) => {
   // CORS 설정
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  if(BASE_URL) {
+    res.setHeader("Access-Control-Allow-Origin", BASE_URL);
+    res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  }
 
   // OPTIONS 메서드에 대한 예비 요청(Preflight request) 처리
   if (req.method === "OPTIONS") {
