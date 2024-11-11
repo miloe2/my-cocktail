@@ -1,18 +1,27 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 const apiKey = process.env.OPENAI_API_KEY;
+const BASE_URL = process.env.BASE_URL;
 const apiEndpoint = "https://api.openai.com/v1/chat/completions";
 
 const handleSendMessage = async (req: NextApiRequest, res: NextApiResponse) => {
-  // CORS 설정
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-
-  // OPTIONS 메서드에 대한 예비 요청(Preflight request) 처리
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
+  // 요청의 Origin 헤더를 확인하고 BASE_URL과 일치하는 경우에만 허용
+  if (BASE_URL && req.headers.origin === BASE_URL) {
+    res.setHeader("Access-Control-Allow-Origin", BASE_URL);
+    res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "Content-Type, Authorization",
+    );
+  } else {
+    res.setHeader("Access-Control-Allow-Origin", "null");
   }
+
+  if (req.method === "OPTIONS") {
+    res.status(200).end();
+    return;
+  }
+
   console.log("api 호출 시작");
   const { query } = req.body;
   const notice = `

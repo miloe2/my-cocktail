@@ -1,8 +1,9 @@
 import axios from "axios";
 import { ChatGptResponse } from "@/types/types";
 
-const BASE_URL = "http://172.20.10.3:3000/api";
-// const BASE_URL = "http://localhost:3000/api";
+// const BASE_URL = "http://172.20.10.3:3000";
+const BASE_URL = process.env.BASE_URL;
+
 export const fetchSearchResult = async (
   query: string,
   searchType: "chat" | "filter",
@@ -16,7 +17,7 @@ export const fetchSearchResult = async (
   }
   console.log(content);
   try {
-    const rsp = await axios.post(`${BASE_URL}/generate`, {
+    const rsp = await axios.post(`${BASE_URL}/api/generate`, {
       query: content,
     });
     const parsedMsg = JSON.parse(rsp.data.response);
@@ -30,7 +31,7 @@ export const fetchSearchResult = async (
 export const testPhone = async () => {
   console.log("api start");
   try {
-    const rsp = await axios.post(`${BASE_URL}/test`, {
+    const rsp = await axios.post(`${BASE_URL}/api/test`, {
       message: "Hello from client", // 요청 본문에 message 필드를 추가
     });
     console.log("API Response:", rsp.data);
