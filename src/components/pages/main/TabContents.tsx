@@ -14,7 +14,7 @@ interface ListArray {
 
 const TabContents = forwardRef<HTMLDivElement, TabContentsProps>(
   function TabContents({ title, list, onSelectOption }, ref) {
-    console.log("tab contents");
+    // console.log("tab contents");
 
     const handleUpdateClick = (label: string) => {
       onSelectOption(label);

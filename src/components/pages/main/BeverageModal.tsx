@@ -105,9 +105,9 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
     handleSearch("filter", filterItem);
     closeModal(modalId);
   };
-  const handleRefresh = () => {
-    optionsSet.current.clear();
-  };
+  // const handleRefresh = () => {
+  //   optionsSet.current.clear();
+  // };
 
   const addOptionToSet = useCallback((label: string) => {
     if (optionsSet.current.has(label)) {
@@ -127,6 +127,7 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
           pagination={false}
           slidesPerView={3.6}
           slides={slides}
+          freeMode={false}
         />
       }
       content={
@@ -137,7 +138,7 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
         />
       }
       onPrimaryAction={handleApply}
-      onSecondaryAction={handleRefresh}
+      // onSecondaryAction={handleRefresh}
     />
   );
 };

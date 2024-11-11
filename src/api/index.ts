@@ -21,7 +21,6 @@ export const fetchSearchResult = async (
     });
     const parsedMsg = JSON.parse(rsp.data.response);
     console.log(parsedMsg, typeof parsedMsg);
-    // console.log(rsp.data.response, typeof rsp.data.response) // {cocktails : [..] , string}
     return parsedMsg;
   } catch (error) {
     console.log(error);
@@ -43,6 +42,7 @@ export const testPhone = async () => {
 /**
  * TODO
  * 초기화 버튼 고치기
+ * 모달 스크롤에 따라 버튼 활성화
  * 배포
  * bottom Modal 올라오는 효과 (&& 조건? 어떻게 처리?)
  * 기본적인 item 사진 찾기 (주류 픽 사진 뽑고, 카테고리 뒤로 내리기? 내려보고 검색해보기)
@@ -52,21 +52,21 @@ export const testPhone = async () => {
  * 애드센스
  * chat gpt history 전달해서 같이 물어보기
  * 질문 DB 화
-*
-*
-****** Finished ******
-* handlerSearch 모듈화
-* SearchManger / cocktail-chat 모듈화
-* 스켈레톤 페이지
-* 모바일에서 api 호출
-* 모달창 필터 수정 하기 - 술이 아닌 진 / 칵테일 / 라임 / 콜라/ 이런식으로 만들기,
-* 모달창 스크롤 이벤트 => 뒤로가기버튼 되게
-* 카드아이템 디자인
-* 채팅에 Date() 같이 전달하기
-* useChatStore user 파라미터로 자동 저장
-* 튜토리얼 페이지
-* 필터로 api 호출 할 때, notice2 로 넘기기 / 적용 => 바로 서치하기,  type 1 / 2
-*
+ *
+ *
+ ****** Finished ******
+ * handlerSearch 모듈화
+ * SearchManger / cocktail-chat 모듈화
+ * 스켈레톤 페이지
+ * 모바일에서 api 호출
+ * 모달창 필터 수정 하기 - 술이 아닌 진 / 칵테일 / 라임 / 콜라/ 이런식으로 만들기,
+ * 모달창 스크롤 이벤트 => 뒤로가기버튼 되게
+ * 카드아이템 디자인
+ * 채팅에 Date() 같이 전달하기
+ * useChatStore user 파라미터로 자동 저장
+ * 튜토리얼 페이지
+ * 필터로 api 호출 할 때, notice2 로 넘기기 / 적용 => 바로 서치하기,  type 1 / 2
+ *
  ****** 안 중요 ******
  * 유튜브 링크 걸기
  * 버튼 효과
