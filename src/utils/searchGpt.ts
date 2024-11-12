@@ -10,7 +10,7 @@ export const searchGpt = async ({
 }: HandleSearchParams): Promise<ChatGptResponse | "error"> => {
   setLoadingStatus();
   try {
-    const rsp = await fetchSearchResult(searchText, searchType) as string;
+    const rsp = (await fetchSearchResult(searchText, searchType)) as string;
     let parsedResponse: ChatGptResponse | string;
 
     try {

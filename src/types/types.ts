@@ -33,7 +33,6 @@ export interface ChatStore {
   updateGptMessage: (msg: ChatGptResponse) => void;
   updateUserMessage: (msg: string, time: string) => void;
   updateSystemMessage: (msg: string) => void;
-  
 }
 
 export interface ChatGptResponse {

@@ -1,6 +1,12 @@
 "use client";
-import React, { useState, useRef, useCallback, useMemo } from "react";
-import { useRouter } from "next/navigation";
+import React, {
+  useState,
+  useRef,
+  useCallback,
+  useMemo,
+  useEffect,
+} from "react";
+import { useRouter, usePathname } from "next/navigation";
 import { SwiperSlide } from "swiper/react";
 import { debounce } from "lodash";
 import SwiperCore from "swiper";
@@ -43,18 +49,23 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
   const { closeModal } = useModalStore();
   const { handleSearch } = useSearchHandler();
   const router = useRouter();
+  const pathname = usePathname();
 
   const optionsSet = useRef(new Set());
   const swiperRef = useRef<SwiperCore | null>(null);
   const contentRefs = useRef<(HTMLElement | null)[]>([]);
 
   const [selected, setSelected] = useState<number>(0);
-
+  const [isMainPage, setMainPage] = useState<boolean>(true);
   const scrollToContent = (index: number) => {
     if (contentRefs.current[index]) {
       contentRefs.current[index]?.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  useEffect(() => {
+    setMainPage(pathname === "/");
+  }, [pathname]);
 
   // tab 클릭시, 해당 위치로 스크롤 이동
   const handleTab = debounce((index: number) => {
@@ -75,7 +86,9 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
 
   // 필터 적용 클릭 시, router 이동 & item전달
   const handleApply = async () => {
-    router.push("/cocktail-chat");
+    if (isMainPage) {
+      router.push("/cocktail-chat");
+    }
     let filterItem = Array.from(optionsSet.current).join(", ");
     // console.log("searchQuery", filterItem);
     handleSearch("filter", filterItem);
@@ -97,11 +110,14 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
     () =>
       tabList.map((slide, index) => (
         <SwiperSlide key={index}>
-          <div className="mx-auto w-1/2" onClick={() => handleTab(index)}>
+          <div
+            className="mx-auto w-1/2 cursor-pointer"
+            onClick={() => handleTab(index)}
+          >
             <div
               className={`${
                 selected === index ? "text-white" : "text-stone-500"
-              } bg-red-00 text-center py-4`}
+              } text-center py-4`}
             >
               {slide.title}
             </div>

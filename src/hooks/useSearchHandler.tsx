@@ -7,7 +7,8 @@ import { searchGpt } from "@/utils/searchGpt";
 import useAppStore from "@/store/useAppStore";
 
 const useSearchHandler = () => {
-  const { updateGptMessage, updateUserMessage, updateSystemMessage } = useChatStore();
+  const { updateGptMessage, updateUserMessage, updateSystemMessage } =
+    useChatStore();
   const { setLoadingStatus } = useAppStore();
   const { searchQuery, updateQuery } = useSearchStore();
   const [searchText, setSearchText] = useState("");
@@ -40,18 +41,18 @@ const useSearchHandler = () => {
     // 검색어/필터아이템을 query로 선언
     const query = searchText || (filterItem as string);
     updateUserMessage(query, time);
+    setSearchText("");
     const result = await searchGpt({
       setLoadingStatus,
       searchText: query,
       fetchSearchResult,
       searchType,
     });
-    if(result === "error") {
-      updateSystemMessage("오류입니다~~")
+    if (result === "error") {
+      updateSystemMessage("오류입니다~~");
     } else {
       updateGptMessage(result);
     }
-    setSearchText("");
     updateQuery("");
   };
 
