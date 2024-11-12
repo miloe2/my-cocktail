@@ -6,7 +6,7 @@ import BeverageModal from "@/components/pages/main/BeverageModal";
 import SearchManager from "@/components/pages/main/SearchManager";
 
 const AskCocktailPage = () => {
-  const { modals, openModal } = useModalStore();
+  const { openModal } = useModalStore();
   const modalId = "beverage";
   return (
     <div className="max-w-5xl mx-auto">
@@ -24,7 +24,8 @@ const AskCocktailPage = () => {
           <SearchManager showHintComponent={false} />
         </div>
       </div>
-      {modals[modalId] && <BeverageModal modalId={modalId} />}
+      {<BeverageModal modalId={modalId} />}
+      {/* {modals[modalId] && <BeverageModal modalId={modalId} />} */}
     </div>
   );
 };

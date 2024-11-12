@@ -42,8 +42,6 @@ export const testPhone = async () => {
 
 /**
  * TODO
- * 모달 스크롤에 따라 버튼 활성화
- * 배포
  * bottom Modal 올라오는 효과 (&& 조건? 어떻게 처리?)
  * 기본적인 item 사진 찾기 (주류 픽 사진 뽑고, 카테고리 뒤로 내리기? 내려보고 검색해보기)
  * fine tuning
@@ -66,6 +64,9 @@ export const testPhone = async () => {
  * useChatStore user 파라미터로 자동 저장
  * 튜토리얼 페이지
  * 필터로 api 호출 할 때, notice2 로 넘기기 / 적용 => 바로 서치하기,  type 1 / 2
+ * 모달 스크롤에 따라 버튼 활성화
+ * 배포
+ *
  *
  ****** 안 중요 ******
  * 유튜브 링크 걸기

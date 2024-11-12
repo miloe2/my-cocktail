@@ -8,7 +8,7 @@ interface SearchHintsProps {
 }
 
 const SearchHints = ({ className }: SearchHintsProps) => {
-  const { modals, openModal } = useModalStore();
+  const { openModal } = useModalStore();
   const { updateQuery } = useSearchStore();
   const handleText = (text: string) => {
     updateQuery(text);
@@ -72,7 +72,7 @@ const SearchHints = ({ className }: SearchHintsProps) => {
           </div>
         </div>
       </ScrollableBox>
-      {modals[modalId] && <BeverageModal modalId={modalId} />}
+      {<BeverageModal modalId={modalId} />}
     </div>
   );
 };

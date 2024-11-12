@@ -14,10 +14,8 @@ const BottomModal = ({
   tab,
   content,
   onPrimaryAction,
-  // onSecondaryAction,
 }: BottomModalProps) => {
   console.log("bottom modal render");
-  // const refreshIconUrl = "/images/refresh-icon.svg";
   const { modals, closeModal } = useModalStore();
   const isOpen = modals[id] || false;
   const modalClass = ` bg-stone-700 fixed ${
