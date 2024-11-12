@@ -32,6 +32,8 @@ export interface ChatStore {
   chatMessages: Array<ChatGptMessage | ChatUserMessage | ChatNoticeMessage>;
   updateGptMessage: (msg: ChatGptResponse) => void;
   updateUserMessage: (msg: string, time: string) => void;
+  updateSystemMessage: (msg: string) => void;
+  
 }
 
 export interface ChatGptResponse {
@@ -44,8 +46,8 @@ export interface HandleSearchParams {
   fetchSearchResult: (
     text: string,
     searchType: "chat" | "filter",
-  ) => Promise<ChatGptResponse | undefined>;
-  updateGptMessage: (msg: ChatGptResponse) => void;
+  ) => Promise<string | undefined>;
+  // updateGptMessage: (msg: ChatGptResponse) => void;
   searchType: "chat" | "filter";
   finalCallback?: () => void;
 }

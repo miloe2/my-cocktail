@@ -80,6 +80,7 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
     // console.log("searchQuery", filterItem);
     handleSearch("filter", filterItem);
     closeModal(modalId);
+    optionsSet.current.clear();
   };
 
   // 필터 아이템 추가/삭제

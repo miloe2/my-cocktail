@@ -1,28 +1,29 @@
 import axios from "axios";
 import { ChatGptResponse } from "@/types/types";
 
-// const BASE_URL = "http://172.20.10.3:3000";
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL = "http://172.20.10.3:3000";
+// const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const fetchSearchResult = async (
   query: string,
   searchType: "chat" | "filter",
-): Promise<ChatGptResponse | undefined> => {
+): Promise<string | undefined> => {
   console.log("API 호출합니다", BASE_URL);
   let content;
   if (searchType === "filter") {
-    content = `Please suggest up to 3 cocktails that include the following ingredients: ${query}. Focus on recipes that highlight these ingredients and suggest simple, achievable recipes based on the selected items.`;
+    content = `Please suggest up to 1 cocktails that include the following ingredients: ${query}. Focus on recipes that highlight these ingredients and suggest simple, achievable recipes based on the selected items.`;
   } else {
-    content = `Please suggest up to 3 cocktails based on the user query: "${query}".`;
+    content = `Please suggest up to 1 cocktails based on the user query: "${query}".`;
   }
   console.log(content);
   try {
     const rsp = await axios.post(`${BASE_URL}/api/generate`, {
       query: content,
     });
-    const parsedMsg = JSON.parse(rsp.data.response);
-    console.log(parsedMsg, typeof parsedMsg);
-    return parsedMsg;
+    // const parsedMsg = JSON.parse(rsp.data.response);
+    // console.log(parsedMsg, typeof parsedMsg);
+    // return parsedMsg;
+    return rsp.data.response
   } catch (error) {
     console.log(error);
   }
