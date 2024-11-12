@@ -15,6 +15,7 @@ import SwiperModule from "@/components/elements/SwiperModule";
 import { SwiperSlide } from "swiper/react";
 import useSearchHandler from "@/hooks/useSearchHandler";
 import { useRouter } from "next/navigation";
+import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 interface BeverageModalProps {
   modalId: string;
 }
@@ -68,7 +69,12 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
       )),
     [selected, handleTab],
   );
-
+  const handleTabIO = (index:number) => {
+    // console.log(`${index}wathching`);
+    setSelected(index)
+  }
+  //@ts-ignore
+  useIntersectionObserver(contentRefs.current, handleTabIO);
   const ContentsMemo = React.memo(
     ({
       tabList,
@@ -79,7 +85,7 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
       addOptionToSet: (label: string) => void;
       contentRefs: React.MutableRefObject<(HTMLElement | null)[]>;
     }) => (
-      <>
+      <div className="modal-tab">
         {tabList.map((tab: tabListProps, index: number) => (
           <TabContents
             key={index}
@@ -91,10 +97,12 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
             }}
           />
         ))}
-      </>
+      </div>
     ),
   );
   ContentsMemo.displayName = "ContentsMemo";
+
+
 
   // const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const handleApply = async () => {
