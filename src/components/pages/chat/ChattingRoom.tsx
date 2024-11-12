@@ -1,16 +1,17 @@
 import React, { useEffect, useRef, useMemo, memo } from "react";
-import useChatStore from "@/store/useChatStore";
-import ChatBubble from "@/components/elements/ChatBubble";
 import { useRouter } from "next/navigation";
-import useAppStore from "@/store/useAppStore";
 import SkeletoneAnswerCard from "@/components/elements/SkeletoneAnswerCard";
+import ChatBubble from "@/components/elements/ChatBubble";
+import useChatStore from "@/store/useChatStore";
+import useAppStore from "@/store/useAppStore";
 
 const ChattingRoom = () => {
-  const chatEndRef = useRef<HTMLDivElement | null>(null);
   const { chatMessages } = useChatStore();
   const { isLoading } = useAppStore();
   const router = useRouter();
+  const chatEndRef = useRef<HTMLDivElement | null>(null);
 
+  // 채팅이 생성되면 스크롤 이동
   useEffect(() => {
     if (chatEndRef.current) {
       chatEndRef.current.scrollIntoView({ behavior: "smooth" });

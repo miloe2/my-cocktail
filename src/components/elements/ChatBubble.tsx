@@ -1,10 +1,10 @@
 import { memo } from "react";
+import AnswerCard from "@/components/elements/AnswerCard";
 import {
   ChatGptMessage,
   ChatUserMessage,
   ChatNoticeMessage,
 } from "@/types/types";
-import AnswerCard from "@/components/elements/AnswerCard";
 
 const ChatBubble = ({
   chat,
@@ -13,15 +13,15 @@ const ChatBubble = ({
 }) => {
   // console.log(time)
   // console.log("chatbubble render");
-  console.log(
-    "채팅 버블 여기에서 user vs gpt로 나눠서 렌더링",
-    new Date().getSeconds(),
-  );
+  // console.log(
+  //   "채팅 버블 여기에서 user vs gpt로 나눠서 렌더링",
+  //   new Date().getSeconds(),
+  // );
   return (
     <>
       {chat.user === "notice" ? (
         <div className="bg-stone-00 flex py-4">
-          <div className="bg-black px-4 py-2 max-w-64 flex-wrap break-words rounded-md  leading-5 text-sm">
+          <div className="bg-black px-4 py-2 max-w-64 flex-wrap break-words rounded-md leading-5 text-sm">
             가지고 계신 재료로 <br />딱 맞는 칵테일을 찾아드릴게요!
           </div>
         </div>

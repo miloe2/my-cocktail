@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
 import ChattingRoom from "@/components/pages/chat/ChattingRoom";
-import useModalStore from "@/store/useModalStore";
 import BeverageModal from "@/components/pages/main/BeverageModal";
 import SearchManager from "@/components/pages/main/SearchManager";
+import useModalStore from "@/store/useModalStore";
 
 const AskCocktailPage = () => {
   const { openModal } = useModalStore();

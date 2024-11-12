@@ -12,16 +12,18 @@ const useSearchHandler = () => {
   const { searchQuery, updateQuery } = useSearchStore();
   const [searchText, setSearchText] = useState("");
 
+  // SearchHint 부분에서만 사용 이제 해당 내용은 사용안함
   useEffect(() => {
     setSearchText(searchQuery);
   }, [searchQuery]);
 
+  // searchBar 조작
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
   };
+
   const clearSearchText = () => {
     setSearchText("");
-    console.log("clicked", searchText);
   };
 
   const today = new Date();
@@ -35,9 +37,9 @@ const useSearchHandler = () => {
       console.log("검색어 없음");
       return;
     }
+    // 검색어/필터아이템을 query로 선언
     const query = searchText || (filterItem as string);
     updateUserMessage(query, time);
-    // console.log("searchGPT 실행해!!");
     searchGpt({
       setLoadingStatus,
       searchText: query,

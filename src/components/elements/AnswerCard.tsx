@@ -4,7 +4,7 @@ import { findImage } from "@/utils/imageUrls";
 
 const AnswerCard = ({ cocktails }: ChatGptResponse) => {
   // console.log("answerCard redner");
-  console.log("레시피를 알려주너는 엔서카드", new Date().getSeconds());
+  // console.log("레시피를 알려주너는 엔서카드", new Date().getSeconds());
 
   return (
     <div>

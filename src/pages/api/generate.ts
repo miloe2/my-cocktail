@@ -42,8 +42,6 @@ const handleSendMessage = async (req: NextApiRequest, res: NextApiResponse) => {
       }
     ]
   }`;
-  // "taste": "맛 설명 (string)"
-  // const notice = 'JSON 키워드는 name, receipt, degree, taste 로 해줘. '
 
   try {
     const response = await fetch(apiEndpoint, {

@@ -42,6 +42,7 @@ export const testPhone = async () => {
 
 /**
  * TODO
+ * 리턴값이 JSON이 아닐때 notice
  * bottom Modal 올라오는 효과 (&& 조건? 어떻게 처리?)
  * 기본적인 item 사진 찾기 (주류 픽 사진 뽑고, 카테고리 뒤로 내리기? 내려보고 검색해보기)
  * fine tuning

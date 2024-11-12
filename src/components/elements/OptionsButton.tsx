@@ -6,14 +6,12 @@ export interface OptionsButtonProps {
   label: string;
   onClick?: () => void;
   onUpdateSelection: (label: string) => void;
-  // isSelected?: boolean;
 }
 
 export const OptionsButton = ({
   label = "button",
   onClick,
   onUpdateSelection,
-  // isSelected = false,
 }: OptionsButtonProps) => {
   // console.log("option Button");
   const [isSelected, setIsSelected] = useState(false);

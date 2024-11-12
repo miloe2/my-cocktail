@@ -2,6 +2,7 @@
 import React, { useState, useRef, useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { SwiperSlide } from "swiper/react";
+import { debounce } from "lodash";
 import SwiperCore from "swiper";
 import BottomModal from "@/components/elements/BottomModal";
 import SwiperModule from "@/components/elements/SwiperModule";
@@ -55,28 +56,33 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
     }
   };
 
-  const handleTab = (index: number) => {
+  // tab 클릭시, 해당 위치로 스크롤 이동
+  const handleTab = debounce((index: number) => {
     setSelected(index);
     scrollToContent(index);
-  };
+  }, 50);
 
-  const handleTabIO = (index: number) => {
+  // 스크롤에 따라 tab 메뉴 Swipe
+  const handleTabIO = debounce((index: number) => {
     setSelected(index);
     if (swiperRef.current) {
-      swiperRef.current.slideTo(index); // 선택된 탭으로 스와이퍼 이동
+      swiperRef.current.slideTo(index);
     }
-  };
+  }, 200);
 
+  // 스크롤 감시를 위한 IO설정 & ref 전달
   useIntersectionObserver(contentRefs.current, handleTabIO);
 
+  // 필터 적용 클릭 시, router 이동 & item전달
   const handleApply = async () => {
     router.push("/cocktail-chat");
     let filterItem = Array.from(optionsSet.current).join(", ");
-    console.log("searchQuery", filterItem);
+    // console.log("searchQuery", filterItem);
     handleSearch("filter", filterItem);
     closeModal(modalId);
   };
 
+  // 필터 아이템 추가/삭제
   const addOptionToSet = useCallback((label: string) => {
     if (optionsSet.current.has(label)) {
       optionsSet.current.delete(label);
@@ -85,6 +91,7 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
     }
   }, []);
 
+  // SwiperMoudule 사용을 위한 slides template
   const slides = useMemo(
     () =>
       tabList.map((slide, index) => (
@@ -103,6 +110,7 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
     [selected, handleTab],
   );
 
+  // tabContents template
   const ContentsMemo = React.memo(
     ({
       tabList,

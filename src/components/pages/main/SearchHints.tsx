@@ -1,8 +1,8 @@
 import { memo } from "react";
-import BeverageModal from "./BeverageModal";
-import useModalStore from "@/store/useModalStore";
 import ScrollableBox from "@/components/elements/ScrollableBox";
+import useModalStore from "@/store/useModalStore";
 import useSearchStore from "@/store/useSearchStore";
+import BeverageModal from "./BeverageModal";
 interface SearchHintsProps {
   className?: string;
 }
@@ -10,10 +10,10 @@ interface SearchHintsProps {
 const SearchHints = ({ className }: SearchHintsProps) => {
   const { openModal } = useModalStore();
   const { updateQuery } = useSearchStore();
+  const modalId = "beverage";
   const handleText = (text: string) => {
     updateQuery(text);
   };
-  const modalId = "beverage";
   return (
     <div className={className}>
       <ScrollableBox>

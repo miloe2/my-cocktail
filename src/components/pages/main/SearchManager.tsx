@@ -1,8 +1,8 @@
 "use client";
-import SearchBar from "@/components/elements/SearchBar";
-import SearchHints from "./SearchHints";
-import useSearchHandler from "@/hooks/useSearchHandler";
 import { useRouter } from "next/navigation";
+import SearchBar from "@/components/elements/SearchBar";
+import useSearchHandler from "@/hooks/useSearchHandler";
+import SearchHints from "./SearchHints";
 interface SearchManagerProps {
   showHintComponent: boolean;
 }
@@ -11,10 +11,9 @@ const SearchManager = ({ showHintComponent }: SearchManagerProps) => {
   const { searchText, handleInputChange, handleSearch, clearSearchText } =
     useSearchHandler();
   const router = useRouter();
-  // 3. 페이지별 특화된 핸들러
   const handleMainSearch = () => {
+    router.push("/cocktail-chat");
     handleSearch("chat");
-    router.push("/cocktail-chat"); // 라우터 이동
   };
   return (
     <div className="flex flex-col w-full relative ">

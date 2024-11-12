@@ -1,6 +1,6 @@
+import { cookies } from "next/headers";
 import SearchManager from "@/components/pages/main/SearchManager";
 // import { GetServerSideProps } from "next";
-import { cookies } from "next/headers";
 import { Tutorial } from "@/components/pages/main/Tutorial";
 
 export default function Home() {
