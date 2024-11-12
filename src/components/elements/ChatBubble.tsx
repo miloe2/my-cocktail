@@ -22,7 +22,12 @@ const ChatBubble = ({
       {chat.user === "notice" ? (
         <div className="bg-stone-00 flex py-4">
           <div className="bg-black px-4 py-2 max-w-64 flex-wrap break-words rounded-md leading-5 text-sm">
-            가지고 계신 재료로 <br />딱 맞는 칵테일을 찾아드릴게요!
+            {chat.msg.split("\n").map((line, index) => (
+              <span key={index}>
+                {line}
+                <br />
+              </span>
+            ))}
           </div>
         </div>
       ) : chat.user === "user" ? (

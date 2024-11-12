@@ -6,7 +6,7 @@ const useChatStore = create<ChatStore>((set) => ({
   chatMessages: [
     {
       user: "notice",
-      msg: "welcome",
+      msg: "가지고 계신 재료로 \n 딱 맞는 칵테일을 찾아드릴게요! 🍹",
     },
     {
       user: "gpt",

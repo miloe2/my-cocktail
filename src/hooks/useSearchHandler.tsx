@@ -49,7 +49,9 @@ const useSearchHandler = () => {
       searchType,
     });
     if (result === "error") {
-      updateSystemMessage("오류입니다~~");
+      updateSystemMessage(
+        "앗, 원하는 칵테일을 찾지 못했어요. \n 검색어를 바꿔 다시 시도해보세요! 😅",
+      );
     } else {
       updateGptMessage(result);
     }
