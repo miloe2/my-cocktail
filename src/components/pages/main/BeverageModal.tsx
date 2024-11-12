@@ -1,6 +1,10 @@
 "use client";
 import React, { useState, useRef, useCallback, useMemo } from "react";
+import { useRouter } from "next/navigation";
+import { SwiperSlide } from "swiper/react";
+import SwiperCore from "swiper";
 import BottomModal from "@/components/elements/BottomModal";
+import SwiperModule from "@/components/elements/SwiperModule";
 import {
   drinkList,
   fruitList,
@@ -9,13 +13,11 @@ import {
   rumList,
   syrupList,
 } from "@/data/beverage";
-import TabContents from "./TabContents";
 import useModalStore from "@/store/useModalStore";
-import SwiperModule from "@/components/elements/SwiperModule";
-import { SwiperSlide } from "swiper/react";
 import useSearchHandler from "@/hooks/useSearchHandler";
-import { useRouter } from "next/navigation";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
+import TabContents from "./TabContents";
+
 interface BeverageModalProps {
   modalId: string;
 }
@@ -26,11 +28,6 @@ interface tabListProps {
 
 const BeverageModal = ({ modalId }: BeverageModalProps) => {
   console.log("beverage modal");
-  const optionsSet = useRef(new Set());
-  const { closeModal } = useModalStore();
-  const [selected, setSelected] = useState<number>(0);
-  const { handleSearch } = useSearchHandler();
-  const router = useRouter();
 
   const tabList = [
     { title: "리큐르", list: liquorList },
@@ -41,7 +38,17 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
     { title: "시럽", list: syrupList },
     // { title: "주류", list: liquorCategoryList },
   ];
+
+  const { closeModal } = useModalStore();
+  const { handleSearch } = useSearchHandler();
+  const router = useRouter();
+
+  const optionsSet = useRef(new Set());
+  const swiperRef = useRef<SwiperCore | null>(null);
   const contentRefs = useRef<(HTMLElement | null)[]>([]);
+
+  const [selected, setSelected] = useState<number>(0);
+
   const scrollToContent = (index: number) => {
     if (contentRefs.current[index]) {
       contentRefs.current[index]?.scrollIntoView({ behavior: "smooth" });
@@ -52,6 +59,32 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
     setSelected(index);
     scrollToContent(index);
   };
+
+  const handleTabIO = (index: number) => {
+    setSelected(index);
+    if (swiperRef.current) {
+      swiperRef.current.slideTo(index); // 선택된 탭으로 스와이퍼 이동
+    }
+  };
+
+  useIntersectionObserver(contentRefs.current, handleTabIO);
+
+  const handleApply = async () => {
+    router.push("/cocktail-chat");
+    let filterItem = Array.from(optionsSet.current).join(", ");
+    console.log("searchQuery", filterItem);
+    handleSearch("filter", filterItem);
+    closeModal(modalId);
+  };
+
+  const addOptionToSet = useCallback((label: string) => {
+    if (optionsSet.current.has(label)) {
+      optionsSet.current.delete(label);
+    } else {
+      optionsSet.current.add(label);
+    }
+  }, []);
+
   const slides = useMemo(
     () =>
       tabList.map((slide, index) => (
@@ -69,12 +102,7 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
       )),
     [selected, handleTab],
   );
-  const handleTabIO = (index:number) => {
-    // console.log(`${index}wathching`);
-    setSelected(index)
-  }
-  //@ts-ignore
-  useIntersectionObserver(contentRefs.current, handleTabIO);
+
   const ContentsMemo = React.memo(
     ({
       tabList,
@@ -102,29 +130,6 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
   );
   ContentsMemo.displayName = "ContentsMemo";
 
-
-
-  // const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
-  const handleApply = async () => {
-    router.push("/cocktail-chat");
-    let filterItem = Array.from(optionsSet.current).join(", ");
-    // updateQuery(query);
-    console.log("searchQuery", filterItem);
-    handleSearch("filter", filterItem);
-    closeModal(modalId);
-  };
-  // const handleRefresh = () => {
-  //   optionsSet.current.clear();
-  // };
-
-  const addOptionToSet = useCallback((label: string) => {
-    if (optionsSet.current.has(label)) {
-      optionsSet.current.delete(label);
-    } else {
-      optionsSet.current.add(label);
-    }
-  }, []);
-
   return (
     <BottomModal
       id={modalId}
@@ -136,6 +141,7 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
           slidesPerView={3.6}
           slides={slides}
           freeMode={false}
+          onSwiper={(swiper) => (swiperRef.current = swiper)}
         />
       }
       content={
@@ -146,7 +152,6 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
         />
       }
       onPrimaryAction={handleApply}
-      // onSecondaryAction={handleRefresh}
     />
   );
 };

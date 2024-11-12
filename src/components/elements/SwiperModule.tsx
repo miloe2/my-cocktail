@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import { Swiper } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
+import SwiperCore from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -14,6 +15,7 @@ interface SwiperModuleProps {
   className?: string;
   slides: ReactNode[];
   freeMode?: boolean;
+  onSwiper?: (swiper: SwiperCore) => void;
 }
 
 const SwiperModule = ({
@@ -25,6 +27,7 @@ const SwiperModule = ({
   className,
   slides,
   freeMode = true,
+  onSwiper,
 }: SwiperModuleProps) => {
   return (
     <Swiper
@@ -36,7 +39,7 @@ const SwiperModule = ({
       freeMode={freeMode}
       modules={[Navigation, Pagination]}
       onSlideChange={() => console.log("slide change")}
-      onSwiper={(swiper) => console.log(swiper)}
+      onSwiper={onSwiper}
       className={`${className} custom-swiper`}
       style={{ marginLeft: 0 }}
     >
