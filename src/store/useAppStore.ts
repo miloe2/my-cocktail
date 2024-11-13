@@ -3,6 +3,8 @@ import { create } from "zustand";
 interface AppStore {
   isLoading: boolean;
   setLoadingStatus: () => void;
+  pathLoading: boolean;
+  setPathLoading: () => void;
 }
 
 const useAppStore = create<AppStore>((set) => ({
@@ -10,6 +12,11 @@ const useAppStore = create<AppStore>((set) => ({
   setLoadingStatus: () =>
     set((state) => ({
       isLoading: !state.isLoading,
+    })),
+  pathLoading: false,
+  setPathLoading: () =>
+    set((state) => ({
+      pathLoading: !state.pathLoading,
     })),
 }));
 

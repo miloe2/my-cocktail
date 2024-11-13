@@ -6,7 +6,7 @@ import React, {
   useMemo,
   useEffect,
 } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { SwiperSlide } from "swiper/react";
 import { debounce } from "lodash";
 import SwiperCore from "swiper";
@@ -24,6 +24,7 @@ import useModalStore from "@/store/useModalStore";
 import useSearchHandler from "@/hooks/useSearchHandler";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 import TabContents from "./TabContents";
+import useAppStore from "@/store/useAppStore";
 
 interface BeverageModalProps {
   modalId: string;
@@ -48,7 +49,7 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
 
   const { closeModal } = useModalStore();
   const { handleSearch } = useSearchHandler();
-  const router = useRouter();
+  const { setPathLoading } = useAppStore();
   const pathname = usePathname();
 
   const swiperRef = useRef<SwiperCore | null>(null);
@@ -91,9 +92,9 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
   const handleApply = async () => {
     // console.log(selectedOptions)
     let filterItem = Array.from(selectedOptions).join(", ");
-
     if (isMainPage && filterItem) {
-      router.push("/cocktail-chat");
+      // 전역 state로 부모 요소의 의존성을 변경하여, 로딩 시작 & router 변경
+      setPathLoading();
     }
     // console.log("searchQuery", filterItem);
     handleSearch("filter", filterItem);

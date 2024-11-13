@@ -2,7 +2,7 @@
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 
-const testpage = () => {
+const LoadingCocktail = () => {
   const Lottie = dynamic(() => import("react-lottie-player"), { ssr: false });
   const [lottieData, setLottieData] = useState<object | null>(null);
 
@@ -14,12 +14,19 @@ const testpage = () => {
   }, []);
 
   if (!lottieData) return null; // 데이터가 로드될 때까지는 렌더링하지 않음
-
   return (
-    <div className="w-full bg-red-950 h-40">
-      <Lottie loop animationData={lottieData} play />
-    </div>
+    <>
+      <div className="bg-black opacity-45 w-svw h-svh overflow-hidden fixed top-0 left-0" />
+      <div className="flex flex-col fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <div className="w-40 h-40">
+          <Lottie animationData={lottieData} play />
+        </div>
+        <span className="text-center text-sm">
+          알맞는 재료를 검색중이에요!{" "}
+        </span>
+      </div>
+    </>
   );
 };
 
-export default testpage;
+export default LoadingCocktail;
