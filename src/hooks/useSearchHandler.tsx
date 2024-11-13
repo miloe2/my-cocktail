@@ -40,7 +40,8 @@ const useSearchHandler = () => {
     }
     // 검색어/필터아이템을 query로 선언
     const query = searchText || (filterItem as string);
-    updateUserMessage(query, time);
+    const regQuery = filterItem ? `/*#filter#*/${query}` : query;
+    updateUserMessage(regQuery, time);
     setSearchText("");
     const result = await searchGpt({
       setLoadingStatus,
