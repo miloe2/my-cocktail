@@ -5,7 +5,8 @@ import OptionsButton from "@/components/elements/OptionsButton";
 interface TabContentsProps {
   title: string;
   list: ListArray[];
-  onSelectOption: (options: string) => void;
+  toggleOption: (label: string) => void;
+  hasOption: (label: string) => boolean;
 }
 interface ListArray {
   name: string;
@@ -13,12 +14,8 @@ interface ListArray {
 }
 
 const TabContents = forwardRef<HTMLDivElement, TabContentsProps>(
-  function TabContents({ title, list, onSelectOption }, ref) {
+  function TabContents({ title, list, toggleOption, hasOption }, ref) {
     // console.log("tab contents");
-    const handleUpdateClick = (label: string) => {
-      onSelectOption(label);
-    };
-
     return (
       <div className="flex flex-col mb-8" ref={ref}>
         <div className="my-4 flex space-x-2">
@@ -32,7 +29,8 @@ const TabContents = forwardRef<HTMLDivElement, TabContentsProps>(
             <OptionsButton
               key={i}
               label={item.name}
-              onUpdateSelection={handleUpdateClick}
+              isSelected={hasOption(item.name)}
+              onClick={() => toggleOption(item.name)}
             />
           ))}
         </div>

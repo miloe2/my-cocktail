@@ -16,7 +16,7 @@ const SearchManager = ({ isMainPage }: SearchManagerProps) => {
 
   // isMainPage가 true일 때만 router를 이용하는 함수
   const onSearchClick = useCallback(() => {
-    if (isMainPage) {
+    if (isMainPage && searchText) {
       router.push("/cocktail-chat");
     }
     handleSearch("chat");

@@ -51,11 +51,13 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const optionsSet = useRef(new Set());
   const swiperRef = useRef<SwiperCore | null>(null);
   const contentRefs = useRef<(HTMLElement | null)[]>([]);
 
-  const [selected, setSelected] = useState<number>(0);
+  const [selectedOptions, setSelectedOptions] = useState<Set<string>>(
+    new Set(),
+  );
+  const [selectedTab, setSelectedTab] = useState<number>(0);
   const [isMainPage, setMainPage] = useState<boolean>(true);
   const scrollToContent = (index: number) => {
     if (contentRefs.current[index]) {
@@ -69,41 +71,35 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
 
   // tab 클릭시, 해당 위치로 스크롤 이동
   const handleTab = debounce((index: number) => {
-    setSelected(index);
+    setSelectedTab(index);
     scrollToContent(index);
   }, 50);
 
   // 스크롤에 따라 tab 메뉴 Swipe
+  // IO 설정
   const handleTabIO = debounce((index: number) => {
-    setSelected(index);
+    setSelectedTab(index);
     if (swiperRef.current) {
       swiperRef.current.slideTo(index);
     }
-  }, 200);
+  });
 
   // 스크롤 감시를 위한 IO설정 & ref 전달
   useIntersectionObserver(contentRefs.current, handleTabIO);
 
   // 필터 적용 클릭 시, router 이동 & item전달
   const handleApply = async () => {
-    if (isMainPage) {
+    // console.log(selectedOptions)
+    let filterItem = Array.from(selectedOptions).join(", ");
+
+    if (isMainPage && filterItem) {
       router.push("/cocktail-chat");
     }
-    let filterItem = Array.from(optionsSet.current).join(", ");
     // console.log("searchQuery", filterItem);
     handleSearch("filter", filterItem);
     closeModal(modalId);
-    optionsSet.current.clear();
+    setSelectedOptions(new Set()); // Set을 빈 상태로 초기화
   };
-
-  // 필터 아이템 추가/삭제
-  const addOptionToSet = useCallback((label: string) => {
-    if (optionsSet.current.has(label)) {
-      optionsSet.current.delete(label);
-    } else {
-      optionsSet.current.add(label);
-    }
-  }, []);
 
   // SwiperMoudule 사용을 위한 slides template
   const slides = useMemo(
@@ -116,7 +112,9 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
           >
             <div
               className={`${
-                selected === index ? "text-white" : "text-stone-500"
+                selectedTab === index
+                  ? "text-white font-medium"
+                  : "text-stone-500"
               } text-center py-4`}
             >
               {slide.title}
@@ -124,34 +122,58 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
           </div>
         </SwiperSlide>
       )),
-    [selected, handleTab],
+    [selectedTab, handleTab],
+  );
+
+  // 선택 상태 업데이트 함수
+  const toggleOption = useCallback((label: string) => {
+    setSelectedOptions((prev) => {
+      const newSelected = new Set(prev);
+      if (newSelected.has(label)) {
+        newSelected.delete(label);
+      } else {
+        newSelected.add(label);
+      }
+      return newSelected;
+    });
+  }, []);
+
+  const hasOption = useCallback(
+    (label: string) => selectedOptions.has(label),
+    [selectedOptions],
   );
 
   // tabContents template
   const ContentsMemo = React.memo(
     ({
       tabList,
-      addOptionToSet,
       contentRefs,
+      toggleOption,
+      hasOption,
     }: {
       tabList: tabListProps[];
-      addOptionToSet: (label: string) => void;
       contentRefs: React.MutableRefObject<(HTMLElement | null)[]>;
-    }) => (
-      <div className="modal-tab">
-        {tabList.map((tab: tabListProps, index: number) => (
-          <TabContents
-            key={index}
-            title={tab.title}
-            list={tab.list}
-            onSelectOption={(label) => addOptionToSet(label)}
-            ref={(el) => {
-              contentRefs.current[index] = el;
-            }}
-          />
-        ))}
-      </div>
-    ),
+      toggleOption: (label: string) => void;
+      hasOption: (label: string) => boolean;
+    }) => {
+      console.log("contenteMemo");
+      return (
+        <div className="modal-tab">
+          {tabList.map((tab: tabListProps, index: number) => (
+            <TabContents
+              key={index}
+              title={tab.title}
+              list={tab.list}
+              toggleOption={toggleOption} // 상태 변경 함수 전달
+              hasOption={hasOption} // 선택 여부 조회 함수 전달
+              ref={(el) => {
+                contentRefs.current[index] = el;
+              }}
+            />
+          ))}
+        </div>
+      );
+    },
   );
   ContentsMemo.displayName = "ContentsMemo";
 
@@ -172,8 +194,9 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
       content={
         <ContentsMemo
           tabList={tabList}
-          addOptionToSet={addOptionToSet}
           contentRefs={contentRefs}
+          toggleOption={toggleOption}
+          hasOption={hasOption}
         />
       }
       onPrimaryAction={handleApply}
