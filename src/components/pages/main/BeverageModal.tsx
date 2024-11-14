@@ -38,12 +38,12 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
   console.log("beverage modal");
 
   const tabList = [
-    { title: "리큐르", list: liquorList },
-    { title: "진", list: ginList },
-    { title: "럼", list: rumList },
-    { title: "음료", list: drinkList },
-    { title: "과일", list: fruitList },
-    { title: "시럽", list: syrupList },
+    { title: "🍹 리큐르", list: liquorList },
+    { title: "🍸 진", list: ginList },
+    { title: "🥂 럼", list: rumList },
+    { title: "🧋 음료", list: drinkList },
+    { title: "🍍 과일", list: fruitList },
+    { title: "🍯시럽", list: syrupList },
     // { title: "주류", list: liquorCategoryList },
   ];
 
@@ -118,7 +118,7 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
                   : "text-stone-500"
               } text-center py-4`}
             >
-              {slide.title}
+              {slide.title.slice(2)}
             </div>
           </div>
         </SwiperSlide>

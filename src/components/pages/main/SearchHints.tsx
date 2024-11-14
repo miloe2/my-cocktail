@@ -1,4 +1,3 @@
-import { memo } from "react";
 import ScrollableBox from "@/components/elements/ScrollableBox";
 import useModalStore from "@/store/useModalStore";
 import useSearchStore from "@/store/useSearchStore";
@@ -76,4 +75,4 @@ const SearchHints = ({ className }: SearchHintsProps) => {
     </div>
   );
 };
-export default memo(SearchHints);
+export default SearchHints;

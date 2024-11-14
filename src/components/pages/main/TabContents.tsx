@@ -19,9 +19,6 @@ const TabContents = forwardRef<HTMLDivElement, TabContentsProps>(
     return (
       <div className="flex flex-col mb-8" ref={ref}>
         <div className="my-4 flex space-x-2">
-          <div className="w-4 h-4 bg-stone-500">
-            <img src="" alt="" />
-          </div>
           <h1>{title}</h1>
         </div>
         <div>
@@ -39,4 +36,4 @@ const TabContents = forwardRef<HTMLDivElement, TabContentsProps>(
   },
 );
 
-export default React.memo(TabContents);
+export default TabContents;

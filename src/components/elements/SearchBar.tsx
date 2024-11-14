@@ -13,7 +13,7 @@ const SearchBar = ({
   onSearchClick,
   clearSearchText,
 }: SearchBarProps) => {
-  // console.log('search rerender')
+  console.log("search rerender");
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -28,7 +28,7 @@ const SearchBar = ({
         onKeyDown={handleKeyDown}
         value={value}
         type="text"
-        className="touch-manipulation text-base font-medium rounded-md w-full h-9 focus:ring-stone-500 focus:ring-1 bg-stone-700  outline-none text-stone-100 pl-3 pr-8"
+        className="touch-manipulation text-base font-medium rounded-md w-full h-9 focus:ring-stone-500 focus:ring-1 bg-stone-700 outline-none text-stone-100 pl-3 pr-8"
       />
       {value && (
         <button

@@ -36,7 +36,7 @@ const SearchManager = ({ isMainPage }: SearchManagerProps) => {
         // 전역 상태 trigger로 BeverageModal의 apply도 같이 router 이동이 가능
         router.push("/cocktail-chat");
         setPathLoading();
-      }, 4000);
+      }, 6000);
     }
 
     return () => clearTimeout(timer);
