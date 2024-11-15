@@ -15,7 +15,7 @@ const BottomModal = ({
   content,
   onPrimaryAction,
 }: BottomModalProps) => {
-  console.log("bottom modal render");
+  // console.log("bottom modal render");
   const { modals, closeModal } = useModalStore();
   const isOpen = modals[id] || false;
   const modalClass = ` bg-stone-700 fixed ${

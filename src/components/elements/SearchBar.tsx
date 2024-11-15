@@ -13,7 +13,7 @@ const SearchBar = ({
   onSearchClick,
   clearSearchText,
 }: SearchBarProps) => {
-  console.log("search rerender");
+  // console.log("search rerender");
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {

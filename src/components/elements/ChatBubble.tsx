@@ -39,7 +39,7 @@ const FilterMessage = ({ chat }: { chat: ChatUserMessage }) => {
             key={index}
             className="flex bg-stone-700  text-sm px-2 py-1 rounded-md ml-1.5 my-1"
           >
-            {item}
+            #{item}
           </div>
         ))}
       </div>

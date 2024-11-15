@@ -8,12 +8,6 @@ export const Tutorial = () => {
     if (step < 2) setStep(step + 1);
   };
 
-  useEffect(() => {
-    if (step === 2) {
-      document.cookie = "hasVisited=true; Path=/; SameSite=Lax";
-    }
-  }, [step]);
-
   const images = [
     "/images/common/tutorial_01.png",
     "/images/common/tutorial_02.png",

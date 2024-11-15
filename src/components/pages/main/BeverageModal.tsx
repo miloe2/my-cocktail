@@ -35,7 +35,7 @@ interface tabListProps {
 }
 
 const BeverageModal = ({ modalId }: BeverageModalProps) => {
-  console.log("beverage modal");
+  // console.log("beverage modal");
 
   const tabList = [
     { title: "🍹 리큐르", list: liquorList },
@@ -157,7 +157,7 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
       toggleOption: (label: string) => void;
       hasOption: (label: string) => boolean;
     }) => {
-      console.log("contenteMemo");
+      // console.log("contenteMemo");
       return (
         <div className="modal-tab">
           {tabList.map((tab: tabListProps, index: number) => (
