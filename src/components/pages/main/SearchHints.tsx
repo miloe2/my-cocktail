@@ -55,7 +55,7 @@ const SearchHints = ({ className }: SearchHintsProps) => {
           </div>
         </div>
 
-        <div className="bg-stone-700 w-full h-full rounded-md text-sm flex p-2 font-thin">
+        <div className="bg-stone-700 w-full h-full rounded-md text-sm flex p-2 font-thin cursor-pointer">
           <div className="bg-stone-600 aspect-square flex justify-center items-center">
             <img
               src="/images/beverages/default-cocktail.webp"

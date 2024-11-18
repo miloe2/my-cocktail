@@ -1,8 +1,3 @@
-export interface ChatGptMessage {
-  user: "gpt";
-  msg: ChatGptResponse;
-}
-
 export interface ChatUserMessage {
   user: "user";
   msg: string;
@@ -12,6 +7,15 @@ export interface ChatUserMessage {
 export interface ChatNoticeMessage {
   user: "notice";
   msg: string;
+}
+
+export interface ChatGptMessage {
+  user: "gpt";
+  msg: ChatGptResponse;
+}
+
+export interface ChatGptResponse {
+  cocktails: Array<CocktailRecipt>;
 }
 
 export interface CocktailRecipt {
@@ -26,6 +30,15 @@ export interface Reciept {
   unit: string;
 }
 
+export interface SQLChatData {
+  user_id: string;
+  sender_type: "gpt" | "user" | "system";
+  message: string | ChatGptMessage;
+  created_at: string;
+  is_favorite: boolean;
+  is_saved_data: boolean;
+}
+
 export interface ChatStore {
   isChatStart: boolean;
   updateChatStatus: () => void;
@@ -35,10 +48,6 @@ export interface ChatStore {
   updateSystemMessage: (msg: string) => void;
 }
 
-export interface ChatGptResponse {
-  cocktails: Array<CocktailRecipt>;
-}
-
 export interface HandleSearchParams {
   setLoadingStatus: () => void;
   searchText: string;
@@ -46,7 +55,6 @@ export interface HandleSearchParams {
     text: string,
     searchType: "chat" | "filter",
   ) => Promise<string | undefined>;
-  // updateGptMessage: (msg: ChatGptResponse) => void;
   searchType: "chat" | "filter";
   finalCallback?: () => void;
 }

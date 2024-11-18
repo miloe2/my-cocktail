@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useMemo, memo } from "react";
-import { useRouter } from "next/navigation";
 import SkeletoneAnswerCard from "@/components/elements/SkeletoneAnswerCard";
 import ChatBubble from "@/components/elements/ChatBubble";
 import useChatStore from "@/store/useChatStore";
@@ -24,7 +23,6 @@ const ChattingRoom = () => {
     ));
   }, [chatMessages]);
 
-
   // console.log("채팅방 (검색창도있고, 뒤로가기도있음)", new Date().getSeconds());
 
   return (
@@ -37,11 +35,8 @@ const ChattingRoom = () => {
 };
 export default memo(ChattingRoom);
 
-
-
-
-
-{/*<div className="fixed top-4 flex" onClick={handleBack}>
+{
+  /*<div className="fixed top-4 flex" onClick={handleBack}>
 <div
   className="bg-stone-600 rounded-full w-6 h-6 flex justify-center items-center"
   onClick={handleChatStatus}
@@ -66,4 +61,5 @@ export default memo(ChattingRoom);
     </g>
   </svg>
 </div>
-</div> */}
+</div> */
+}
