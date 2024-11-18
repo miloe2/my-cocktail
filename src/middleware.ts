@@ -9,8 +9,6 @@ export function middleware(request: NextRequest) {
       response.cookies.set(key, value, {
         path: "/",
         sameSite: "lax",
-        httpOnly: true,
-        secure: true,
       });
     }
   };

@@ -1,63 +1,51 @@
 import { useEffect, useState } from "react";
-import useAppStore from "@/store/useAppStore";
 import { SQLChatData } from "@/types/types";
 
 const useIndexedMessageDB = () => {
-  const { uuid, setUUID } = useAppStore();
   const dbName = "today_cocktail";
   const storeName = "t_message";
   const [db, setDb] = useState<IDBDatabase | null>(null);
+  // let isDBInitialized = false;
 
-  useEffect(() => {
-    const initDB = () => {
-      if (!window.indexedDB) {
-        console.error("This browser doesn't support indexedDB.");
-        return;
+  const initDB = () => {
+    console.trace("initDB called");
+    // console.trace("initDB called");
+    // if (isDBInitialized) return; // 이미 초기화된 경우 실행 중단
+    // console.log('13', isDBInitialized)
+    // isDBInitialized = true;
+    if (!window.indexedDB) {
+      console.error("This browser doesn't support indexedDB.");
+      return;
+    }
+
+    // IndexedDB 초기화
+    const request = indexedDB.open(dbName, 1);
+
+    request.onupgradeneeded = (event) => {
+      const database = (event.target as IDBOpenDBRequest).result;
+      if (database && !database.objectStoreNames.contains(storeName)) {
+        database.createObjectStore(storeName, {
+          keyPath: "id",
+          autoIncrement: true,
+        });
       }
-
-      // 모든 쿠키를 객체로 변환
-      const cookies = document.cookie.split("; ").reduce(
-        (acc, currentCookie) => {
-          const [name, value] = currentCookie.split("=");
-          acc[name] = value;
-          return acc;
-        },
-        {} as Record<string, string>,
-      );
-
-      // 쿠키에서 uuid 가져오기
-      if (cookies.user_uuid) {
-        setUUID(cookies.user_uuid);
-      } else {
-        console.warn("user_uuid not found in cookies.");
-      }
-
-      // IndexedDB 초기화
-      const request = indexedDB.open(dbName, 1);
-
-      request.onupgradeneeded = (event) => {
-        const database = (event.target as IDBOpenDBRequest).result;
-        if (database && !database.objectStoreNames.contains(storeName)) {
-          database.createObjectStore(storeName, {
-            keyPath: "id",
-            autoIncrement: true,
-          });
-        }
-      };
-
-      request.onsuccess = (event) => {
-        const database = (event.target as IDBOpenDBRequest).result;
-        if (database) {
-          setDb(database);
-          console.log("Database initialized successfully.");
-        }
-      };
-
-      request.onerror = () => {
-        console.error("Database initialization failed:", request.error);
-      };
     };
 
+    request.onsuccess = (event) => {
+      const database = (event.target as IDBOpenDBRequest).result;
+      if (database) {
+        setDb(database);
+        console.log("Database initialized successfully.");
+      }
+    };
+
+    request.onerror = () => {
+      console.error("Database initialization failed:", request.error);
+    };
+  };
+
+  useEffect(() => {
+    console.trace("initDB called");
     initDB();
   }, []);
 
@@ -86,7 +74,6 @@ const useIndexedMessageDB = () => {
 
   // ############### getAllData ##################
   const getAllData = async () => {
-    console.log("here", uuid);
     if (!db) {
       console.error("Database is not initialized.");
       return [];
