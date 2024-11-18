@@ -1,18 +1,34 @@
 import { useEffect, useState } from "react";
 import { SQLChatData } from "@/types/types";
+import useAppStore from "@/store/useAppStore";
 
 const useIndexedMessageDB = () => {
   const dbName = "today_cocktail";
   const storeName = "t_message";
   const [db, setDb] = useState<IDBDatabase | null>(null);
-  // let isDBInitialized = false;
+  const [isDBReady, setIsDBReady] = useState(false);
+  const { setUUID } = useAppStore();
 
-  const initDB = () => {
-    console.trace("initDB called");
-    // console.trace("initDB called");
-    // if (isDBInitialized) return; // 이미 초기화된 경우 실행 중단
-    // console.log('13', isDBInitialized)
-    // isDBInitialized = true;
+  const initDB = async () => {
+    console.log("init!!!!!!!!!!!!!");
+
+    // 모든 쿠키를 객체로 변환
+    const cookies = document.cookie.split("; ").reduce(
+      (acc, currentCookie) => {
+        const [name, value] = currentCookie.split("=");
+        acc[name] = value;
+        return acc;
+      },
+      {} as Record<string, string>,
+    );
+
+    // 쿠키에서 uuid 가져오기
+    if (cookies.user_uuid) {
+      setUUID(cookies.user_uuid);
+    } else {
+      console.warn("user_uuid not found in cookies.");
+    }
+
     if (!window.indexedDB) {
       console.error("This browser doesn't support indexedDB.");
       return;
@@ -35,6 +51,8 @@ const useIndexedMessageDB = () => {
       const database = (event.target as IDBOpenDBRequest).result;
       if (database) {
         setDb(database);
+        console.log(db);
+        setIsDBReady(true); // DB 준비 완료
         console.log("Database initialized successfully.");
       }
     };
@@ -44,13 +62,9 @@ const useIndexedMessageDB = () => {
     };
   };
 
-  useEffect(() => {
-    console.trace("initDB called");
-    initDB();
-  }, []);
-
   // ############### addData ##################
   const addData = async (data: SQLChatData) => {
+    console.log(db);
     if (!db) {
       console.error("Database is not initialized.");
       return;
@@ -74,9 +88,11 @@ const useIndexedMessageDB = () => {
 
   // ############### getAllData ##################
   const getAllData = async () => {
+    console.log("ALLLLLLLLLLLL!!!!!!!!!!!!!");
+
     if (!db) {
       console.error("Database is not initialized.");
-      return [];
+      return ["데이터 없음"];
     }
 
     try {
@@ -96,7 +112,11 @@ const useIndexedMessageDB = () => {
     }
   };
 
-  return { addData, getAllData };
+  useEffect(() => {
+    initDB();
+  }, []);
+
+  return { addData, getAllData, initDB, isDBReady };
 };
 
 export default useIndexedMessageDB;

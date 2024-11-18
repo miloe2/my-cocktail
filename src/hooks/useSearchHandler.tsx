@@ -12,6 +12,8 @@ const useSearchHandler = () => {
   const { updateGptMessage, updateUserMessage, updateSystemMessage } =
     useChatStore();
   const { setLoadingStatus, uuid } = useAppStore();
+  const { addData } = useIndexedMessageDB();
+
   const { searchQuery, updateQuery } = useSearchStore();
   const [searchText, setSearchText] = useState("");
 
@@ -55,7 +57,6 @@ const useSearchHandler = () => {
       console.log("검색어 없음");
       return;
     }
-    const { addData } = useIndexedMessageDB();
 
     // 검색어/필터아이템을 query로 선언
     const query = searchText || (filterItem as string);

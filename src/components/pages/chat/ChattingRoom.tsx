@@ -1,13 +1,43 @@
-import React, { useEffect, useRef, useMemo, memo } from "react";
+import React, { useEffect, useRef, useMemo, memo, useState } from "react";
 import SkeletoneAnswerCard from "@/components/elements/SkeletoneAnswerCard";
 import ChatBubble from "@/components/elements/ChatBubble";
 import useChatStore from "@/store/useChatStore";
 import useAppStore from "@/store/useAppStore";
+import useIndexedMessageDB from "@/hooks/useIndexedMessageDB";
+import { SQLChatData } from "@/types/types";
 
 const ChattingRoom = () => {
   const { chatMessages } = useChatStore();
+  const { getAllData, isDBReady } = useIndexedMessageDB();
   const { isLoading } = useAppStore();
   const chatEndRef = useRef<HTMLDivElement | null>(null);
+  const [test, setTest] = useState<SQLChatData[] | undefined>();
+
+  useEffect(() => {
+    if (isDBReady) {
+      fetchData()
+        .then((rsp) => {
+          //@ts-ignore
+          setTest(rsp);
+          console.log(rsp);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+      // console.log(typeof rsp);
+    }
+  }, [isDBReady]);
+
+  const fetchData = async () => {
+    console.log("실행?");
+    try {
+      const rsp = await getAllData();
+      console.log("rsp", Array.isArray(rsp));
+      return rsp;
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   // 채팅이 생성되면 스크롤 이동
   useEffect(() => {
@@ -34,32 +64,3 @@ const ChattingRoom = () => {
   );
 };
 export default memo(ChattingRoom);
-
-{
-  /*<div className="fixed top-4 flex" onClick={handleBack}>
-<div
-  className="bg-stone-600 rounded-full w-6 h-6 flex justify-center items-center"
-  onClick={handleChatStatus}
->
-  <svg
-    fill="#ffffff"
-    width="24px"
-    height="24px"
-    viewBox="0 0 24 24"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <g data-name="Layer 2">
-      <g data-name="arrow-ios-back">
-        <rect
-          width="24"
-          height="24"
-          transform="rotate(90 12 12)"
-          opacity="0"
-        />
-        <path d="M13.83 19a1 1 0 0 1-.78-.37l-4.83-6a1 1 0 0 1 0-1.27l5-6a1 1 0 0 1 1.54 1.28L10.29 12l4.32 5.36a1 1 0 0 1-.78 1.64z" />
-      </g>
-    </g>
-  </svg>
-</div>
-</div> */
-}
