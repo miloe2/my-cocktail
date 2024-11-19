@@ -51,7 +51,6 @@ const useIndexedMessageDB = () => {
       const database = (event.target as IDBOpenDBRequest).result;
       if (database) {
         setDb(database);
-        console.log(db);
         setIsDBReady(true); // DB 준비 완료
         console.log("Database initialized successfully.");
       }

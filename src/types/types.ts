@@ -1,19 +1,3 @@
-export interface ChatUserMessage {
-  user: "user";
-  msg: string;
-  time: string;
-}
-
-export interface ChatNoticeMessage {
-  user: "notice";
-  msg: string;
-}
-
-export interface ChatGptMessage {
-  user: "gpt";
-  msg: ChatGptResponse;
-}
-
 export interface ChatGptResponse {
   cocktails: Array<CocktailRecipt>;
 }
@@ -33,19 +17,20 @@ export interface Reciept {
 export interface SQLChatData {
   user_id: string;
   sender_type: "gpt" | "user" | "system";
-  message: string | ChatGptMessage;
+  message: string | ChatGptResponse;
   created_at: string;
   is_favorite: boolean;
   is_saved_data: boolean;
 }
 
 export interface ChatStore {
-  isChatStart: boolean;
-  updateChatStatus: () => void;
-  chatMessages: Array<ChatGptMessage | ChatUserMessage | ChatNoticeMessage>;
-  updateGptMessage: (msg: ChatGptResponse) => void;
-  updateUserMessage: (msg: string, time: string) => void;
-  updateSystemMessage: (msg: string) => void;
+  // isChatStart: boolean;
+  // updateChatStatus: () => void;
+  chatMessages: Array<SQLChatData>;
+  updateChatMessage: (data: SQLChatData) => void;
+  // updateGptMessage: (msg: ChatGptResponse) => void;
+  // updateUserMessage: (msg: string, time: string) => void;
+  // updateSystemMessage: (msg: string) => void;
 }
 
 export interface HandleSearchParams {

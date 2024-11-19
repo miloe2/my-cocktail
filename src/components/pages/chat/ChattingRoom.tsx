@@ -1,38 +1,31 @@
-import React, { useEffect, useRef, useMemo, memo, useState } from "react";
+import React, { useEffect, useRef, useMemo, memo } from "react";
 import SkeletoneAnswerCard from "@/components/elements/SkeletoneAnswerCard";
 import ChatBubble from "@/components/elements/ChatBubble";
 import useChatStore from "@/store/useChatStore";
 import useAppStore from "@/store/useAppStore";
 import useIndexedMessageDB from "@/hooks/useIndexedMessageDB";
-import { SQLChatData } from "@/types/types";
 
 const ChattingRoom = () => {
   const { chatMessages } = useChatStore();
   const { getAllData, isDBReady } = useIndexedMessageDB();
   const { isLoading } = useAppStore();
   const chatEndRef = useRef<HTMLDivElement | null>(null);
-  const [test, setTest] = useState<SQLChatData[] | undefined>();
 
   useEffect(() => {
     if (isDBReady) {
       fetchData()
         .then((rsp) => {
-          //@ts-ignore
-          setTest(rsp);
           console.log(rsp);
         })
         .catch((e) => {
           console.log(e);
         });
-      // console.log(typeof rsp);
     }
   }, [isDBReady]);
 
   const fetchData = async () => {
-    console.log("실행?");
     try {
       const rsp = await getAllData();
-      console.log("rsp", Array.isArray(rsp));
       return rsp;
     } catch (error) {
       console.error(error);

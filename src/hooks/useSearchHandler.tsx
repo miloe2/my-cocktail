@@ -9,15 +9,15 @@ import useIndexedMessageDB from "./useIndexedMessageDB";
 import { ChatGptResponse, SQLChatData } from "@/types/types";
 
 const useSearchHandler = () => {
-  const { updateGptMessage, updateUserMessage, updateSystemMessage } =
-    useChatStore();
+  const { updateChatMessage } = useChatStore();
   const { setLoadingStatus, uuid } = useAppStore();
   const { addData } = useIndexedMessageDB();
 
   const { searchQuery, updateQuery } = useSearchStore();
   const [searchText, setSearchText] = useState("");
+  const today = new Date();
 
-  // SearchHint 부분에서만 사용 이제 해당 내용은 사용안함
+  // SearchHint 부분에서만 사용 (input value를 query로 변환 기능은 사용안함)
   useEffect(() => {
     setSearchText(searchQuery);
   }, [searchQuery]);
@@ -27,17 +27,16 @@ const useSearchHandler = () => {
     setSearchText(e.target.value);
   };
 
+  // 검색어 초기화 버튼
   const clearSearchText = () => {
     setSearchText("");
   };
 
-  const today = new Date();
-  const time = `${today.getHours().toString().padStart(2, "0")}:${today.getMinutes().toString().padStart(2, "0")}`;
-
+  // data 타입 변경
   const convertedIndexedDB = (
     msg: string | ChatGptResponse,
     type: "user" | "gpt" | "system",
-  ) => {
+  ): SQLChatData => {
     const data = {
       user_id: uuid,
       sender_type: type,
@@ -45,40 +44,40 @@ const useSearchHandler = () => {
       created_at: today.toISOString(),
       is_favorite: false,
       is_saved_data: false,
-    } as SQLChatData;
+    };
     return data;
   };
 
+  // 실제 검색 로직
   const handleSearch = async (
     searchType: "chat" | "filter",
     filterItem?: string,
   ) => {
-    if (!searchText && !filterItem) {
+    const query = filterItem ? `/*#filter#*/${filterItem}` : searchText;
+    if (!query) {
       console.log("검색어 없음");
       return;
     }
-
-    // 검색어/필터아이템을 query로 선언
-    const query = searchText || (filterItem as string);
     const userMessage = convertedIndexedDB(query, "user");
     setSearchText("");
     await addData(userMessage);
-    const regQuery = filterItem ? `/*#filter#*/${query}` : query;
-    updateUserMessage(regQuery, time);
+    updateChatMessage(userMessage);
+
     const result = await searchGpt({
       setLoadingStatus,
       searchText: query,
       fetchSearchResult,
       searchType,
     });
-    if (result !== "error") {
-      updateGptMessage(result);
-    } else {
-      updateSystemMessage(
-        "원하는 칵테일을 찾지 못했어요. \n 검색어를 바꿔 다시 시도해보세요! 😅",
-      );
-    }
-    const gptMessage = convertedIndexedDB(result, "gpt");
+
+    const gptMessage = convertedIndexedDB(
+      result !== "error"
+        ? result
+        : "원하는 칵테일을 찾지 못했어요. \n 검색어를 바꿔 다시 시도해보세요! 😅",
+      result !== "error" ? "gpt" : "system",
+    );
+
+    updateChatMessage(gptMessage);
     await addData(gptMessage);
     updateQuery("");
   };

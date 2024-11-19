@@ -1,15 +1,11 @@
 import { memo } from "react";
 import AnswerCard from "@/components/elements/AnswerCard";
-import {
-  ChatGptMessage,
-  ChatUserMessage,
-  ChatNoticeMessage,
-} from "@/types/types";
+import { SQLChatData, ChatGptResponse } from "@/types/types";
 
-const NoticeMessage = ({ chat }: { chat: ChatNoticeMessage }) => (
+const NoticeMessage = ({ chat }: { chat: SQLChatData }) => (
   <div className="bg-stone-00 flex py-4">
     <div className="bg-black px-4 py-2 max-w-64 flex-wrap break-words rounded-md leading-5 text-sm">
-      {chat.msg.split("\n").map((line, index) => (
+      {(chat.message as string).split("\n").map((line, index) => (
         <span key={index}>
           {line}
           <br />
@@ -19,20 +15,20 @@ const NoticeMessage = ({ chat }: { chat: ChatNoticeMessage }) => (
   </div>
 );
 
-const ChatMessage = ({ chat }: { chat: ChatUserMessage }) => (
+const ChatMessage = ({ chat }: { chat: SQLChatData }) => (
   <div className="bg-stone-00 flex justify-end items-end py-4 ">
-    <div className="pb-2 text-[10px] font-thin">{chat.time}</div>
+    <div className="pb-2 text-[10px] font-thin">{chat.created_at}</div>
     <div className="bg-black px-4 py-2 max-w-64 flex-wrap break-words ml-1 rounded-md leading-5 text-sm">
-      {chat.msg}
+      {chat.message as string}
     </div>
   </div>
 );
-const FilterMessage = ({ chat }: { chat: ChatUserMessage }) => {
-  const editMsg = chat.msg.replace("/*#filter#*/", "");
+const FilterMessage = ({ chat }: { chat: SQLChatData }) => {
+  const editMsg = (chat.message as string).replace("/*#filter#*/", "");
   const filterMsgArr = editMsg.split(", ");
   return (
     <div className="bg-stone-00 flex justify-end items-end py-4 ">
-      <div className="pb-2 text-[10px] font-thin">{chat.time}</div>
+      <div className="pb-2 text-[10px] font-thin">{chat.created_at}</div>
       <div className="bg-black px-4 py-2 max-w-64 flex-wrap break-words ml-1 rounded-md leading-5 text-sm flex justify-end">
         {filterMsgArr.map((item, index) => (
           <div
@@ -46,9 +42,9 @@ const FilterMessage = ({ chat }: { chat: ChatUserMessage }) => {
     </div>
   );
 };
-const UserMessage = ({ chat }: { chat: ChatUserMessage }) => {
+const UserMessage = ({ chat }: { chat: SQLChatData }) => {
   console.log("################UserMessage 렌더링##################");
-  return chat.msg.startsWith("/*#filter#*/") ? (
+  return (chat.message as string).startsWith("/*#filter#*/") ? (
     <FilterMessage chat={chat} />
   ) : (
     <ChatMessage chat={chat} />
@@ -56,20 +52,18 @@ const UserMessage = ({ chat }: { chat: ChatUserMessage }) => {
 };
 // UserMessage.displayName = "UserMessage";
 
-const AnswerCardMessage = ({ chat }: { chat: ChatGptMessage }) => (
-  <AnswerCard cocktails={chat.msg.cocktails} />
+const AnswerCardMessage = ({ chat }: { chat: ChatGptResponse }) => (
+  <AnswerCard cocktails={chat.cocktails} />
 );
 
-const ChatBubble = ({
-  chat,
-}: {
-  chat: ChatGptMessage | ChatUserMessage | ChatNoticeMessage;
-}) => {
+const ChatBubble = ({ chat }: { chat: SQLChatData }) => {
   return (
     <>
-      {chat.user === "notice" && <NoticeMessage chat={chat} />}
-      {chat.user === "user" && <UserMessage chat={chat} />}
-      {chat.user === "gpt" && <AnswerCardMessage chat={chat} />}
+      {chat.sender_type === "system" && <NoticeMessage chat={chat} />}
+      {chat.sender_type === "user" && <UserMessage chat={chat} />}
+      {chat.sender_type === "gpt" && (
+        <AnswerCardMessage chat={chat.message as ChatGptResponse} />
+      )}
     </>
   );
 };
