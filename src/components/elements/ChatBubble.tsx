@@ -52,8 +52,8 @@ const UserMessage = ({ chat }: { chat: SQLChatData }) => {
 };
 // UserMessage.displayName = "UserMessage";
 
-const AnswerCardMessage = ({ chat }: { chat: ChatGptResponse }) => (
-  <AnswerCard cocktails={chat.cocktails} />
+const AnswerCardMessage = ({ chat }: { chat: SQLChatData }) => (
+  <AnswerCard cocktails={(chat.message as ChatGptResponse).cocktails} />
 );
 
 const ChatBubble = ({ chat }: { chat: SQLChatData }) => {
@@ -61,9 +61,7 @@ const ChatBubble = ({ chat }: { chat: SQLChatData }) => {
     <>
       {chat.sender_type === "system" && <NoticeMessage chat={chat} />}
       {chat.sender_type === "user" && <UserMessage chat={chat} />}
-      {chat.sender_type === "gpt" && (
-        <AnswerCardMessage chat={chat.message as ChatGptResponse} />
-      )}
+      {chat.sender_type === "gpt" && <AnswerCardMessage chat={chat} />}
     </>
   );
 };

@@ -28,6 +28,7 @@ export interface ChatStore {
   // updateChatStatus: () => void;
   chatMessages: Array<SQLChatData>;
   updateChatMessage: (data: SQLChatData) => void;
+  loadChatHistory: (historyData: SQLChatData[]) => void;
   // updateGptMessage: (msg: ChatGptResponse) => void;
   // updateUserMessage: (msg: string, time: string) => void;
   // updateSystemMessage: (msg: string) => void;

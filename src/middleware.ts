@@ -9,6 +9,7 @@ export function middleware(request: NextRequest) {
       response.cookies.set(key, value, {
         path: "/",
         sameSite: "lax",
+        maxAge: 60 * 60 * 24 * 90, // 90일 동안 유지
       });
     }
   };

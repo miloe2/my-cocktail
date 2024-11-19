@@ -18,6 +18,10 @@ const useChatStore = create<ChatStore>((set) => ({
     set((state) => ({
       chatMessages: [...state.chatMessages, data],
     })),
+  loadChatHistory: (historyData) =>
+    set(() => ({
+      chatMessages: historyData,
+    })),
 }));
 
 // {

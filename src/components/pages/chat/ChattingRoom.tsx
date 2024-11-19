@@ -6,7 +6,7 @@ import useAppStore from "@/store/useAppStore";
 import useIndexedMessageDB from "@/hooks/useIndexedMessageDB";
 
 const ChattingRoom = () => {
-  const { chatMessages } = useChatStore();
+  const { chatMessages, loadChatHistory } = useChatStore();
   const { getAllData, isDBReady } = useIndexedMessageDB();
   const { isLoading } = useAppStore();
   const chatEndRef = useRef<HTMLDivElement | null>(null);
@@ -15,7 +15,10 @@ const ChattingRoom = () => {
     if (isDBReady) {
       fetchData()
         .then((rsp) => {
-          console.log(rsp);
+          if (rsp) {
+            console.log(rsp);
+            loadChatHistory(rsp);
+          }
         })
         .catch((e) => {
           console.log(e);

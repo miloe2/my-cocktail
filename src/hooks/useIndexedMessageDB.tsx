@@ -62,7 +62,7 @@ const useIndexedMessageDB = () => {
   };
 
   // ############### addData ##################
-  const addData = async (data: SQLChatData) => {
+  const addData = async (data: SQLChatData[]) => {
     console.log(db);
     if (!db) {
       console.error("Database is not initialized.");
@@ -87,11 +87,9 @@ const useIndexedMessageDB = () => {
 
   // ############### getAllData ##################
   const getAllData = async () => {
-    console.log("ALLLLLLLLLLLL!!!!!!!!!!!!!");
-
     if (!db) {
       console.error("Database is not initialized.");
-      return ["데이터 없음"];
+      return [];
     }
 
     try {
