@@ -9,6 +9,16 @@ const useIndexedMessageDB = () => {
   const [isDBReady, setIsDBReady] = useState(false);
   const { setUUID } = useAppStore();
 
+  // 헬퍼 함수: 기본 시스템 메시지 생성
+  const createWelcomeMessage = (): SQLChatData => ({
+    created_at: new Date().toISOString(),
+    is_favorite: false,
+    is_saved_data: false,
+    message: "가지고 계신 재료로 \n 딱 맞는 칵테일을 찾아드릴게요! 🍹",
+    sender_type: "system",
+    user_id: "",
+  });
+
   const initDB = async () => {
     console.log("init!!!!!!!!!!!!!");
 
@@ -40,10 +50,20 @@ const useIndexedMessageDB = () => {
     request.onupgradeneeded = (event) => {
       const database = (event.target as IDBOpenDBRequest).result;
       if (database && !database.objectStoreNames.contains(storeName)) {
-        database.createObjectStore(storeName, {
+        const objectStore = database.createObjectStore(storeName, {
           keyPath: "id",
           autoIncrement: true,
         });
+        console.log("Object store created.");
+
+        // 웰컴 메시지 추가
+        const transaction = objectStore.transaction;
+        transaction.oncomplete = () => {
+          const tx = database.transaction(storeName, "readwrite");
+          const store = tx.objectStore(storeName);
+          store.add(createWelcomeMessage());
+          console.log("Welcome message added during upgrade.");
+        };
       }
     };
 
@@ -62,7 +82,7 @@ const useIndexedMessageDB = () => {
   };
 
   // ############### addData ##################
-  const addData = async (data: SQLChatData[]) => {
+  const addData = async (data: SQLChatData) => {
     console.log(db);
     if (!db) {
       console.error("Database is not initialized.");

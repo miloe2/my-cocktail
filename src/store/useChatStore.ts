@@ -2,18 +2,7 @@ import { create } from "zustand";
 import { ChatStore } from "@/types/types";
 
 const useChatStore = create<ChatStore>((set) => ({
-  // isChatStart: false,
-  chatMessages: [
-    {
-      id: 999999,
-      created_at: "2024-11-18T03:58:32.010Z",
-      is_favorite: false,
-      is_saved_data: false,
-      message: "가지고 계신 재료로 \n 딱 맞는 칵테일을 찾아드릴게요! 🍹",
-      sender_type: "system",
-      user_id: "",
-    },
-  ],
+  chatMessages: [],
   updateChatMessage: (data) =>
     set((state) => ({
       chatMessages: [...state.chatMessages, data],
@@ -23,7 +12,15 @@ const useChatStore = create<ChatStore>((set) => ({
       chatMessages: historyData,
     })),
 }));
-
+// {
+//   id: 999999,
+//   created_at: "2024-11-18T03:58:32.010Z",
+//   is_favorite: false,
+//   is_saved_data: false,
+//   message: "가지고 계신 재료로 \n 딱 맞는 칵테일을 찾아드릴게요! 🍹",
+//   sender_type: "system",
+//   user_id: "",
+// },
 // {
 //   user: "notice",
 //   msg: "가지고 계신 재료로 \n 딱 맞는 칵테일을 찾아드릴게요! 🍹",
