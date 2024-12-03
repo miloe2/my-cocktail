@@ -15,6 +15,7 @@ export interface Reciept {
 }
 
 export interface SQLChatData {
+  id?: number;
   user_id: string;
   sender_type: "gpt" | "user" | "system";
   message: string | ChatGptResponse;
@@ -27,8 +28,10 @@ export interface ChatStore {
   // isChatStart: boolean;
   // updateChatStatus: () => void;
   chatMessages: Array<SQLChatData>;
+  currentIndex: number | null;
   updateChatMessage: (data: SQLChatData) => void;
   loadChatHistory: (historyData: SQLChatData[]) => void;
+  setCurrentIndex: (newIndex: number | null) => void;
   // updateGptMessage: (msg: ChatGptResponse) => void;
   // updateUserMessage: (msg: string, time: string) => void;
   // updateSystemMessage: (msg: string) => void;

@@ -5,6 +5,10 @@ import useAppStore from "@/store/useAppStore";
 const useIndexedMessageDB = () => {
   const dbName = "today_cocktail";
   const storeName = "t_message";
+
+  // 페이지네이션 설정
+  const pageSize = 10;
+
   const [db, setDb] = useState<IDBDatabase | null>(null);
   const [isDBReady, setIsDBReady] = useState(false);
   const { setUUID } = useAppStore();
@@ -129,11 +133,55 @@ const useIndexedMessageDB = () => {
     }
   };
 
+  // ############### getPaginatedData ##################
+  const getPaginatedData = async (currentIndex: number | null) => {
+    if (!db) {
+      console.error("Database is not initialized.");
+      return [];
+    }
+
+    try {
+      const tx = db.transaction(storeName, "readonly");
+      const store = tx.objectStore(storeName);
+      const data: SQLChatData[] = [];
+      let fetchedCount = 0;
+
+      await new Promise<void>((resolve, reject) => {
+        const request = store.openCursor(
+          currentIndex ? IDBKeyRange.upperBound(currentIndex) : null,
+          "prev",
+        );
+
+        request.onsuccess = (event) => {
+          const cursor = (event.target as IDBRequest<IDBCursorWithValue>)
+            .result;
+
+          if (cursor && fetchedCount < pageSize) {
+            data.push(cursor.value); // 데이터 추가
+            fetchedCount++;
+            cursor.continue();
+          } else {
+            resolve(); // 데이터가 없거나 pageSize만큼 가져옴
+          }
+        };
+
+        request.onerror = () => {
+          reject(request.error);
+        };
+      });
+
+      return data || [];
+    } catch (error) {
+      console.error("Failed to fetch data:", error);
+      return [];
+    }
+  };
+
   useEffect(() => {
     initDB();
   }, []);
 
-  return { addData, getAllData, initDB, isDBReady };
+  return { addData, getAllData, getPaginatedData, initDB, isDBReady };
 };
 
 export default useIndexedMessageDB;

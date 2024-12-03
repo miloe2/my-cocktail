@@ -18,9 +18,7 @@ const NoticeMessage = ({ chat }: { chat: SQLChatData }) => (
 
 const ChatMessage = ({ chat }: { chat: SQLChatData }) => (
   <div className="bg-stone-00 flex justify-end items-end py-4 ">
-    <div className="pb-2 text-[10px] font-thin">
-      {convertToKST(chat.created_at)}
-    </div>
+    <div className="pb-2 text-[10px] font-thin">{chat.created_at}</div>
     <div className="bg-black px-4 py-2 max-w-64 flex-wrap break-words ml-1 rounded-md leading-5 text-sm">
       {chat.message as string}
     </div>
@@ -32,7 +30,8 @@ const FilterMessage = ({ chat }: { chat: SQLChatData }) => {
   return (
     <div className="bg-stone-00 flex justify-end items-end py-4 ">
       <div className="pb-2 text-[10px] font-thin">
-        {convertToKST(chat.created_at)}
+        {chat.created_at}
+        {/* {convertToKST(chat.created_at)} */}
       </div>
       <div className="bg-black px-4 py-2 max-w-64 flex-wrap break-words ml-1 rounded-md leading-5 text-sm flex justify-end">
         {filterMsgArr.map((item, index) => (
