@@ -2,13 +2,13 @@ import { create } from "zustand";
 import { ChatStore } from "@/types/types";
 
 const useChatStore = create<ChatStore>((set) => ({
-  currentIndex: null,
+  currentIndex: Infinity,
   chatMessages: [],
   updateChatMessage: (data) =>
     set((state) => ({
       chatMessages: [...state.chatMessages, data],
     })),
-  loadChatHistory: (historyData) =>
+  loadChatHistory: (historyData = []) =>
     set((state) => ({
       chatMessages: [...historyData, ...state.chatMessages],
     })),

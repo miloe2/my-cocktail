@@ -9,9 +9,14 @@ type ObserverOptions = {
 const useIntersectionObserver = (
   elements: (HTMLElement | null)[],
   onIntersect: (index: number) => void,
+  shouldDisconnect?: boolean,
   options?: ObserverOptions,
 ) => {
   useEffect(() => {
+    const targets = elements.filter((el): el is HTMLElement => el !== null); // null-safe 처리
+
+    if (targets.length === 0 || shouldDisconnect) return; // 감시 중단 조건 추가
+
     const observerOptions = options || { threshold: 0.9 };
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -31,7 +36,7 @@ const useIntersectionObserver = (
     return () => {
       observer.disconnect();
     };
-  }, [elements, onIntersect, options]);
+  }, [elements, onIntersect, options, shouldDisconnect]);
 };
 
 export default useIntersectionObserver;

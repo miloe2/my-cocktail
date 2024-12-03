@@ -28,10 +28,10 @@ export interface ChatStore {
   // isChatStart: boolean;
   // updateChatStatus: () => void;
   chatMessages: Array<SQLChatData>;
-  currentIndex: number | null;
+  currentIndex: number;
   updateChatMessage: (data: SQLChatData) => void;
   loadChatHistory: (historyData: SQLChatData[]) => void;
-  setCurrentIndex: (newIndex: number | null) => void;
+  setCurrentIndex: (newIndex: number) => void;
   // updateGptMessage: (msg: ChatGptResponse) => void;
   // updateUserMessage: (msg: string, time: string) => void;
   // updateSystemMessage: (msg: string) => void;

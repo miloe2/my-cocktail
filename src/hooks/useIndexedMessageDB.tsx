@@ -134,7 +134,7 @@ const useIndexedMessageDB = () => {
   };
 
   // ############### getPaginatedData ##################
-  const getPaginatedData = async (currentIndex: number | null) => {
+  const getPaginatedData = async (currentIndex: number) => {
     if (!db) {
       console.error("Database is not initialized.");
       return [];
@@ -148,7 +148,7 @@ const useIndexedMessageDB = () => {
 
       await new Promise<void>((resolve, reject) => {
         const request = store.openCursor(
-          currentIndex ? IDBKeyRange.upperBound(currentIndex) : null,
+          currentIndex ? IDBKeyRange.upperBound(currentIndex - 1) : null,
           "prev",
         );
 
@@ -157,17 +157,15 @@ const useIndexedMessageDB = () => {
             .result;
 
           if (cursor && fetchedCount < pageSize) {
-            data.push(cursor.value); // 데이터 추가
+            data.push(cursor.value);
             fetchedCount++;
             cursor.continue();
           } else {
-            resolve(); // 데이터가 없거나 pageSize만큼 가져옴
+            resolve();
           }
         };
 
-        request.onerror = () => {
-          reject(request.error);
-        };
+        request.onerror = () => reject(request.error);
       });
 
       return data || [];
@@ -176,7 +174,6 @@ const useIndexedMessageDB = () => {
       return [];
     }
   };
-
   useEffect(() => {
     initDB();
   }, []);

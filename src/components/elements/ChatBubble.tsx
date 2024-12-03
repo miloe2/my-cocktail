@@ -9,6 +9,7 @@ const NoticeMessage = ({ chat }: { chat: SQLChatData }) => (
       {(chat.message as string).split("\n").map((line, index) => (
         <span key={index}>
           {line}
+          {chat.id}
           <br />
         </span>
       ))}
@@ -18,9 +19,13 @@ const NoticeMessage = ({ chat }: { chat: SQLChatData }) => (
 
 const ChatMessage = ({ chat }: { chat: SQLChatData }) => (
   <div className="bg-stone-00 flex justify-end items-end py-4 ">
-    <div className="pb-2 text-[10px] font-thin">{chat.created_at}</div>
+    <div className="pb-2 text-[10px] font-thin">
+      {chat.created_at}
+      {/* {convertToKST(chat.created_at)} */}
+    </div>
     <div className="bg-black px-4 py-2 max-w-64 flex-wrap break-words ml-1 rounded-md leading-5 text-sm">
       {chat.message as string}
+      {chat.id}
     </div>
   </div>
 );
@@ -40,6 +45,7 @@ const FilterMessage = ({ chat }: { chat: SQLChatData }) => {
             className="flex bg-stone-700  text-sm px-2 py-1 rounded-md ml-1.5 my-1"
           >
             #{item}
+            {chat.id}
           </div>
         ))}
       </div>
@@ -57,7 +63,11 @@ const UserMessage = ({ chat }: { chat: SQLChatData }) => {
 // UserMessage.displayName = "UserMessage";
 
 const AnswerCardMessage = ({ chat }: { chat: SQLChatData }) => (
-  <AnswerCard cocktails={(chat.message as ChatGptResponse).cocktails} />
+  <div>
+    {chat.id}
+    {chat.created_at}
+    <AnswerCard cocktails={(chat.message as ChatGptResponse).cocktails} />
+  </div>
 );
 
 const ChatBubble = ({ chat }: { chat: SQLChatData }) => {
