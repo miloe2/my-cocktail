@@ -217,12 +217,6 @@ table {
   display: none; /* Chrome, Safari, Opera */
 }
 
-.scroll-container {
-  display: flex;
-  overflow-x: scroll; /* 가로 스크롤을 활성화 */
-  scroll-behavior: smooth; /* 부드러운 스크롤 */
-  -webkit-overflow-scrolling: touch; /* iOS에서 부드러운 스크롤을 위해 */
-}
 /* raido button */
 input[type="radio"] {
   /* display: none;  */
@@ -242,4 +236,8 @@ label:has(input[type="radio"]) {
 label:has(input[type="radio"]:checked) {
   background-color: #222;
   color: white;
+}
+
+*{
+  scroll-behavior:auto
 }

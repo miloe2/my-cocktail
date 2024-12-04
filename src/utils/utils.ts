@@ -13,4 +13,6 @@ const convertToKST = (timeStr: string): string => {
   return `${hours}:${minutes}`;
 };
 
-export { convertToKST };
+const PAGE_SIZE = 3;
+
+export { convertToKST, PAGE_SIZE };

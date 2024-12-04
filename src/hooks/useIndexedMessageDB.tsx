@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import { SQLChatData } from "@/types/types";
 import useAppStore from "@/store/useAppStore";
+import { PAGE_SIZE } from "@/utils/utils";
 
 const useIndexedMessageDB = () => {
   const dbName = "today_cocktail";
   const storeName = "t_message";
-
-  // 페이지네이션 설정
-  const pageSize = 10;
 
   const [db, setDb] = useState<IDBDatabase | null>(null);
   const [isDBReady, setIsDBReady] = useState(false);
@@ -156,7 +154,7 @@ const useIndexedMessageDB = () => {
           const cursor = (event.target as IDBRequest<IDBCursorWithValue>)
             .result;
 
-          if (cursor && fetchedCount < pageSize) {
+          if (cursor && fetchedCount < PAGE_SIZE) {
             data.push(cursor.value);
             fetchedCount++;
             cursor.continue();
