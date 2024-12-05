@@ -15,45 +15,67 @@ const ChattingRoom = () => {
   const { isLoading } = useAppStore();
   const chatEndRef = useRef<HTMLDivElement | null>(null);
   const chatStartRef = useRef<HTMLDivElement | null>(null);
-  const chatContainerRef  = useRef<HTMLDivElement | null>(null);
+  const chatContainerRef = useRef<HTMLDivElement | null>(null);
   const [isHistoryLoading, setIsHistoryLoading] = useState(false);
   const [isFinalMessage, setIsFinalMessage] = useState(false);
 
+  useEffect(() => {
+    // Chatting 영역으로 스크롤 포커스 강제 이동
+    // if (chatContainerRef.current) {
+    //   chatContainerRef.current.scrollIntoView({
+    //     behavior: "smooth",
+    //     block: "start",
+    //   });
+    // }
+    // // 상위 스크롤 방지
+    // const preventDefault = (e: Event) => e.preventDefault();
+    // document.body.addEventListener("touchmove", preventDefault, {
+    //   passive: false,
+    // });
+    // return () => {
+    //   document.body.removeEventListener("touchmove", preventDefault);
+    // };
+  }, []);
+
   const fetchData = async () => {
     if (!isDBReady || isHistoryLoading) return [];
-    console.log('fetchData 호출');
-  
+    console.log("fetchData 호출");
+
     const chatContainer = chatContainerRef.current;
     const prevScrollHeight = chatContainer?.scrollHeight || 0;
-    chatContainer
     try {
       setIsHistoryLoading(true);
       const rsp = (await getPaginatedData(currentIndex)) || [];
-  
+
       if (rsp.length > 0) {
         const newIndex = rsp[rsp.length - 1].id as number;
         setCurrentIndex(newIndex);
       }
-  
+
       if (rsp.length < PAGE_SIZE) {
         setIsFinalMessage(true);
       }
-  
+
       // 스크롤 위치 복원
       requestAnimationFrame(() => {
         if (chatContainer) {
-          console.log(chatContainer)
+          console.log(chatContainer);
           const newScrollHeight = chatContainer.scrollHeight;
-          console.log('계산값', newScrollHeight - prevScrollHeight)
+          console.log("계산값", newScrollHeight - prevScrollHeight);
           chatContainer.scrollTop += newScrollHeight - prevScrollHeight; // 변경된 높이만큼 추가
           // document.documentElement.scrollTop += newScrollHeight - prevScrollHeight; // 변경된 높이만큼 추가
           console.log("chatContainer.scrollTop:", chatContainer.scrollTop);
-          console.log("chatContainer.scrollHeight:", chatContainer.scrollHeight);
-          console.log("chatContainer.clientHeight:", chatContainer.clientHeight);
-
+          console.log(
+            "chatContainer.scrollHeight:",
+            chatContainer.scrollHeight,
+          );
+          console.log(
+            "chatContainer.clientHeight:",
+            chatContainer.clientHeight,
+          );
         }
       });
-  
+
       return rsp.sort((a, b) => (a.id as number) - (b.id as number));
     } catch (error) {
       console.error(error);
@@ -62,11 +84,10 @@ const ChattingRoom = () => {
       setIsHistoryLoading(false);
     }
   };
-  
 
   const renderChatData = async () => {
     if (!isDBReady || isHistoryLoading) return; // 데이터 로드 조건이 충족되지 않으면 중단
-    console.log('rednerChatData!!!')
+    console.log("rednerChatData!!!");
     try {
       const data = await fetchData(); // fetchData로 데이터 가져오기
       if (data.length > 0) loadChatHistory(data); // 데이터가 있으면 히스토리에 로드
@@ -75,22 +96,25 @@ const ChattingRoom = () => {
     }
   };
   // DB 초기화
-  useEffect(() => {
-    renderChatData();
-  }, [isDBReady]);
+  // useEffect(() => {
+  //   renderChatData();
+  // }, [isDBReady]);
 
   // Intersection Observer 설정
   const observedElements = chatStartRef.current ? [chatStartRef.current] : [];
   // useIntersectionObserver(observedElements, (renderChatData), isFinalMessage);
-  useIntersectionObserver(observedElements, debounce(renderChatData, 300), isFinalMessage);
-
+  useIntersectionObserver(
+    observedElements,
+    debounce(renderChatData, 100),
+    isFinalMessage,
+  );
 
   // 채팅이 생성되면 스크롤 이동
-  // useEffect(() => {
-  //   if (chatEndRef.current) {
-  //     chatEndRef.current.scrollIntoView({ behavior: "smooth" });
-  //   }
-  // }, [chatMessages]);
+  useEffect(() => {
+    if (chatEndRef.current) {
+      chatEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [chatMessages]);
 
   // 메모이제이션된 메시지
   const memoizedChatMessages = useMemo(() => {
@@ -102,16 +126,19 @@ const ChattingRoom = () => {
   // console.log("채팅방 (검색창도있고, 뒤로가기도있음)", new Date().getSeconds());
 
   return (
-  <div className="flex flex-col relative w-full bg-yellow-00 px-4"
+    <div
+      className="flex flex-col relative w-full bg-yellow-400  overflow-auto h-full"
       ref={chatContainerRef}
-      >
-        <div ref={chatStartRef} className="bg-red-500">isLoading</div>
-        <div className="bg-blue-00 " >
-          {memoizedChatMessages}
-        </div>
-        {isLoading && <SkeletoneAnswerCard />}
-        <div ref={chatEndRef} />
+    >
+      <div ref={chatStartRef} className="bg-red-500">
+        isLoading
       </div>
+      <div className="bg-blue-300 pb-16 px-4">
+        {memoizedChatMessages}
+        {isLoading && <SkeletoneAnswerCard />}
+      </div>
+      <div ref={chatEndRef} />
+    </div>
   );
 };
 export default memo(ChattingRoom);
