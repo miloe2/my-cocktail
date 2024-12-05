@@ -19,24 +19,6 @@ const ChattingRoom = () => {
   const [isHistoryLoading, setIsHistoryLoading] = useState(false);
   const [isFinalMessage, setIsFinalMessage] = useState(false);
 
-  useEffect(() => {
-    // Chatting 영역으로 스크롤 포커스 강제 이동
-    // if (chatContainerRef.current) {
-    //   chatContainerRef.current.scrollIntoView({
-    //     behavior: "smooth",
-    //     block: "start",
-    //   });
-    // }
-    // // 상위 스크롤 방지
-    // const preventDefault = (e: Event) => e.preventDefault();
-    // document.body.addEventListener("touchmove", preventDefault, {
-    //   passive: false,
-    // });
-    // return () => {
-    //   document.body.removeEventListener("touchmove", preventDefault);
-    // };
-  }, []);
-
   const fetchData = async () => {
     if (!isDBReady || isHistoryLoading) return [];
     console.log("fetchData 호출");
@@ -105,7 +87,7 @@ const ChattingRoom = () => {
   // useIntersectionObserver(observedElements, (renderChatData), isFinalMessage);
   useIntersectionObserver(
     observedElements,
-    debounce(renderChatData, 100),
+    debounce(renderChatData, 300),
     isFinalMessage,
   );
 
@@ -117,23 +99,58 @@ const ChattingRoom = () => {
   }, [chatMessages]);
 
   // 메모이제이션된 메시지
+  // const memoizedChatMessages = useMemo(() => {
+  //   return chatMessages?.map((chat, index) => (
+  //     <ChatBubble key={index} chat={chat} />
+  //   ));
+  // }, [chatMessages]);
   const memoizedChatMessages = useMemo(() => {
-    return chatMessages?.map((chat, index) => (
-      <ChatBubble key={index} chat={chat} />
-    ));
+    const result: React.ReactNode[] = [];
+    let lastDate = "";
+
+    chatMessages?.forEach((chat, index) => {
+      // 메시지의 날짜를 추출
+      const currentDate = new Date(chat.created_at).toLocaleDateString(
+        "ko-KR",
+        {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          weekday: "short",
+        },
+      );
+
+      // 날짜가 변경되었으면 구분선 추가
+      if (currentDate !== lastDate) {
+        lastDate = currentDate;
+        result.push(
+          <div
+            key={`separator-${index}`}
+            className="text-sm w-full h-16  flex justify-center bg-yellow-00"
+          >
+            <div className="bg-red-00 w-full h-1/2  border-b border-solid border-b-stone-400" />
+            <div className="flex-shrink-0 self-center px-6">{currentDate}</div>
+            <div className="bg-red-00 w-full h-1/2  border-b border-solid border-b-stone-400" />
+          </div>,
+        );
+      }
+
+      // 메시지 추가
+      result.push(<ChatBubble key={chat.id || index} chat={chat} />);
+    });
+
+    return result;
   }, [chatMessages]);
 
   // console.log("채팅방 (검색창도있고, 뒤로가기도있음)", new Date().getSeconds());
 
   return (
     <div
-      className="flex flex-col relative w-full bg-yellow-400  overflow-auto h-full"
+      className="flex flex-col relative w-full bg-yellow-00 overflow-auto h-full no-scroll"
       ref={chatContainerRef}
     >
-      <div ref={chatStartRef} className="bg-red-500">
-        isLoading
-      </div>
-      <div className="bg-blue-300 pb-16 px-4">
+      <div ref={chatStartRef} className="bg-red-00" />
+      <div className="bg-blue-00 pb-16 px-4 ">
         {memoizedChatMessages}
         {isLoading && <SkeletoneAnswerCard />}
       </div>
