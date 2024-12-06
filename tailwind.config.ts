@@ -12,6 +12,15 @@ const config: Config = {
       fontFamily: {
         pretendard: ["var(--font-pretendard)"],
       },
+      keyframes: {
+        ripple: {
+          "0%": { transform: "scale(0)", opacity: "0.3" },
+          "100%": { transform: "scale(4)", opacity: "0" },
+        },
+      },
+      animation: {
+        ripple: "ripple 1.6s linear",
+      },
     },
   },
   plugins: [],
