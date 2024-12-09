@@ -2,14 +2,12 @@
 import { useState, ChangeEvent, useEffect } from "react";
 import { fetchSearchResult } from "@/api";
 import useSearchStore from "@/store/useSearchStore";
-import useChatStore from "@/store/useChatStore";
 import { searchGpt } from "@/utils/searchGpt";
 import useAppStore from "@/store/useAppStore";
 import useIndexedMessageDB from "./useIndexedMessageDB";
 import { ChatGptResponse, SQLChatData } from "@/types/types";
 
 const useSearchHandler = () => {
-  const { updateChatMessage } = useChatStore();
   const { setLoadingStatus, uuid } = useAppStore();
   const { addData } = useIndexedMessageDB();
 
@@ -61,7 +59,7 @@ const useSearchHandler = () => {
     const userMessage = convertedIndexedDB(query, "user");
     setSearchText("");
     await addData(userMessage);
-    updateChatMessage(userMessage);
+    // updateChatMessage(userMessage);
 
     const result = await searchGpt({
       setLoadingStatus,
@@ -77,7 +75,7 @@ const useSearchHandler = () => {
       result !== "error" ? "gpt" : "system",
     );
 
-    updateChatMessage(gptMessage);
+    // updateChatMessage(gptMessage);
     await addData(gptMessage);
     updateQuery("");
   };
