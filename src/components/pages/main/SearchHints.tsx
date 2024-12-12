@@ -17,7 +17,7 @@ const SearchHints = ({ className }: SearchHintsProps) => {
     <div className={className}>
       <ScrollableBox>
         <div
-          className="bg-stone-700 w-full h-full rounded-md text-sm flex p-2 font-thin cursor-pointer"
+          className="bg-neutral-600 w-full h-full rounded-md text-sm flex p-2 font-thin cursor-pointer"
           onClick={() => openModal(modalId)}
         >
           <div className="bg-stone-600 aspect-square flex justify-center items-center">
@@ -36,7 +36,7 @@ const SearchHints = ({ className }: SearchHintsProps) => {
         </div>
 
         <div
-          className="bg-stone-700 w-full h-full rounded-md text-sm flex p-2 font-thin cursor-pointer"
+          className="bg-neutral-600 w-full h-full rounded-md text-sm flex p-2 font-thin cursor-pointer"
           onClick={() => handleText("말리부랑 짐빔으로 만들수 있는 칵테일")}
         >
           <div className="bg-stone-600 aspect-square aspect-ratio flex justify-center items-center flex-nowrap">
@@ -55,7 +55,7 @@ const SearchHints = ({ className }: SearchHintsProps) => {
           </div>
         </div>
 
-        <div className="bg-stone-700 w-full h-full rounded-md text-sm flex p-2 font-thin cursor-pointer">
+        <div className="bg-neutral-600 w-full h-full rounded-md text-sm flex p-2 font-thin cursor-pointer">
           <div className="bg-stone-600 aspect-square flex justify-center items-center">
             <img
               src="/images/beverages/default-cocktail.webp"

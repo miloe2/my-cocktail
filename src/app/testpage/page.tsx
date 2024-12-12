@@ -9,7 +9,7 @@ const testpage = () => {
 
   useEffect(() => {
     // public 폴더 내 파일을 절대 경로로 로드
-    fetch("/lotties/cocktail-loading.json")
+    fetch("/lotties/todays-cocktail.json")
       .then((response) => response.json())
       .then((data) => setLottieData(data));
   }, []);
@@ -20,7 +20,7 @@ const testpage = () => {
 
   return (
     <div className="w-full bg-red-950 h-40">
-      <Lottie loop animationData={lottieData} play />
+      <Lottie loop={false} animationData={lottieData} play />
       <RippleButton
         onClick={handleClick}
         className="hover:bg-blue-500 bg-stone-900"

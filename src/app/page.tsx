@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import SearchManager from "@/components/pages/main/SearchManager";
 // import { GetServerSideProps } from "next";
 import { Tutorial } from "@/components/pages/main/Tutorial";
+import RecommendCocktail from "@/components/pages/main/RecommendCocktail";
 
 export default function Home() {
   // if (typeof window !== "undefined") {
@@ -12,11 +13,11 @@ export default function Home() {
   // }
   const cookieStore = cookies();
   const isFirstVisit = !cookieStore.get("hasVisited");
-  // console.log(isFirstVisit);
   return (
     <>
-      <main className="mx-auto max-w-5xl px-4 py-5 relative flex items-center justify-center h-svh pb-32">
+      <main className="mx-auto max-w-5xl px-4 py-5 relative flex flex-col items-center justify-center h-svh">
         <SearchManager isMainPage={true} />
+        <RecommendCocktail />
       </main>
       {isFirstVisit && <Tutorial />}
     </>

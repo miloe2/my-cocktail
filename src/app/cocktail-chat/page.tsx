@@ -16,7 +16,7 @@ const AskCocktailPage = () => {
       {/* </div> */}
       <div className="fixed bottom-0 h-14 bg-[#2f2f2f] px-4 pt-2 max-w-5xl mx-auto w-full flex">
         <div
-          className="bg-stone-700 w-10 h-9 rounded-full mr-2 flex justify-center items-center text-3xl font-thin align-top cursor-pointer"
+          className="bg-neutral-600 w-10 h-9 rounded-full mr-2 flex justify-center items-center text-3xl font-thin align-top cursor-pointer"
           onClick={() => openModal(modalId)}
         >
           +

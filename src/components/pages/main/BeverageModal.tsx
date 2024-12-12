@@ -18,6 +18,7 @@ import {
   liquorList,
   ginList,
   rumList,
+  syrupList,
 } from "@/data/beverage";
 import useModalStore from "@/store/useModalStore";
 import useSearchHandler from "@/hooks/useSearchHandler";
@@ -42,7 +43,7 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
     { title: "🥂 럼", list: rumList },
     { title: "🧋 음료", list: drinkList },
     { title: "🍍 과일", list: fruitList },
-    // { title: "🍯시럽", list: syrupList },
+    { title: "🍯시럽", list: syrupList },
     // { title: "주류", list: liquorCategoryList },
   ];
 
@@ -82,7 +83,7 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
     if (swiperRef.current) {
       swiperRef.current.slideTo(index);
     }
-  });
+  }, 500);
 
   // 스크롤 감시를 위한 IO설정 & ref 전달
   useIntersectionObserver(contentRefs.current, handleTabIO);
@@ -114,7 +115,7 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
               className={`${
                 selectedTab === index
                   ? "text-white font-medium"
-                  : "text-stone-500"
+                  : "text-neutral-500"
               } text-center py-4`}
             >
               {slide.title.slice(2)}

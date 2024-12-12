@@ -42,7 +42,7 @@ const FilterMessage = ({ chat }: { chat: SQLChatData }) => {
         {filterMsgArr.map((item, index) => (
           <div
             key={index}
-            className="flex bg-stone-700  text-sm px-2 py-1 rounded-md ml-1.5 my-1"
+            className="flex bg-neutral-600  text-sm px-2 py-1 rounded-md ml-1.5 my-1"
           >
             #{item}
             {/* {chat.id} */}

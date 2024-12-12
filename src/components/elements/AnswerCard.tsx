@@ -15,10 +15,10 @@ const AnswerCard = ({ cocktails }: ChatGptResponse) => {
           key={index}
           className="w-[95%] bg-black rounded-md p-4 mb-4 flex text-sm relative"
         >
-          <span className="absolute -top-2 -right-2 bg-stone-500 text-white text-xs  w-9 h-6 flex justify-center items-center rounded-full">
+          <span className="absolute -top-2 -right-2 bg-neutral-500 text-white text-xs  w-9 h-6 flex justify-center items-center rounded-full">
             {cocktail.degree}°
           </span>
-          <div className="w-20 h-20 bg-stone-700 mr-4 rounded-md overflow-hidden flex-shrink-0">
+          <div className="w-20 h-20 bg-neutral-600 mr-4 rounded-md overflow-hidden flex-shrink-0">
             <img
               src={findImage(cocktail.name)}
               alt={`${cocktail.name}`}
