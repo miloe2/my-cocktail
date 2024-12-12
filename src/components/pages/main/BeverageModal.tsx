@@ -18,7 +18,6 @@ import {
   liquorList,
   ginList,
   rumList,
-  syrupList,
 } from "@/data/beverage";
 import useModalStore from "@/store/useModalStore";
 import useSearchHandler from "@/hooks/useSearchHandler";
@@ -43,7 +42,7 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
     { title: "🥂 럼", list: rumList },
     { title: "🧋 음료", list: drinkList },
     { title: "🍍 과일", list: fruitList },
-    { title: "🍯시럽", list: syrupList },
+    // { title: "🍯시럽", list: syrupList },
     // { title: "주류", list: liquorCategoryList },
   ];
 
