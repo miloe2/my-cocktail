@@ -24,6 +24,11 @@ export interface SQLChatData {
   is_saved_data: boolean;
 }
 
+export interface HandleSearchProps {
+  searchType: "chat" | "filter";
+  msg: SQLChatData;
+}
+
 export interface ChatStore {
   chatMessages: Array<SQLChatData>;
   currentIndex: number;

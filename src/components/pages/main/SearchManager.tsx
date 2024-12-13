@@ -1,11 +1,12 @@
 "use client";
-import { useCallback, useEffect, memo } from "react";
+import { useCallback, useEffect, memo, useState, ChangeEvent } from "react";
 import { useRouter } from "next/navigation";
 import SearchBar from "@/components/elements/SearchBar";
 import useSearchHandler from "@/hooks/useSearchHandler";
 import SearchHints from "./SearchHints";
 import useAppStore from "@/store/useAppStore";
 import LoadingCocktail from "@/components/elements/LoadingCocktail";
+import useChatStore from "@/store/useChatStore";
 
 interface SearchManagerProps {
   isMainPage: boolean;
@@ -15,19 +16,34 @@ interface SearchManagerProps {
 const MemoizedLoadingCocktail = memo(LoadingCocktail);
 
 const SearchManager = ({ isMainPage }: SearchManagerProps) => {
-  const { searchText, handleInputChange, handleSearch, clearSearchText } =
-    useSearchHandler();
+  const { handleSearch, convertedIndexedDB } = useSearchHandler();
   const { pathLoading, setPathLoading } = useAppStore();
-
+  const { updateChatMessage } = useChatStore();
   const router = useRouter();
 
+  const [searchText, setSearchText] = useState("");
+
+  // searchBar 조작
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchText(e.target.value);
+  };
+
+  // 검색어 초기화 버튼
+  const clearSearchText = () => {
+    setSearchText("");
+  };
+
+  const userMessage = convertedIndexedDB(searchText, "user");
   // isMainPage가 true일 때만 router를 이용하는 함수
   const onSearchClick = useCallback(() => {
     if (isMainPage && searchText) {
       setPathLoading();
+    } else {
+      updateChatMessage(userMessage);
     }
-    handleSearch("chat");
-  }, [isMainPage, handleSearch, searchText, setPathLoading]); // 메모이제이션된 함수로 참조 고정
+    handleSearch({ searchType: "chat", msg: userMessage });
+    setSearchText("");
+  }, [handleSearch, searchText, setPathLoading]); // 메모이제이션된 함수로 참조 고정
 
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout>; // 타이머 타입을 추론

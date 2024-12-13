@@ -11,7 +11,7 @@ import { PAGE_SIZE } from "@/utils/utils";
 const ChattingRoom = () => {
   const { chatMessages, currentIndex, loadChatHistory, setCurrentIndex } =
     useChatStore();
-  const { isDBReady, getPaginatedData } = useIndexedMessageDB();
+  const { isDBReady, getPaginatedData, addData } = useIndexedMessageDB();
   const { isLoading } = useAppStore();
   const chatEndRef = useRef<HTMLDivElement | null>(null);
   const chatStartRef = useRef<HTMLDivElement | null>(null);
@@ -96,7 +96,7 @@ const ChattingRoom = () => {
     if (chatEndRef.current) {
       chatEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, [chatMessages]);
+  }, [addData]);
 
   // 메모이제이션된 메시지
   // const memoizedChatMessages = useMemo(() => {

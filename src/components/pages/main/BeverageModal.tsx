@@ -25,6 +25,7 @@ import useSearchHandler from "@/hooks/useSearchHandler";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 import TabContents from "./TabContents";
 import useAppStore from "@/store/useAppStore";
+import useChatStore from "@/store/useChatStore";
 
 interface BeverageModalProps {
   modalId: string;
@@ -48,8 +49,9 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
   ];
 
   const { closeModal } = useModalStore();
-  const { handleSearch } = useSearchHandler();
+  const { handleSearch, convertedIndexedDB } = useSearchHandler();
   const { setPathLoading } = useAppStore();
+  const { updateChatMessage } = useChatStore();
   const pathname = usePathname();
 
   const swiperRef = useRef<SwiperCore | null>(null);
@@ -87,17 +89,22 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
 
   // 스크롤 감시를 위한 IO설정 & ref 전달
   useIntersectionObserver(contentRefs.current, handleTabIO);
-
   // 필터 적용 클릭 시, router 이동 & item전달
   const handleApply = async () => {
     // console.log(selectedOptions)
     let filterItem = Array.from(selectedOptions).join(", ");
+    filterItem = `/*#filter#*/${filterItem}`;
+
+    const userMessage = convertedIndexedDB(filterItem, "user");
+
     if (isMainPage && filterItem) {
       // 전역 state로 부모 요소의 의존성을 변경하여, 로딩 시작 & router 변경
       setPathLoading();
+    } else {
+      updateChatMessage(userMessage);
     }
     // console.log("searchQuery", filterItem);
-    handleSearch("filter", filterItem);
+    handleSearch({ searchType: "filter", msg: userMessage });
     closeModal(modalId);
     setSelectedOptions(new Set()); // Set을 빈 상태로 초기화
   };

@@ -1,34 +1,24 @@
-"use client";
-import { useState, ChangeEvent, useEffect } from "react";
+// "use client";
 import { fetchSearchResult } from "@/api";
-import useSearchStore from "@/store/useSearchStore";
 import { searchGpt } from "@/utils/searchGpt";
 import useAppStore from "@/store/useAppStore";
 import useIndexedMessageDB from "./useIndexedMessageDB";
-import { ChatGptResponse, SQLChatData } from "@/types/types";
+import { ChatGptResponse, SQLChatData, HandleSearchProps } from "@/types/types";
+import useChatStore from "@/store/useChatStore";
 
 const useSearchHandler = () => {
   const { setLoadingStatus, uuid } = useAppStore();
   const { addData } = useIndexedMessageDB();
+  const { updateChatMessage } = useChatStore();
 
-  const { searchQuery, updateQuery } = useSearchStore();
-  const [searchText, setSearchText] = useState("");
+  // const { searchQuery, updateQuery } = useSearchStore();
+  // const [searchText, setSearchText] = useState("");
   const today = new Date();
 
   // SearchHint 부분에서만 사용 (input value를 query로 변환 기능은 사용안함)
-  useEffect(() => {
-    setSearchText(searchQuery);
-  }, [searchQuery]);
-
-  // searchBar 조작
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchText(e.target.value);
-  };
-
-  // 검색어 초기화 버튼
-  const clearSearchText = () => {
-    setSearchText("");
-  };
+  // useEffect(() => {
+  //   setSearchText(searchQuery);
+  // }, [searchQuery]);
 
   // data 타입 변경
   const convertedIndexedDB = (
@@ -47,23 +37,20 @@ const useSearchHandler = () => {
   };
 
   // 실제 검색 로직
-  const handleSearch = async (
-    searchType: "chat" | "filter",
-    filterItem?: string,
-  ) => {
-    const query = filterItem ? `/*#filter#*/${filterItem}` : searchText;
-    if (!query) {
-      console.log("검색어 없음");
-      return;
-    }
-    const userMessage = convertedIndexedDB(query, "user");
-    setSearchText("");
-    await addData(userMessage);
+  const handleSearch = async ({ searchType, msg }: HandleSearchProps) => {
+    // const query = filterItem ? `/*#filter#*/${filterItem}` : searchText;
+    // if (!query) {
+    //   console.log("검색어 없음");
+    //   return;
+    // }
+    // const userMessage = convertedIndexedDB(query, "user");
+    await addData(msg);
+    console.log("useSearchHandler", searchType, msg);
     // updateChatMessage(userMessage);
 
     const result = await searchGpt({
       setLoadingStatus,
-      searchText: query,
+      searchText: msg.message as string,
       fetchSearchResult,
       searchType,
     });
@@ -75,11 +62,13 @@ const useSearchHandler = () => {
       result !== "error" ? "gpt" : "system",
     );
 
-    // updateChatMessage(gptMessage);
+    updateChatMessage(gptMessage);
     await addData(gptMessage);
-    updateQuery("");
+    // updateQuery("");
+    return result;
   };
 
-  return { handleInputChange, handleSearch, searchText, clearSearchText };
+  return { handleSearch, convertedIndexedDB };
+  // return { handleInputChange, handleSearch, searchText, clearSearchText, convertedIndexedDB };
 };
 export default useSearchHandler;
