@@ -36,6 +36,9 @@ const SearchManager = ({ isMainPage }: SearchManagerProps) => {
   const userMessage = convertedIndexedDB(searchText, "user");
   // isMainPage가 true일 때만 router를 이용하는 함수
   const onSearchClick = useCallback(() => {
+    if (!searchText) {
+      return;
+    }
     if (isMainPage && searchText) {
       setPathLoading();
     } else {

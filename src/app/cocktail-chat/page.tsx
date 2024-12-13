@@ -12,14 +12,14 @@ const AskCocktailPage = () => {
   return (
     <div className="max-w-5xl mx-auto h-svh overflow-hidden">
       <ChattingRoom />
-      <div className="fixed bottom-0 h-14 bg-neutral-800 px-4 pt-2 max-w-5xl mx-auto w-full flex">
-        <div
-          className="bg-neutral-600 w-10 h-9 rounded-full mr-2 flex justify-center items-center text-3xl font-thin align-top cursor-pointer"
-          onClick={() => openModal(modalId)}
-        >
-          +
-        </div>
-        <div className="w-full">
+      <div className="fixed bottom-0 h-14 bg-neutral-800 px-4 pt-2 max-w-5xl mx-auto w-full">
+        <div className="w-full  flex items-center">
+          <div
+            className="bg-neutral-600 w-8 h-8 rounded-full mr-2 flex justify-center items-center cursor-pointer"
+            onClick={() => openModal(modalId)}
+          >
+            <img src="/icons/plus_white.svg" />
+          </div>
           <SearchManager isMainPage={false} />
         </div>
       </div>

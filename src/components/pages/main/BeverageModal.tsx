@@ -91,7 +91,9 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
   useIntersectionObserver(contentRefs.current, handleTabIO);
   // 필터 적용 클릭 시, router 이동 & item전달
   const handleApply = async () => {
-    // console.log(selectedOptions)
+    if (selectedOptions.size === 0) {
+      return;
+    }
     let filterItem = Array.from(selectedOptions).join(", ");
     filterItem = `/*#filter#*/${filterItem}`;
 
