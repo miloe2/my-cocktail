@@ -83,7 +83,7 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
     if (swiperRef.current) {
       swiperRef.current.slideTo(index);
     }
-  }, 500);
+  }, 200);
 
   // 스크롤 감시를 위한 IO설정 & ref 전달
   useIntersectionObserver(contentRefs.current, handleTabIO);

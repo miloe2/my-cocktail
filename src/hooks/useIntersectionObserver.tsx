@@ -17,7 +17,7 @@ const useIntersectionObserver = (
 
     if (targets.length === 0 || shouldDisconnect) return; // 감시 중단 조건
 
-    const observerOptions = options || { threshold: 0.4 };
+    const observerOptions = options || { threshold: 0.9 };
     // let initialRenderDone = false; // 초기 평가 상태 추적
 
     const observer = new IntersectionObserver((entries) => {
