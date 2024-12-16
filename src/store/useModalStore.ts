@@ -4,6 +4,7 @@ interface ModalStore {
   modals: { [key: string]: boolean };
   openModal: (id: string) => void;
   closeModal: (id: string) => void;
+  toggleModal: (id: string) => void;
 }
 
 const useModalStore = create<ModalStore>((set) => ({
@@ -15,6 +16,13 @@ const useModalStore = create<ModalStore>((set) => ({
   closeModal: (id) =>
     set((state) => ({
       modals: { ...state.modals, [id]: false },
+    })),
+  toggleModal: (id) =>
+    set((state) => ({
+      modals: {
+        ...state.modals,
+        [id]: !state.modals[id],
+      },
     })),
 }));
 

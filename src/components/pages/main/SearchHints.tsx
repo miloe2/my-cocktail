@@ -15,7 +15,7 @@ const SearchHints = ({ className }: SearchHintsProps) => {
   };
   return (
     <div className={className}>
-      <ScrollableBox>
+      <ScrollableBox className={""}>
         <div
           className="bg-neutral-600 w-full h-full rounded-md text-sm flex p-2 font-thin cursor-pointer"
           onClick={() => openModal(modalId)}

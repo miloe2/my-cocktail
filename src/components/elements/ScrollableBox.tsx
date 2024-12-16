@@ -2,17 +2,21 @@ import React from "react";
 
 interface ScrollableBoxProps {
   children: React.ReactNode;
+  className: string;
 }
 
-const ScrollableBox = ({ children }: ScrollableBoxProps) => {
+const ScrollableBox = ({ children, className = "" }: ScrollableBoxProps) => {
   return (
-    <div className="w-full flex flex-nowrap overflow-y-scroll h-auto overflow-x-hidden scroll-container">
+    <div
+      className={`w-full flex flex-nowrap overflow-x-auto h-auto overflow-y-hidden scroll-container ${className}`}
+    >
       {React.Children.map(children, (child, index) => (
-        <div key={index} className="h-20 mr-2 grow-0 min-w-52 w-full">
+        <div key={index} className="flex-shrink-0 w-auto">
           {child}
         </div>
       ))}
     </div>
   );
 };
+
 export default ScrollableBox;

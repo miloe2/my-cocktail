@@ -35,12 +35,12 @@ const RecommendCocktail = () => {
 
   return (
     <>
-      <div className="flex bg-neutral-600 w-full h-36 mt-3 rounded-md px-4">
+      <div className="flex bg-black w-full py-4 mt-3 rounded-md px-6">
         <div className="w-full flex flex-col justify-center ">
-          <p className="font-bold text-lg">오늘의 칵테일</p>
+          <p className="font-bold text-lg">오늘의 랜덤 칵테일은?</p>
           <p className="text-sm mt-2 leading-6">
-            칵테일이 고민되시나요? <br /> 오늘의 칵테일을 클릭하고{" "}
-            <br className="block md:hidden" /> 칵테일 레시피를 추천받아봐요{" "}
+            클릭하고 오늘의 랜덤 칵테일을 <br />
+            추천받아봐요!🍹 <br className="block md:hidden" />{" "}
           </p>
         </div>
         <div className="h-full w-36 flex justify-center items-center ">

@@ -3,7 +3,6 @@ import { useCallback, useEffect, memo, useState, ChangeEvent } from "react";
 import { useRouter } from "next/navigation";
 import SearchBar from "@/components/elements/SearchBar";
 import useSearchHandler from "@/hooks/useSearchHandler";
-import SearchHints from "./SearchHints";
 import useAppStore from "@/store/useAppStore";
 import LoadingCocktail from "@/components/elements/LoadingCocktail";
 import useChatStore from "@/store/useChatStore";
@@ -62,18 +61,18 @@ const SearchManager = ({ isMainPage }: SearchManagerProps) => {
   }, [pathLoading, setPathLoading]);
 
   return (
-    <div className="flex flex-col w-full relative">
+    <div className="flex flex-col w-full relative h-full">
       <SearchBar
         onChange={handleInputChange}
         onSearchClick={onSearchClick}
         clearSearchText={clearSearchText}
         value={searchText}
       />
-      {isMainPage && (
+      {/* {isMainPage && (
         <div className="-mr-4 mt-4">
           <SearchHints />
         </div>
-      )}
+      )} */}
       {pathLoading && <MemoizedLoadingCocktail />}
     </div>
   );
