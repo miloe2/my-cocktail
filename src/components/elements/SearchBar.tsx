@@ -56,7 +56,7 @@ const SearchBar = ({
           <img
             src="/icons/plus_white.svg"
             alt=""
-            className="rotate-45 w-2 h-2"
+            className="rotate-45 w-3 h-3"
           />
         </button>
       )}

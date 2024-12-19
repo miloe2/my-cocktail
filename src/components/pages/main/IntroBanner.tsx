@@ -3,17 +3,17 @@ import SearchManager from "./SearchManager";
 
 const IntroBanner = () => {
   return (
-    <div className="w-full relative ">
+    <div className="w-full h-72 relative flex justify-center items-center">
       <Image
         src="/images/common/main_banner.png"
         alt="Thumbnail"
         width={200}
         height={400}
-        className="w-full h-full"
+        className="w-full h-full absolute"
       />
-      <div className="w-full h-full absolute top-0 left-0 bg-black opacity-60" />
-      <div />
-      <div className="w-full px-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center flex-col">
+      <div className="w-full h-full absolute inset-0 bg-black opacity-60" />
+
+      <div className="w-full px-4 flex relative justify-center items-center flex-col">
         <div className="text-center mb-4">
           <p>오늘의 한잔</p>
           <p className="font-bold mt-2 text-xl/relaxed">

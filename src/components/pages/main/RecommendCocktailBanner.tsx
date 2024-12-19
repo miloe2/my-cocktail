@@ -1,12 +1,13 @@
 "use client";
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
-// import thumnail from "/next.svg"
+import { useEffect, useState, memo } from "react";
+import RandomCocktailCard from "./RandomCocktailCard";
 import Image from "next/image";
 
-const RecommendCocktail = () => {
+const RecommendCocktailBanner = () => {
   const Lottie = dynamic(() => import("react-lottie-player"), { ssr: false });
   const [lottieData, setLottieData] = useState<object | null>(null);
+  const [isCardOpen, setIsCardOpen] = useState<boolean>(false);
 
   useEffect(() => {
     // public 폴더 내 파일을 절대 경로로 로드
@@ -14,6 +15,24 @@ const RecommendCocktail = () => {
       .then((response) => response.json())
       .then((data) => setLottieData(data));
   }, []);
+
+  const MemoizedLottie = memo(
+    ({ animationData }: { animationData?: object }) => {
+      return (
+        <Lottie
+          animationData={animationData}
+          play
+          loop={false}
+          className="h-full"
+        />
+      );
+    },
+  );
+  MemoizedLottie.displayName = "MemoizedLottie";
+
+  const handleOpenClick = () => {
+    setIsCardOpen(!isCardOpen);
+  };
 
   // const [cocktail, setCocktail] = useState(null);
 
@@ -35,7 +54,10 @@ const RecommendCocktail = () => {
 
   return (
     <>
-      <div className="flex bg-black w-full py-4 mt-3 rounded-md px-6">
+      <div
+        className="flex bg-black w-full py-4 rounded-md px-6 "
+        onClick={handleOpenClick}
+      >
         <div className="w-full flex flex-col justify-center ">
           <p className="font-bold text-lg">오늘의 랜덤 칵테일은?</p>
           <p className="text-sm mt-2 leading-6">
@@ -43,27 +65,22 @@ const RecommendCocktail = () => {
             추천받아봐요!🍹 <br className="block md:hidden" />{" "}
           </p>
         </div>
-        <div className="h-full w-36 flex justify-center items-center ">
-          {!lottieData ? (
-            // <div className="w-full h-full bg-red-500 animate-pulse "></div>
+        <div className="w-36 h-24 flex justify-center items-center relative ">
+          {!isCardOpen && lottieData ? (
+            <MemoizedLottie animationData={lottieData} />
+          ) : (
             <Image
               src="/lotties/todays-cocktail.thumnail.svg"
               alt="Thumbnail"
               width={200}
               height={200}
             />
-          ) : (
-            <Lottie
-              animationData={lottieData}
-              play
-              loop={false}
-              className="h-full z-0"
-            />
           )}
         </div>
       </div>
+      {isCardOpen && <RandomCocktailCard onClose={handleOpenClick} />}
     </>
   );
 };
 
-export default RecommendCocktail;
+export default memo(RecommendCocktailBanner);
