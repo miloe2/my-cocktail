@@ -19,16 +19,14 @@ export default function Home() {
   const isFirstVisit = !cookieStore.get("hasVisited");
   return (
     <>
-      <main className="mx-auto max-w-5xl relative flex flex-col h-svh px-4 ">
-        <div className="-mx-4">
+      <main className="mx-auto max-w-5xl relative flex flex-col h-svh px-6 ">
+        <div className="-mx-6">
           <IntroBanner />
         </div>
-        <h1 className="font-bold mt-8 pl-2.5 text-lg">
-          이렇게 검색할수 있어요!
-        </h1>
-        <div className="-mr-4 mt-4 ">
+        <h1 className="font-bold mt-8 text-lg">이렇게 검색할수 있어요!</h1>
+        <div className="-mx-6  mt-4 ">
           <ScrollableBox className="">
-            <div className="py-2.5 px-4 bg-neutral-600 rounded-md mr-3">
+            <div className="py-2.5 px-4 ml-6 bg-neutral-600 rounded-md mr-3">
               도수가 낮은 칵테일 추천해줘
             </div>
             <div className="py-2.5 px-4 bg-neutral-600 rounded-md mr-3">
@@ -39,7 +37,7 @@ export default function Home() {
             </div>
           </ScrollableBox>
         </div>
-        <div className="mt-8">
+        <div className="mt-8 ">
           <RecommendCocktailBanner />
         </div>
       </main>

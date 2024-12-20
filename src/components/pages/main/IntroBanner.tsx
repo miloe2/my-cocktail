@@ -13,7 +13,7 @@ const IntroBanner = () => {
       />
       <div className="w-full h-full absolute inset-0 bg-black opacity-60" />
 
-      <div className="w-full px-4 flex relative justify-center items-center flex-col">
+      <div className="w-full px-6 flex relative justify-center items-center flex-col">
         <div className="text-center mb-4">
           <p>오늘의 한잔</p>
           <p className="font-bold mt-2 text-xl/relaxed">

@@ -59,10 +59,10 @@ const RecommendCocktailBanner = () => {
         onClick={handleOpenClick}
       >
         <div className="w-full flex flex-col justify-center ">
-          <p className="font-bold text-lg">오늘의 랜덤 칵테일은?</p>
+          <p className="font-bold text-lg">레시피를 뽑아봐요!</p>
           <p className="text-sm mt-2 leading-6">
-            클릭하고 오늘의 랜덤 칵테일을 <br />
-            추천받아봐요!🍹 <br className="block md:hidden" />{" "}
+            클릭하고 랜덤 칵테일 <br />
+            레시피를 추천받아봐요!🍹 <br className="block md:hidden" />{" "}
           </p>
         </div>
         <div className="w-36 h-24 flex justify-center items-center relative ">
