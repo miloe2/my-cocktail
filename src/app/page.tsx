@@ -33,7 +33,7 @@ export default function Home() {
         </div>
       </main>
       <BottomNavigator />
-      {isFirstVisit && <Tutorial />}
+      {/* {isFirstVisit && <Tutorial />} */}
       {<BeverageModal modalId={modalId} />}
     </>
   );

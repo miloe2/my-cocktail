@@ -32,7 +32,8 @@ const SearchBar = ({
         onKeyDown={handleKeyDown}
         value={value}
         type="text"
-        className="touch-manipulation text-base font-medium rounded-full w-full h-9 focus:ring-stone-500 focus:ring-1 bg-neutral-300 outline-none text-stone-900 pl-10 pr-[70px]"
+        placeholder="칵테일 레시피 알려줘"
+        className="touch-manipulation text-base font-medium rounded-full w-full h-9 focus:ring-stone-500 focus:ring-1 bg-neutral-300 outline-none text-stone-900 pl-10 pr-[70px] placeholder:text-sm"
       />
       <button
         className="absolute top-2.5 left-3"
