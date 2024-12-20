@@ -15,7 +15,7 @@ const RandomCocktailCard = ({ onClose }: RandomCocktailCardProps) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
-    let flipTimeout: ReturnType<typeof setTimeout>;
+    // let flipTimeout: ReturnType<typeof setTimeout>;
 
     const fetchRandomCocktail = async () => {
       try {
@@ -24,9 +24,9 @@ const RandomCocktailCard = ({ onClose }: RandomCocktailCardProps) => {
         setCocktailData(data.drinks[0]); // 상태 업데이트 요청
 
         // 상태 업데이트 후 flip 실행
-        flipTimeout = setTimeout(() => {
-          setIsFlipped(true);
-        }, 1000);
+        // flipTimeout = setTimeout(() => {
+        setIsFlipped(true);
+        // }, 200);
       } catch (error) {
         console.error(error);
       }
@@ -35,7 +35,7 @@ const RandomCocktailCard = ({ onClose }: RandomCocktailCardProps) => {
     fetchRandomCocktail();
 
     return () => {
-      clearTimeout(flipTimeout); // 타이머 정리
+      // clearTimeout(flipTimeout); // 타이머 정리
       setIsFlipped(false); // 상태 초기화
     };
   }, []);
@@ -80,7 +80,9 @@ const RandomCocktailCard = ({ onClose }: RandomCocktailCardProps) => {
             }}
             className="bg-white rounded-lg"
           >
-            <div className="w-full h-1/2 rounded-t-lg">
+            <div
+              className={`${isFlipped ? "animate-none" : "animate-pulse"} w-full h-1/2 rounded-t-lg bg-neutral-300`}
+            >
               <img
                 src={cocktailData.strDrinkThumb}
                 alt=""

@@ -5,6 +5,7 @@ import RecommendCocktailBanner from "@/components/pages/main/RecommendCocktailBa
 import IntroBanner from "@/components/pages/main/IntroBanner";
 import BeverageModal from "@/components/pages/main/BeverageModal";
 import ScrollableBox from "@/components/elements/ScrollableBox";
+import BottomNavigator from "@/components/elements/BottomNavigator";
 
 export default function Home() {
   // if (typeof window !== "undefined") {
@@ -41,6 +42,7 @@ export default function Home() {
           <RecommendCocktailBanner />
         </div>
       </main>
+      <BottomNavigator />
       {isFirstVisit && <Tutorial />}
       {<BeverageModal modalId={modalId} />}
     </>
