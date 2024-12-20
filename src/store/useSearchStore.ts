@@ -5,13 +5,17 @@ interface searchStoreProps {
   removeOption: (word: string) => void;
   clearOptions: () => void;
 
+  temporaryText: string;
+  setTemporaryText: (text: string) => void;
+
   searchQuery: string;
-  updateQuery: (query: string) => void;
+  updateQuery: (text: string) => void;
 }
 
 const useSearchStore = create<searchStoreProps>((set) => ({
   selectedOption: new Set(),
   searchQuery: "",
+  temporaryText: "",
   addOption: (word) =>
     set((state) => {
       const newSet = new Set(state.selectedOption);
@@ -28,6 +32,10 @@ const useSearchStore = create<searchStoreProps>((set) => ({
     set(() => {
       const newSet = new Set<string>();
       return { selectedOption: newSet };
+    }),
+  setTemporaryText: (text) =>
+    set(() => {
+      return { temporaryText: text };
     }),
   updateQuery: (query) =>
     set(() => {

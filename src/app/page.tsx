@@ -4,8 +4,8 @@ import { Tutorial } from "@/components/pages/main/Tutorial";
 import RecommendCocktailBanner from "@/components/pages/main/RecommendCocktailBanner";
 import IntroBanner from "@/components/pages/main/IntroBanner";
 import BeverageModal from "@/components/pages/main/BeverageModal";
-import ScrollableBox from "@/components/elements/ScrollableBox";
 import BottomNavigator from "@/components/elements/BottomNavigator";
+import SearchHints from "@/components/pages/main/SearchHints";
 
 export default function Home() {
   // if (typeof window !== "undefined") {
@@ -25,18 +25,8 @@ export default function Home() {
           <IntroBanner />
         </div>
         <h1 className="font-bold mt-8 text-lg">이렇게 검색할수 있어요!</h1>
-        <div className="-mx-6  mt-4 ">
-          <ScrollableBox className="">
-            <div className="py-2.5 px-4 ml-6 bg-neutral-600 rounded-md mr-3">
-              도수가 낮은 칵테일 추천해줘
-            </div>
-            <div className="py-2.5 px-4 bg-neutral-600 rounded-md mr-3">
-              짐빔으로 만들수 있는 칵테일은?
-            </div>
-            <div className="py-2.5 px-4 bg-neutral-600 rounded-md mr-3">
-              혼자 즐기는 칵테일 추천해줘
-            </div>
-          </ScrollableBox>
+        <div className="-mx-6 mt-4 ">
+          <SearchHints />
         </div>
         <div className="mt-8 ">
           <RecommendCocktailBanner />

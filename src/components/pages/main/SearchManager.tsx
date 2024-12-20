@@ -6,6 +6,7 @@ import useSearchHandler from "@/hooks/useSearchHandler";
 import useAppStore from "@/store/useAppStore";
 import LoadingCocktail from "@/components/elements/LoadingCocktail";
 import useChatStore from "@/store/useChatStore";
+import useSearchStore from "@/store/useSearchStore";
 
 interface SearchManagerProps {
   isMainPage: boolean;
@@ -16,11 +17,19 @@ const MemoizedLoadingCocktail = memo(LoadingCocktail);
 
 const SearchManager = ({ isMainPage }: SearchManagerProps) => {
   const { handleSearch, convertedIndexedDB } = useSearchHandler();
+  const { temporaryText, setTemporaryText } = useSearchStore();
   const { pathLoading, setPathLoading } = useAppStore();
   const { updateChatMessage } = useChatStore();
   const router = useRouter();
 
   const [searchText, setSearchText] = useState("");
+
+  useEffect(() => {
+    if (temporaryText) {
+      setSearchText(temporaryText);
+      setTemporaryText("");
+    }
+  }, [temporaryText]);
 
   // searchBar 조작
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -68,11 +77,6 @@ const SearchManager = ({ isMainPage }: SearchManagerProps) => {
         clearSearchText={clearSearchText}
         value={searchText}
       />
-      {/* {isMainPage && (
-        <div className="-mr-4 mt-4">
-          <SearchHints />
-        </div>
-      )} */}
       {pathLoading && <MemoizedLoadingCocktail />}
     </div>
   );

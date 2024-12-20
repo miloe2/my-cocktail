@@ -9,7 +9,7 @@ const IntroBanner = () => {
         alt="Thumbnail"
         width={200}
         height={400}
-        className="w-full h-full absolute"
+        className="w-full h-full absolute object-cover"
       />
       <div className="w-full h-full absolute inset-0 bg-black opacity-60" />
 

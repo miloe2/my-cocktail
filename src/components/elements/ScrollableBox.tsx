@@ -2,7 +2,7 @@ import React from "react";
 
 interface ScrollableBoxProps {
   children: React.ReactNode;
-  className: string;
+  className?: string;
 }
 
 const ScrollableBox = ({ children, className = "" }: ScrollableBoxProps) => {
