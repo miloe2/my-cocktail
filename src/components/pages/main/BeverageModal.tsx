@@ -13,6 +13,7 @@ import SwiperCore from "swiper";
 import BottomModal from "@/components/elements/BottomModal";
 import SwiperModule from "@/components/elements/SwiperModule";
 import {
+  liquorCategoryList,
   drinkList,
   fruitList,
   liquorList,
@@ -39,13 +40,13 @@ const BeverageModal = ({ modalId }: BeverageModalProps) => {
   // console.log("beverage modal");
 
   const tabList = [
+    { title: "🍾 주류", list: liquorCategoryList },
     { title: "🍹 리큐르", list: liquorList },
     { title: "🍸 진", list: ginList },
     { title: "🥂 럼", list: rumList },
     { title: "🧋 음료", list: drinkList },
     { title: "🍍 과일", list: fruitList },
-    { title: "🍯시럽", list: syrupList },
-    // { title: "주류", list: liquorCategoryList },
+    { title: "🍯 시럽", list: syrupList },
   ];
 
   const { closeModal } = useModalStore();
