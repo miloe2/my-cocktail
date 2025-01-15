@@ -20,7 +20,7 @@ export default function Home() {
   const isFirstVisit = !cookieStore.get("hasVisited");
   return (
     <>
-      <main className="mx-auto max-w-5xl relative flex flex-col h-svh px-6 ">
+      <main className="mx-auto max-w-2xl relative flex flex-col h-svh px-6 ">
         <div className="-mx-6">
           <IntroBanner />
         </div>

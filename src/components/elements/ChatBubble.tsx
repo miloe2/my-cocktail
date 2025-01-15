@@ -53,7 +53,7 @@ const FilterMessage = ({ chat }: { chat: SQLChatData }) => {
   );
 };
 const UserMessage = ({ chat }: { chat: SQLChatData }) => {
-  console.log("################UserMessage 렌더링##################");
+  // console.log("################UserMessage 렌더링##################");
   return (chat.message as string).startsWith("/*#filter#*/") ? (
     <FilterMessage chat={chat} />
   ) : (

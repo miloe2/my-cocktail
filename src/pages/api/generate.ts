@@ -22,7 +22,6 @@ const handleSendMessage = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "OPTIONS") {
     return res.status(200).end();
   }
-  console.log("api 호출 시작");
   const { query } = req.body;
   const notice = `
   {
