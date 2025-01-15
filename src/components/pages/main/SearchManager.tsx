@@ -70,7 +70,7 @@ const SearchManager = ({ isMainPage }: SearchManagerProps) => {
   }, [pathLoading, setPathLoading]);
 
   return (
-    <div className="flex flex-col w-full relative h-full">
+    <div className="flex flex-col w-full relative h-full max-w-2xl">
       <SearchBar
         onChange={handleInputChange}
         onSearchClick={onSearchClick}

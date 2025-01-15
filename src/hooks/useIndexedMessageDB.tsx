@@ -22,7 +22,7 @@ const useIndexedMessageDB = () => {
   });
 
   const initDB = async () => {
-    console.log("init!!!!!!!!!!!!!");
+    // console.log("init!!!!!!!!!!!!!");
 
     // 모든 쿠키를 객체로 변환
     const cookies = document.cookie.split("; ").reduce(
@@ -56,7 +56,7 @@ const useIndexedMessageDB = () => {
           keyPath: "id",
           autoIncrement: true,
         });
-        console.log("Object store created.");
+        // console.log("Object store created.");
 
         // 웰컴 메시지 추가
         const transaction = objectStore.transaction;
@@ -64,7 +64,7 @@ const useIndexedMessageDB = () => {
           const tx = database.transaction(storeName, "readwrite");
           const store = tx.objectStore(storeName);
           store.add(createWelcomeMessage());
-          console.log("Welcome message added during upgrade.");
+          // console.log("Welcome message added during upgrade.");
         };
       }
     };
@@ -74,7 +74,7 @@ const useIndexedMessageDB = () => {
       if (database) {
         setDb(database);
         setIsDBReady(true); // DB 준비 완료
-        console.log("Database initialized successfully.");
+        // console.log("Database initialized successfully.");
       }
     };
 
@@ -85,7 +85,7 @@ const useIndexedMessageDB = () => {
 
   // ############### addData ##################
   const addData = async (data: SQLChatData) => {
-    console.log(db);
+    // console.log(db);
     if (!db) {
       console.error("Database is not initialized.");
       return;
@@ -101,7 +101,7 @@ const useIndexedMessageDB = () => {
         tx.onerror = () => reject(tx.error);
       });
 
-      console.log("Data added successfully:", data);
+      // console.log("Data added successfully:", data);
     } catch (error) {
       console.error("Failed to add data:", error);
     }

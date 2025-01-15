@@ -45,7 +45,7 @@ const useSearchHandler = () => {
     // }
     // const userMessage = convertedIndexedDB(query, "user");
     await addData(msg);
-    console.log("useSearchHandler", searchType, msg);
+    // console.log("useSearchHandler", searchType, msg);
     // updateChatMessage(userMessage);
 
     const result = await searchGpt({

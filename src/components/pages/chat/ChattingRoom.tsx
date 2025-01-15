@@ -21,7 +21,7 @@ const ChattingRoom = () => {
 
   const fetchData = async () => {
     if (!isDBReady || isHistoryLoading) return [];
-    console.log("fetchData 호출");
+    // console.log("fetchData 호출");
 
     const chatContainer = chatContainerRef.current;
     const prevScrollHeight = chatContainer?.scrollHeight || 0;
@@ -41,20 +41,20 @@ const ChattingRoom = () => {
       // 스크롤 위치 복원
       requestAnimationFrame(() => {
         if (chatContainer) {
-          console.log(chatContainer);
+          // console.log(chatContainer);
           const newScrollHeight = chatContainer.scrollHeight;
-          console.log("계산값", newScrollHeight - prevScrollHeight);
+          // console.log("계산값", newScrollHeight - prevScrollHeight);
           chatContainer.scrollTop += newScrollHeight - prevScrollHeight; // 변경된 높이만큼 추가
           // document.documentElement.scrollTop += newScrollHeight - prevScrollHeight; // 변경된 높이만큼 추가
-          console.log("chatContainer.scrollTop:", chatContainer.scrollTop);
-          console.log(
-            "chatContainer.scrollHeight:",
-            chatContainer.scrollHeight,
-          );
-          console.log(
-            "chatContainer.clientHeight:",
-            chatContainer.clientHeight,
-          );
+          // console.log("chatContainer.scrollTop:", chatContainer.scrollTop);
+          // console.log(
+          //   "chatContainer.scrollHeight:",
+          //   chatContainer.scrollHeight,
+          // );
+          // console.log(
+          //   "chatContainer.clientHeight:",
+          //   chatContainer.clientHeight,
+          // );
         }
       });
 
@@ -69,7 +69,7 @@ const ChattingRoom = () => {
 
   const renderChatData = async () => {
     if (!isDBReady || isHistoryLoading) return; // 데이터 로드 조건이 충족되지 않으면 중단
-    console.log("rednerChatData!!!");
+    // console.log("rednerChatData!!!");
     try {
       const data = await fetchData(); // fetchData로 데이터 가져오기
       if (data.length > 0) loadChatHistory(data); // 데이터가 있으면 히스토리에 로드

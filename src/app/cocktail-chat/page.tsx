@@ -8,7 +8,7 @@ const AskCocktailPage = () => {
   const modalId = "beverage";
 
   return (
-    <div className="max-w-5xl mx-auto h-svh overflow-hidden">
+    <div className="max-w-2xl mx-auto h-svh overflow-hidden">
       <ChattingRoom />
       <div className="fixed bottom-0 h-14 bg-neutral-800 px-4 pt-2 max-w-5xl mx-auto w-full">
         <div className="w-full  flex items-center">

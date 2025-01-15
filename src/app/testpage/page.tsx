@@ -14,7 +14,7 @@ const testpage = () => {
       .then((data) => setLottieData(data));
   }, []);
   const handleClick = () => {
-    console.log("Ripple button clicked!");
+    // console.log("Ripple button clicked!");
   };
   if (!lottieData) return null; // 데이터가 로드될 때까지는 렌더링하지 않음
 

@@ -7,7 +7,7 @@ const BottomNavigator = () => {
     router.push(path);
   };
   return (
-    <div className="fixed bottom-0 w-full py-3 bg-neutral-900 flex text-[10px] justify-around">
+    <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-2xl py-3 bg-neutral-900 flex text-[10px] justify-around">
       <button
         className="flex flex-col justify-center items-center bg-red-00"
         onClick={() => goPath("/")}
