@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = "http://172.20.10.3:3000";
-// const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+// const BASE_URL = "http://172.20.10.3:3000";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const fetchSearchResult = async (
   query: string,
